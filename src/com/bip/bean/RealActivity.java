@@ -15,36 +15,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name="t_realactivity")
 public class RealActivity implements Serializable {
-	private int id;
-	private int actionTypeId;
-	private int locationId;
+	private Integer id;
+	private Integer actionTypeId;
+	private Integer locationId;
 	private String name;
-	private int dataMark;
+	private Integer dataMark;
 	private Date dateTime;
 	private String discription;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
 	@Column
-	public int getActionTypeId() {
+	public Integer getActionTypeId() {
 		return actionTypeId;
 	}
-	public void setActionTypeId(int actionTypeId) {
+	public void setActionTypeId(Integer actionTypeId) {
 		this.actionTypeId = actionTypeId;
 	}
 	
 	@Column
-	public int getLocationId() {
+	public Integer getLocationId() {
 		return locationId;
 	}
-	public void setLocationId(int locationId) {
+	public void setLocationId(Integer locationId) {
 		this.locationId = locationId;
 	}
 	@Column
@@ -56,10 +56,10 @@ public class RealActivity implements Serializable {
 	}
 	
 	@Column
-	public int getDataMark() {
+	public Integer getDataMark() {
 		return dataMark;
 	}
-	public void setDataMark(int dataMark) {
+	public void setDataMark(Integer dataMark) {
 		this.dataMark = dataMark;
 	}
 	

@@ -17,18 +17,18 @@ import javax.persistence.Table;
 @Table(name="t_actiontype")
 public class ActionType implements Serializable {
 	
-	private int id;
+	private Integer id;
 	private String name;
-	private int dateMark;
+	private Integer dateMark;
 	private Date date;
 	private String description;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -41,10 +41,10 @@ public class ActionType implements Serializable {
 	}
 	
 	@Column
-	public int getDateMark() {
+	public Integer getDateMark() {
 		return dateMark;
 	}
-	public void setDateMark(int dateMark) {
+	public void setDateMark(Integer dateMark) {
 		this.dateMark = dateMark;
 	}
 	

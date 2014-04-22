@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="t_location")
 public class Location implements Serializable {
-	private int id;
+	private Integer id;
 	private Double latitude;
 	private Double longitude;
 	private String locationName;
@@ -28,10 +28,10 @@ public class Location implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
