@@ -25,7 +25,6 @@ public class Location implements Serializable {
 	private String district;
 	private String street;
 	private String streetNumber;
-	private Set<RealActivity> realActivity;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -116,12 +115,5 @@ public class Location implements Serializable {
 		this.streetNumber = streetNumber;
 	}
 	
-	@OneToMany(mappedBy="locationId")
-	public Set<RealActivity> getRealActivity(){
-		return realActivity;
-	}
-	public void setRealActivity(Set<RealActivity> realactivity){
-		this.realActivity = realactivity;
-	}
 	
 }

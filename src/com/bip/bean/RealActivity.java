@@ -22,8 +22,6 @@ public class RealActivity implements Serializable {
 	private int dataMark;
 	private Date dateTime;
 	private String discription;
-	private ActionType actionType;
-	private Location location;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -80,23 +78,4 @@ public class RealActivity implements Serializable {
 	public void setDiscription(String discription) {
 		this.discription = discription;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="actionTypeId_fk")
-	public ActionType getActionType(){
-		return actionType;
-	}
-	public void setActionType(ActionType actiontype){
-		this.actionType = actiontype;
-	}
-	
-	@ManyToOne
-	@JoinColumn(name="locationId_fk")
-	public Location getLocation(){
-		return location;
-	}
-	public void setLocation(Location lca){
-		this.location = lca;
-	}
-	
 }

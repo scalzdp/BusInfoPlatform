@@ -22,7 +22,6 @@ public class ActionType implements Serializable {
 	private int dateMark;
 	private Date date;
 	private String description;
-	private Set<RealActivity> realActivity;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,12 +64,5 @@ public class ActionType implements Serializable {
 		this.description = description;
 	}
 	
-	@OneToMany(mappedBy="actionTypeId") 
-	public Set<RealActivity> getRealActivity(){
-		return realActivity;
-	}
-	public void setRealActivity(Set<RealActivity> realactivity){
-		this.realActivity = realactivity;
-	}
 
 }
