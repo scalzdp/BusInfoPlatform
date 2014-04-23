@@ -27,6 +27,30 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	
+	<!--设置kaptcha相关属性设置 -->
+	<servlet>
+        <servlet-name>Kaptcha</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <init-param>
+            <param-name>kaptcha.border</param-name>
+            <param-value>no</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.font.color</param-name>
+            <param-value>black</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.char.space</param-name>
+            <param-value>5</param-value>
+        </init-param>
+	</servlet>
+	<servlet-mapping>
+	        <servlet-name>Kaptcha</servlet-name>
+	        <url-pattern>/Kaptcha.jpg</url-pattern>
+	</servlet-mapping>
+	
 	<!---->
 	<servlet>
 		<servlet-name>spring</servlet-name>

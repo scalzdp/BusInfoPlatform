@@ -73,5 +73,6 @@
 	<classpathentry exported="true" kind="lib" path="G:/java/JavaLib/json-lib/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="G:/java/JavaLib/json-lib/ezmorph-1.0.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="G:/java/JavaLib/json-lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="G:/java/JavaLib/Common/kaptcha-2.3.2.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
