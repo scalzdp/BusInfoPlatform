@@ -1,5 +1,6 @@
 package com.bip.Controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bip.service.RegisterService;
 import com.bip.vo.RegisterVO;
@@ -19,23 +21,31 @@ public class RegisteController {
 	@Autowired
 	private RegisterService registerService;
 	
-	@RequestMapping(value="register",method=RequestMethod.GET)
+	
+	@RequestMapping(value="/register",method=RequestMethod.GET)
 	private String getRegister(Model model){
-		return "register/register";
+		model.addAttribute("pagename", "register/register.jsp");
+		return "index";
 	}
 	
-	@RequestMapping(value="register",method=RequestMethod.POST)
-	private String postRegister(Model model,@ModelAttribute("form") RegisterVO registervo,
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	private ModelAndView postRegister(Model model,@ModelAttribute("form") RegisterVO registervo,
 			HttpSession session) throws Exception{
 		try{
 			//判断验证码是否正确
-			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(registervo.getCaptcha().trim())){
-				
-			}
-			registerService.save(registervo);
-			return "";
+//			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(registervo.getCaptcha().trim())){
+//				return "redirect:/error/captchaError";
+//			}
+//			registerService.save(registervo);
+			ModelAndView mv = new ModelAndView("redirect:registerSuccess");//redirect模式  
+			return mv;
 		}catch(Exception ex){
 			throw ex;
 		}
+	}
+	
+	@RequestMapping(value="/registerSuccess",method=RequestMethod.GET)
+	private String registerSuccess(){
+		return "message/captcha";
 	}
 }
