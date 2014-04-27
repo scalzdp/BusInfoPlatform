@@ -30,7 +30,7 @@
 	<!--log4j监听器-->
 	<listener>
 	    <listener-class>
-	        org.springframework.web.util.Log4jConfigListener  
+	        org.springframework.web.util.Log4jConfigListener
 	    </listener-class>
 	</listener>
 	<!--spring监听器 -->

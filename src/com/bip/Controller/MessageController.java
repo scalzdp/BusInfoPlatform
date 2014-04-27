@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MessageController {
 
-	@RequestMapping(value="/captchaError",method=RequestMethod.GET)
+	@RequestMapping(value="/captchaError")
 	private String getCaptchaError(Model model){
 		model.addAttribute("pagename", "message/captcha.jsp");
 		return "index";
