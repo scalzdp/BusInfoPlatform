@@ -28,6 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script>
 		function submitForm(){
 			$('#registerMessage').form('submit');
+			alert($("#userEmail").validatebox('isValid'));
+			$('#submitform').click();
+			//$("content").parent.innerHTML;
+			$("content").parent.reload(true);
 		}
 		function clearForm(){
 			$('#registerMessage').form('clear');
@@ -35,14 +39,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>
   
-  <body>
+  <body id="content">
   	<div class="easyui-panel" title="给自己一个响亮名字哈" style="width:600px">
   	 <div style="padding:10px 60px 20px 60px">
-		<form id="registerMessage" action="register" method="post">
+		<form id="registerMessage" action="register" method="post" >
 	    	<table class="register-table">
 	    		<tr>
 	    			<td>邮箱：</td>
-	    			<td  colspan="2"><input type="text" name="userEmail" placeholder="邮箱" maxlength="20" class="easyui-validatebox textbox" data-options="required:true"> </td>
+	    			<td  colspan="2"><input type="text" id="userEmail" name="userEmail" placeholder="邮箱" maxlength="20" class="easyui-validatebox textbox" data-options="validType:'email'"> </td>
 	    		</tr>
 	    		<tr>
 	    			<td>密码：</td>
@@ -58,11 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		</tr>
 	    		<tr>
 	    			<td colspan="3" > 
-	    				<!--  <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">注册</a>
+	    				 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">注册</a>
 	    				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重填写</a>
-	    				-->
-	    				<input type="submit" value="提交">
-	    				<input type="reset" value="重新写">
+	    				
+	    				<input id="submitform" type="submit" value="提交" style="display:none;">
 	    			</td>
 	    		</tr>
 	    	</table>
