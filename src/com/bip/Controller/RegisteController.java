@@ -32,12 +32,12 @@ public class RegisteController {
 	private ModelAndView postRegister(Model model,@ModelAttribute("form") RegisterVO registervo,
 			HttpSession session) throws Exception{
 		try{
-			//�ж���֤���Ƿ���ȷ
-//			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(registervo.getCaptcha().trim())){
-//				return "redirect:/error/captchaError";
-//			}
-//			registerService.save(registervo);
-			ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirectģʽ  
+			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(registervo.getCaptcha().trim())){
+				ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirectģʽ  
+				return mv;
+			}
+			registerService.save(registervo);
+			ModelAndView mv = new ModelAndView("redirect:/registerSuccess");//redirectģʽ  
 			return mv;
 		}catch(Exception ex){
 			throw ex;
@@ -45,7 +45,8 @@ public class RegisteController {
 	}
 	
 	@RequestMapping(value="/registerSuccess",method=RequestMethod.GET)
-	private String registerSuccess(){
-		return "message/captcha";
+	private String registerSuccess(Model model){
+		model.addAttribute("pagename", "test/test.jsp");
+		return "index";
 	}
 }
