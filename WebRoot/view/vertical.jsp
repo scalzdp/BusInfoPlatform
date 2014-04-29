@@ -1,25 +1,17 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.io.IOException" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-  	<base href="<%=basePath%>">
-    <title>My JSP 'index.jsp' starting page</title>
-
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-	
+<head>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- This is vertical page , will show three part of this page : noth,center,south -->
 	<link rel="stylesheet" href="css/easyui.css" type="text/css"></link>
   	<link rel="stylesheet" href="css/icon.css" type="text/css"></link>
   	<link rel="stylesheet" href="css/demo.css" type="text/css"></link>
@@ -32,18 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			  position: relative;
   		}
   	</style>
-
-  </head>
-  
-  <body class="easyui-layout">
+</head>
+<body class="easyui-layout">
    <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
 		<jsp:include page="template/north.jsp"/> 
-	</div>
-	<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">
-		<jsp:include page="template/west.jsp"/>
-	</div>
-	<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
-		<jsp:include page="template/east.jsp"/>
 	</div>
 	<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
 		<jsp:include page="template/south.jsp"/>

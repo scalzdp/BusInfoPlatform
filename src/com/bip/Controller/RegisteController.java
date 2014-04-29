@@ -24,8 +24,8 @@ public class RegisteController {
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
 	private String getRegister(Model model){
-		model.addAttribute("pagename", "register/register.jsp");
-		return "index";
+		model.addAttribute("pagename", "registerandlogin/register.jsp");
+		return "vertical";
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)

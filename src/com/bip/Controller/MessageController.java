@@ -11,6 +11,12 @@ public class MessageController {
 	@RequestMapping(value="/captchaError")
 	private String getCaptchaError(Model model){
 		model.addAttribute("pagename", "message/captcha.jsp");
-		return "index";
+		return "vertical";
+	}
+	
+	@RequestMapping(value="/loginError")
+	private String getUserEmailOrPasswordError(Model model){
+		model.addAttribute("pagename", "message/userpassworderror.jsp");
+		return "vertical";
 	}
 }

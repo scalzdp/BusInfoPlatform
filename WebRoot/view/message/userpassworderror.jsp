@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Captcha 错误</title>
+<title>用户名或密码错误</title>
 <script type="text/javascript">
 	var timer=null;
 	var totalTime=10;
@@ -16,7 +16,7 @@
 		
 		setTimeout("timedCount()",1000);
 		totalTime--;
-		$("#labMessage").text("还剩下"+totalTime+"秒，页面将跳回注册页面！");
+		$("#labMessage").text("还剩下"+totalTime+"秒，页面将跳回登录页面！");
 		if(totalTime==0){
 			returnPage();
 		}
@@ -30,17 +30,10 @@
 		history.back();
 	}
 </script>
-<style type="text/css">
-    	.captcha-message{
-    		  padding: 5px;
-  			  position: relative;
-  			  cellpadding:5
-    	}
-    </style>
 </head>
 <body>
 	<div class="captcha-message">
-		<h3>验证码错误!</h3>
+		<h1>用户名或密码错误！</h1>
 		<div>
 			<label id="labMessage"></label>
 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="returnPage()">如果没及时跳转请点击我来跳转</a>

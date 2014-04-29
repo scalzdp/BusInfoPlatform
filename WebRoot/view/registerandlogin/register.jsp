@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script>
 		function submitForm(){
 			$('#registerMessage').form('submit');
-			alert($("#userEmail").validatebox('isValid'));
-			$('#submitform').click();
-			//$("content").parent.innerHTML;
-			$("content").parent.reload(true);
+			var result = $("#userEmail").validatebox('isValid')&&$("#userPassword").validatebox('isValid')&&$("#userNickName").validatebox('isValid')&&$("#captcha").validatebox('isValid');
+			if(result){
+				$('#submitform').click(); //因为上面已经提交了表单这里的的type=submit表单，就不用再次提交表单了。
+			}
 		}
 		function clearForm(){
 			$('#registerMessage').form('clear');
@@ -50,20 +50,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		</tr>
 	    		<tr>
 	    			<td>密码：</td>
-	    			<td colspan="2"><input type="text" name="userPassword" placeholder="密码" maxlength="10" class="easyui-validatebox textbox" data-options="required:true">  </td>
+	    			<td colspan="2"><input type="text" id="userPassword" name="userPassword" placeholder="密码" maxlength="10" class="easyui-validatebox textbox" data-options="required:true">  </td>
 	    		</tr>
 	    		<tr>
 	    			<td>昵称：</td>
-	    			<td colspan="2"><input type="text" name="userNickName" placeholder="昵称"  maxlength="5" class="easyui-validatebox textbox" data-options="required:true"> </td>
+	    			<td colspan="2"><input type="text" id="userNickName" name="userNickName" placeholder="昵称"  maxlength="5" class="easyui-validatebox textbox" data-options="required:true"> </td>
 	    		</tr>
 	    		<tr>
 	    			<td><img src="<%=basePath%>/Kaptcha.jpg"></td>
-						<td><input type="text" name="captcha" placeholder="验证码" maxlength="5" class="easyui-validatebox textbox" data-options="required:true"> </td>
+						<td><input type="text" id="captcha" name="captcha" placeholder="验证码" maxlength="5" class="easyui-validatebox textbox" data-options="required:true"> </td>
 	    		</tr>
 	    		<tr>
 	    			<td colspan="3" > 
 	    				 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">注册</a>
-	    				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重填写</a>
+	    				 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重填写</a>
 	    				
 	    				<input id="submitform" type="submit" value="提交" style="display:none;">
 	    			</td>
