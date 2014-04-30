@@ -47,4 +47,10 @@ public class LoginController {
 			throw e;
 		}
 	}
+	
+	@RequestMapping(value="loginSuccess",method=RequestMethod.GET)
+	private String getLoginSuccess(Model model){
+		model.addAttribute("pagename", "template/default.jsp");
+		return "index";
+	}
 }

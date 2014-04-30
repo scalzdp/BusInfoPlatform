@@ -16,7 +16,7 @@ public class LoginService {
 	private IBaseDAO baseDAO;
 	
 	public LoginVO getUser(LoginVO loginVO){
-		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", "email='"+loginVO.getUserEmail()+"'");
+		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+loginVO.getUserEmail()+"'");
 		if(userlist.size()<=0){
 			return null;
 		}else{
