@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bip.bean.User;
 import com.bip.dao.IBaseDAO;
-import com.bip.vo.LoginVO;
+import com.bip.vo.UserVO;
 
 @Service
 public class LoginService {
@@ -15,14 +15,19 @@ public class LoginService {
 	@Autowired
 	private IBaseDAO baseDAO;
 	
-	public LoginVO getUser(LoginVO loginVO){
-		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+loginVO.getUserEmail()+"'");
+	/*
+	 * use email to search the user,
+	 * if the search result is null return null
+	 * if search the result and return the result;
+	 * */
+	public UserVO getUser(UserVO userVO){
+		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+userVO.getUserEmail()+"'");
 		if(userlist.size()<=0){
 			return null;
 		}else{
-			loginVO.setUserEmail(userlist.get(0).getEmail());
-			loginVO.setId(userlist.get(0).getId());
-			return loginVO;
+			userVO.setUserEmail(userlist.get(0).getEmail());
+			userVO.setId(userlist.get(0).getId());
+			return userVO;
 		}
 	}
 }

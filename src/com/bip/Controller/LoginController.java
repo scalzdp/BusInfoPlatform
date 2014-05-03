@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bip.resource.ResourceFile;
 import com.bip.service.LoginService;
-import com.bip.vo.LoginVO;
+import com.bip.vo.UserVO;
 import com.google.code.kaptcha.Constants;
 
 @Controller
@@ -28,18 +29,20 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="login",method=RequestMethod.POST)
-	private ModelAndView postLoginpage(Model model,@ModelAttribute("form") LoginVO loginVO,HttpSession session) throws Exception{
+	private ModelAndView postLoginpage(Model model,@ModelAttribute("form") UserVO loginVO,HttpSession session) throws Exception{
 		try{
-			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(loginVO.getCaptcha().trim())){
+			if(!session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY).toString().equals(loginVO.getCaptcha().trim())){
 				ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirect模式  
 				return mv;
 			}
-			if(loginService.getUser(loginVO)==null){
-				//登录失败
+			UserVO user=loginService.getUser(loginVO);
+			if(user==null){
+				//not has this user
 				ModelAndView mv = new ModelAndView("redirect:/loginError");//redirect模式  
 				return mv;
 			}
-			//登录成功
+			//this user is right and select form to it and save this user
+			model.addAttribute(ResourceFile.USER_SESSION_KEY, user);
 			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirect模式  
 			return mv;
 			

@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bip.resource.ResourceFile;
 import com.bip.service.RegisterService;
-import com.bip.vo.RegisterVO;
+import com.bip.vo.UserVO;
 import com.google.code.kaptcha.Constants;
 
 @Controller
@@ -29,24 +30,21 @@ public class RegisteController {
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	private ModelAndView postRegister(Model model,@ModelAttribute("form") RegisterVO registervo,
+	private ModelAndView postRegister(Model model,@ModelAttribute("form") UserVO uservo,
 			HttpSession session) throws Exception{
 		try{
-			if(!session.getAttribute(Constants.KAPTCHA_SESSION_KEY).toString().equals(registervo.getCaptcha().trim())){
-				ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirectģʽ  
+			if(!session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY).toString().equals(uservo.getCaptcha().trim())){
+				ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirect captcha error page
 				return mv;
 			}
-			registerService.save(registervo);
-			ModelAndView mv = new ModelAndView("redirect:/registerSuccess");//redirectģʽ  
+			registerService.save(uservo);
+			UserVO userVO = registerService.getUser(uservo);
+			model.addAttribute(ResourceFile.USER_SESSION_KEY, userVO);
+			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
 			return mv;
 		}catch(Exception ex){
 			throw ex;
 		}
 	}
 	
-	@RequestMapping(value="/registerSuccess",method=RequestMethod.GET)
-	private String registerSuccess(Model model){
-		model.addAttribute("pagename", "test/test.jsp");
-		return "index";
-	}
 }

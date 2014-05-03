@@ -70,5 +70,7 @@
 	<classpathentry exported="true" kind="lib" path="G:/JavaWork/lib/Log4j/commons-logging.jar"/>
 	<classpathentry exported="true" kind="lib" path="G:/JavaWork/lib/Log4j/log4j-1.2.17.jar"/>
 	<classpathentry exported="true" kind="lib" path="G:/JavaWork/lib/Log4j/log4j-core-2.0-beta9.jar"/>
+	<classpathentry exported="true" kind="lib" path="G:/JavaWork/lib/json-lib/ezmorph-1.0.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="G:/JavaWork/lib/json-lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

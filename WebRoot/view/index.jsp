@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
   	<style type="text/css">
   		.panel-header{
-  			  padding: 20px;
+  			  padding: 10px;
   			  position: relative;
   		}
   	</style>

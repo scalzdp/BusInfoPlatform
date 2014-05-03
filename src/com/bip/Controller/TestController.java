@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bip.vo.RegisterVO;
+import com.bip.vo.UserVO;
 
 @Controller
 public class TestController {
 /*
- * ËùÓÐµÄ²âÊÔ¿ØÖÆÆ÷
+ * ï¿½ï¿½ï¿½ÐµÄ²ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * */
 	@RequestMapping(value="template",method=RequestMethod.GET)
@@ -25,7 +25,7 @@ public class TestController {
 	
 	@RequestMapping(value = "htmlrequest", method = RequestMethod.POST)
 	@ResponseBody
-	public String createQuestionGroup(@RequestBody RegisterVO registervo, HttpServletResponse response) throws IOException{
+	public String createQuestionGroup(@RequestBody UserVO uservo, HttpServletResponse response) throws IOException{
 
 	    // questionGroup - this comes OK.
 
