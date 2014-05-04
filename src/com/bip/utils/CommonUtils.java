@@ -27,7 +27,7 @@ public class CommonUtils {
 	}
 	
 	/** 
-	* 从一个JSON数组得到一个java对象数组，形如： 
+	* change jsonString to ArrayList
 	* [{"id" : idValue, "name" : nameValue}, {"id" : idValue, "name" : nameValue}, ...] 
 	* @param object  
 	* @return 
@@ -40,8 +40,8 @@ public class CommonUtils {
 	}
 	
 	/**
-	 *将一个JavaList对象序列化为Json对象
-	 *@param o 传递的JavaList对象 
+	 *change list to JsonString
+	 *@param list<T> obj,input list object then change to jsonlist 
 	 */
 	public static <T> String convertObjectToJson(List<T> obj){
 		try{

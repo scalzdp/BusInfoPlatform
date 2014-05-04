@@ -21,10 +21,11 @@ public class LoginService {
 	 * if search the result and return the result;
 	 * */
 	public UserVO getUser(UserVO userVO){
-		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+userVO.getUserEmail()+"'");
+		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+userVO.getUserEmail()+"' and password="+userVO.getUserPassword()+"");
 		if(userlist.size()<=0){
 			return null;
 		}else{
+			userVO.setUserNickName(userlist.get(0).getNickName());
 			userVO.setUserEmail(userlist.get(0).getEmail());
 			userVO.setId(userlist.get(0).getId());
 			return userVO;

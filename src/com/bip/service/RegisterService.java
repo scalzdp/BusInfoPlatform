@@ -51,6 +51,7 @@ public class RegisterService {
 		if(userlist.size()<=0){
 			return null;
 		}else{
+			userVO.setUserNickName(userlist.get(0).getNickName());
 			userVO.setUserEmail(userlist.get(0).getEmail());
 			userVO.setId(userlist.get(0).getId());
 			return userVO;

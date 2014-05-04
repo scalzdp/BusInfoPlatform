@@ -42,7 +42,7 @@ public class LoginController {
 				return mv;
 			}
 			//this user is right and select form to it and save this user
-			model.addAttribute(ResourceFile.USER_SESSION_KEY, user);
+			session.setAttribute(ResourceFile.USER_SESSION_KEY, user);
 			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectģʽ  
 			return mv;
 			
@@ -52,7 +52,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="loginSuccess",method=RequestMethod.GET)
-	private String getLoginSuccess(Model model){
+	private String getLoginSuccess(Model model,HttpSession session){
+		model.addAttribute(ResourceFile.USER_SESSION_KEY, session.getAttribute(ResourceFile.USER_SESSION_KEY));
 		model.addAttribute("pagename", "template/default.jsp");
 		return "index";
 	}

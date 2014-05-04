@@ -36,10 +36,14 @@ public class RegisteController {
 			if(!session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY).toString().equals(uservo.getCaptcha().trim())){
 				ModelAndView mv = new ModelAndView("redirect:/captchaError");//redirect captcha error page
 				return mv;
+			}if(!registerService.findEmailHasRegister(uservo)){
+				//this email has register
+				ModelAndView mv = new ModelAndView("redirect:/emailRepeat");//redirectAnother action
+				return mv;
 			}
 			registerService.save(uservo);
 			UserVO userVO = registerService.getUser(uservo);
-			model.addAttribute(ResourceFile.USER_SESSION_KEY, userVO);
+			session.setAttribute(ResourceFile.USER_SESSION_KEY, userVO);
 			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
 			return mv;
 		}catch(Exception ex){

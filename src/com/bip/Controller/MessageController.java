@@ -41,4 +41,10 @@ public class MessageController {
 			throw e;
 		}
 	}
+	
+	@RequestMapping(value="/emailRepeat")
+	private String getUserEmailHasRegister(Model model){
+		model.addAttribute("pagename", "message/useremailhasregister.jsp");
+		return "vertical";
+	}
 }
