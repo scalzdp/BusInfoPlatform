@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bip.resource.ResourceFile;
 import com.bip.service.LoginService;
+import com.bip.util.SessionManager;
 import com.bip.vo.UserVO;
 import com.google.code.kaptcha.Constants;
 
@@ -23,7 +24,8 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value="login",method=RequestMethod.GET)
-	private String getLoginpage(Model model){
+	private String getLoginpage(Model model,HttpSession session){
+		SessionManager.clearUserSession(session);
 		model.addAttribute("pagename", "registerandlogin/login.jsp");
 		return "vertical";
 	}

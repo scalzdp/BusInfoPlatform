@@ -34,10 +34,4 @@ public class TestController {
 	    response.setCharacterEncoding("UTF-8");
 	    return "<div></div>";
 	}
-	
-	@RequestMapping(value="notfound")
-	public String get404Page(Model model){
-		//model.addAttribute("pagename", "");
-		return "template/404error";
-	}
 }

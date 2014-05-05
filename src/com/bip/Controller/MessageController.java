@@ -47,4 +47,10 @@ public class MessageController {
 		model.addAttribute("pagename", "message/useremailhasregister.jsp");
 		return "vertical";
 	}
+	
+	@RequestMapping(value="notfound")
+	public String get404Page(Model model){
+		model.addAttribute("pagename", "template/404error.jsp");
+		return "vertical";
+	}
 }
