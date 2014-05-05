@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
 		<jsp:include page="template/north.jsp"/> 
 	</div>
-	<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">
+	<div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
 		<jsp:include page="template/west.jsp"/>
 	</div>
 	<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
