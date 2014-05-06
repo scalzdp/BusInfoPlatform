@@ -2,13 +2,13 @@
 	background:url('icons/blank.gif') no-repeat center center;
 }
 .icon-add{
-	background:url('icons/edit_add.png') no-repeat center center;
+	background:transparent url('icons/edit_add.png') no-repeat center center;
 }
 .icon-edit{
 	background:url('icons/pencil.png') no-repeat center center;
 }
 .icon-remove{
-	background:url('icons/edit_remove.png') no-repeat center center;
+	background:transparent url('icons/edit_remove.png') no-repeat center center;
 }
 .icon-save{
 	background:url('icons/filesave.png') no-repeat center center;

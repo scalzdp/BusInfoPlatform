@@ -1,49 +1,52 @@
 [{
 	"id":1,
-	"text":"My Documents",
+	"text":"菜单",
 	"children":[{
 		"id":11,
-		"text":"Photos",
-		"state":"closed",
+		"text":"信息发布管理",
 		"children":[{
 			"id":111,
-			"text":"Friend"
+			"text":"产品发布"
 		},{
 			"id":112,
-			"text":"Wife"
+			"text":"产品类型管理"
 		},{
 			"id":113,
-			"text":"Company"
+			"text":"所有发布的产品"
 		}]
 	},{
 		"id":12,
-		"text":"Program Files",
+		"text":"信息查询",
 		"children":[{
 			"id":121,
-			"text":"Intel"
-		},{
-			"id":122,
-			"text":"Java",
-			"attributes":{
-				"p1":"Custom Attribute1",
-				"p2":"Custom Attribute2"
-			}
-		},{
-			"id":123,
-			"text":"Microsoft Office"
-		},{
-			"id":124,
-			"text":"Games",
-			"checked":true
+			"text":"查询发布商品"
 		}]
 	},{
 		"id":13,
-		"text":"index.html"
+		"text":"常用功能",
+		"children":[{
+			"id":131,
+			"text":"日志管理"
+		}]
 	},{
 		"id":14,
-		"text":"about.html"
+		"text":"权限管理",
+		"children":[{
+			"id":141,
+			"text":"角色管理"
+		},{
+			"id":142,
+			"text":"角色权限管理"
+		}]
 	},{
 		"id":15,
-		"text":"welcome.html"
+		"text":"用户管理",
+		"children":[{
+			"id":151,
+			"text":"用户管理"
+		},{
+			"id":152,
+			"text":"密码修改"
+		}]
 	}]
 }]
