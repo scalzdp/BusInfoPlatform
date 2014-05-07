@@ -41,14 +41,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('#tab').tabs('close', index);
 			}
 		}
+		var index = 0;
+		function turnIdToTitle(id){
+			alert(id);
+			return "aa"
+		}	
 		
-       var index = 0;
+       
        //只有使用ifream方式加载
        $(document).ready(function(){
 	       $('#tt').tree({
 				onClick: function(node){
 					if(node.id>100){
-						alert(node.text);  // alert node text property when clicked
+						alert(node.id);  // alert node text property when clicked
 						addTab("text"+index,"<%=basePath%>/notfound","");  //this place input request action
 						index++;
 					}

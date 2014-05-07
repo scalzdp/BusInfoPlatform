@@ -1,0 +1,23 @@
+[{
+	"id":111,
+	"action":"PublishedProducts"
+	},{
+		"id":12,
+		"text":"ProductsClassManage"
+	},{
+		"id":13,
+		"text":"AllPublishedProducts"
+	},{
+		"id":14,
+		"text":"SearchProducts"
+	},{
+		"id":15,
+		"text":"DiaryManage"
+	},{
+		"id":15,
+		"text":"RoleManage"
+	},{
+		"id":15,
+		"text":"DiaryManage"
+	}
+}]
