@@ -10,6 +10,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+		var convertJson;
+		//use jquery read json file
+		$.getJSON("<%=basePath%>json/tree_convert.json",function(data){
+				convertJson = data;
+				//return data[id].action;
+			});
+			
        function collapseAll(){
            $('#tt').tree('collapseAll');
        }
@@ -41,20 +48,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('#tab').tabs('close', index);
 			}
 		}
+		
+		function getAction(id){
+				return convertJson[id].action;
+				//return data[id].action;
+		}
+		
 		var index = 0;
-		function turnIdToTitle(id){
-			alert(id);
-			return "aa"
-		}	
 		
        
        //只有使用ifream方式加载
        $(document).ready(function(){
 	       $('#tt').tree({
 				onClick: function(node){
-					if(node.id>100){
-						alert(node.id);  // alert node text property when clicked
-						addTab("text"+index,"<%=basePath%>/notfound","");  //this place input request action
+					if(node.id>=0){
+						//alert(node.id);  // alert node text property when clicked
+						addTab(node.text,"<%=basePath%>"+getAction(node.id)+"","");  //this place input request action
 						index++;
 					}
 				}

@@ -1,23 +1,28 @@
 [{
-	"id":111,
+	"id":0,
 	"action":"PublishedProducts"
 	},{
-		"id":12,
-		"text":"ProductsClassManage"
+		"id":1,
+		"action":"ProductsClassManage"
 	},{
-		"id":13,
-		"text":"AllPublishedProducts"
+		"id":2,
+		"action":"AllPublishedProducts"
 	},{
-		"id":14,
-		"text":"SearchProducts"
+		"id":3,
+		"action":"SearchProducts"
 	},{
-		"id":15,
-		"text":"DiaryManage"
+		"id":4,
+		"action":"DiaryManage"
 	},{
-		"id":15,
-		"text":"RoleManage"
+		"id":5,
+		"action":"RoleManage"
 	},{
-		"id":15,
-		"text":"DiaryManage"
-	}
-}]
+		"id":6,
+		"action":"RoleAuthority"
+	},{
+		"id":7,
+		"action":"UserManage"
+	},{
+		"id":8,
+		"action":"ModifyPWD"
+	}]
