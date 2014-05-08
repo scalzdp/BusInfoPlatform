@@ -10,16 +10,25 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/tx
-	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     
     <context:annotation-config /> 
     
+	<!-- add new 20140508 避免IE执行AJAX时,返回JSON出现下载文件   
+    <bean id="jsonConverter" 
+            class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+   		<property name="supportedMediaTypes" value="application/json" />
+	</bean>	-->
+	
     <!--对web包中的所有类进行扫描 -->
 	<context:component-scan base-package="com.bip.*"/>
 	  
   	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />     
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		</bean>     
         
 	<!-- 配置数据源数据 -->
 	<context:property-placeholder location="classpath:db.properties" />

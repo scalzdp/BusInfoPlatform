@@ -71,4 +71,9 @@ public class BaseDAO implements IBaseDAO {
 		return temp;
 	}
 
+	public <T> List<T> queryListPageAndRows(int page, int rows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

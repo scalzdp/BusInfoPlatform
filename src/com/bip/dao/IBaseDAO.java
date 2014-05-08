@@ -55,4 +55,10 @@ public interface IBaseDAO {
 	 * @param hql 执行查询的hql查询语言。
 	 * */
 	public <T> List<T> queryFactory(T t,String hql);
+	
+	/* Incoming parameters page and rows 
+	 * use incoming page and row select data in database then automatic assembly 
+	 * the results into one  List Object 
+	 * */
+	public <T> List<T> queryListPageAndRows(int page,int rows);
 }

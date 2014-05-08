@@ -23,7 +23,7 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-pool.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/dom4j-1.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/dumbster-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/ehcache-1.2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/ehcache-1.2.3.jar" sourcepath="G:/java/Maven/Repository/net/sf/ehcache/ehcache/1.2.3/ehcache-1.2.3-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/hibernate-3.2.6.ga.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/hibernate-annotations-3.3.1.GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/hibernate-commons-annotations-3.0.0.ga.jar"/>
@@ -69,5 +69,9 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/kaptcha-2.3.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/ezmorph-1.0.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-core-asl-1.9.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-mapper-asl-1.9.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-core-asl-1.9.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-mapper-asl-1.9.10.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

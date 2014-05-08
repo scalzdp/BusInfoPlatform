@@ -3,7 +3,7 @@ package com.bip.vo;
 /*
  * login this site value Object ,transform input message
  * */
-public class UserVO {
+public class UserVO implements java.io.Serializable {
 	private Integer id;
 	private String userEmail;
 	private String userPassword;
