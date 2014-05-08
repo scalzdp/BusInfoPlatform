@@ -1,5 +1,6 @@
-#Tue May 06 11:24:18 CST 2014
+#Thu May 08 19:03:00 CST 2014
 eclipse.preferences.version=1
 encoding//WebRoot/json/tree_data1.json=UTF-8
+encoding//src/com/bip/Controller/TestController.java=UTF-8
 encoding//src/com/bip/dao/IBaseDAO.java=UTF-8
 encoding//src/com/bip/utils/CommonUtils.java=UTF-8

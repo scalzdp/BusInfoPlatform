@@ -41,11 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             collapsible:true,
             remoteSort: false,
             columns:[[
-                    {title:'Item ID',field:'UserVO.id',width:300},
-                    {title:'Product ID',field:'UserVO.userEmail',width:150},
-                    {title:'List Price',field:'UserVO.userPassword',width:150},
-                    {title:'Unit Cost',field:'UserVO.userNickName',width:150},
-                    {title:'Attribute',field:'UserVO.captcha',width:150}
+                    {title:'Item ID',field:'id',width:300},
+                    {title:'Product ID',field:'userEmail',width:150},
+                    {title:'List Price',field:'userPassword',width:150},
+                    {title:'Unit Cost',field:'userNickName',width:150},
+                    {title:'Attribute',field:'captcha',width:150}
                 ]],
             pagination:true,
             singleSelect:true,

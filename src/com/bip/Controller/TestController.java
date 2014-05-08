@@ -52,19 +52,19 @@ public class TestController {
 	@RequestMapping(value="paging")
 	public @ResponseBody
      Map<String, Object> getJson( Map<String, Object> map,  
-            @RequestParam(required = false, defaultValue = "1") Integer page, //µÚ¼¸Ò³  
-            @RequestParam(required = false, defaultValue = "10") Integer rows //Ò³Êý´óÐ¡ 
+            @RequestParam(required = false, defaultValue = "1") Integer page, //ï¿½Ú¼ï¿½Ò³  
+            @RequestParam(required = false, defaultValue = "10") Integer rows //Ò³ï¿½ï¿½ï¿½Ð¡ 
             ) throws IOException{
-		//DataGrid »áÏò ÇëÇóJson µÄµØÖ·ÒÔPOST·½·¨·¢ËÍ2¸ö²ÎÊý£ºpage£¨µ±Ç°Ò³Âë£©ºÍrows£¨Ã¿Ò³ÏÔÊ¾¼ÇÂ¼Êý£©
-        //»ñÈ¡·ÖÒ³Êý¾Ý
+		//DataGrid ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Json ï¿½Äµï¿½Ö·ï¿½ï¿½POSTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pageï¿½ï¿½ï¿½ï¿½Ç°Ò³ï¿½ë£©ï¿½ï¿½rowsï¿½ï¿½Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½Â¼ï¿½ï¿½
+        //ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½
         List<UserVO> UserVOList = userService.getUser(page,rows);
 
-        //»ñÈ¡×Ü¼ÇÂ¼Êý
+        //ï¿½ï¿½È¡ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
         int totalRows = userService.getTotalRows();
-
         map.put("total", totalRows);
         map.put("rows", UserVOList);
-        //·µ»ØÖ¸¶¨¸ñÊ½µÄMap£¬Jackson»á°ÑMap×ª»»Î´Json
+        //ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Mapï¿½ï¿½Jacksonï¿½ï¿½ï¿½Map×ªï¿½ï¿½Î´Json
+        
         return map;
     }
 
