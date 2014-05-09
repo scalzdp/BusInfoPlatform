@@ -22,4 +22,9 @@ public class PublishMessageController {
 	private String getAllPublishedProducts(){
 		return "publishmessage/allpublishedproducts";
 	}
+	
+	@RequestMapping(value="SearchProducts",method=RequestMethod.GET)
+	private String getSearchProducts(){
+		return "publishmessage/searchproduct";
+	}
 }

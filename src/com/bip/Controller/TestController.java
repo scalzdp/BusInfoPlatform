@@ -52,18 +52,18 @@ public class TestController {
 	@RequestMapping(value="paging")
 	public @ResponseBody
      Map<String, Object> getJson( Map<String, Object> map,  
-            @RequestParam(required = false, defaultValue = "1") Integer page, //�ڼ�ҳ  
-            @RequestParam(required = false, defaultValue = "10") Integer rows //ҳ���С 
+            @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
+            @RequestParam(required = false, defaultValue = "10") Integer rows //get the row number from the select value
             ) throws IOException{
-		//DataGrid ���� ����Json �ĵ�ַ��POST��������2������page����ǰҳ�룩��rows��ÿҳ��ʾ��¼��
-        //��ȡ��ҳ���
+		//DataGrid server paging user input page and rows for paging this page
+        //get the user list object messages
         List<UserVO> UserVOList = userService.getUser(page,rows);
 
-        //��ȡ�ܼ�¼��
+        //get message row numbers
         int totalRows = userService.getTotalRows();
         map.put("total", totalRows);
         map.put("rows", UserVOList);
-        //����ָ����ʽ��Map��Jackson���Mapת��δJson
+        //those message object will convert to json message then return map object
         
         return map;
     }

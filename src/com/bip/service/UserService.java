@@ -33,6 +33,6 @@ public class UserService {
 	 * */
 	public int getTotalRows() {
 		
-		return 10;
+		return 30;
 	}
 }
