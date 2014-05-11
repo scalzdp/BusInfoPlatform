@@ -26,12 +26,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     <table id="datagrid" class="easyui-datagrid" style="width:700px;height:250px"
+     <table id="dataallproductsgrid" class="easyui-datagrid" style="width:700px;height:250px"
            title="Load Data" iconCls="icon-save"
            rownumbers="true" pagination="true">
     </table>
     <script type="text/javascript">
-   	$('#datagrid').datagrid({
+   	$('#dataallproductsgrid').datagrid({
             fit:true,
             pageNumber:1,
             pageList:[10,20,50],
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
         
         
-        var p = $('#datagrid').datagrid('getPager');  
+        var p = $('#dataallproductsgrid').datagrid('getPager');  
 	    p.pagination({  
 	        pageSize: 5,//每页显示的记录条数，默认为10  
 	        pageList: [5, 10, 15],//可以设置每页记录条数的列表  
