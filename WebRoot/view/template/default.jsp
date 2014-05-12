@@ -8,7 +8,7 @@
 </head>
 	<body>
 		<div style="margin:20px 0;"></div>
-		<div id="tab" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:1300px;height:680px">
+		<div id="tab" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:1350px;height:680px">
 		</div>
 		<div id="tab-tools">
 			<!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addPanel()"></a> -->

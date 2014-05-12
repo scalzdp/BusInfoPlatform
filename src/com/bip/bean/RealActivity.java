@@ -18,10 +18,12 @@ public class RealActivity implements Serializable {
 	private Integer id;
 	private Integer actionTypeId;
 	private Integer locationId;
+	private Integer userId;
 	private String name;
 	private Integer dataMark;
 	private Date dateTime;
 	private String discription;
+	private String telephone;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -46,6 +48,14 @@ public class RealActivity implements Serializable {
 	}
 	public void setLocationId(Integer locationId) {
 		this.locationId = locationId;
+	}
+	
+	@Column
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	@Column
 	public String getName() {
@@ -77,5 +87,13 @@ public class RealActivity implements Serializable {
 	}
 	public void setDiscription(String discription) {
 		this.discription = discription;
+	}
+	
+	@Column
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 }
