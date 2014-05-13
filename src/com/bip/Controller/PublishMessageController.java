@@ -1,22 +1,30 @@
 package com.bip.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bip.resource.ResourceFile;
+import com.bip.service.PublishMessageService;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
+import com.bip.vo.UserVO;
 
 @Controller
 public class PublishMessageController {
 
+	@Autowired
+	private PublishMessageService publishService;
+	
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.GET)
 	private String getPublishProduct(Model  model, HttpSession session,HttpServletRequest request){
 		/* 一、通过登录的IP判断所处的城市，查询该城市的相关信息
@@ -51,8 +59,11 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.POST)
-	private String postPublishProduct(Model model,@ModelAttribute("form") PublishMessageVO publishVO){
+	private String postPublishProduct(Model model,@ModelAttribute("form") PublishMessageVO publishVO,HttpSession session){
 		//
+		UserVO uservo =  (UserVO)session.getAttribute(ResourceFile.USER_SESSION_KEY);
+		publishVO.setUserID(uservo.getId());
+		publishService.saveMessage(publishVO);
 		return "publishmessage/publishproduct";
 	}
 	
