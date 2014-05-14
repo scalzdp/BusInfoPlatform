@@ -27,8 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
 		#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;float:left;}
 		#map-field{width: 48%;height: 100%;overflow: hidden;margin:0;float:left;}
-		#inputMessage{width: 45%; position:relative; left:10px; height: 50%;overflow: hidden;margin:0;}
-		#list-publish-message{width:45%;position:relative;top:10px;left:10px;height:50%;overflow:hidden;margin:0;}
+		#inputMessage{width: 45%; position:relative; left:10px; height: 45%;overflow: hidden;margin:0;}
+		#list-publish-message{width:45%;position:relative;top:10px;left:10px;height:55%;overflow:hidden;margin:0;}
 		.textBox{
 			width:200px;
 		}
@@ -47,17 +47,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            fit:true,
 	            pageNumber:1,
 	            pageList:[10,20,50],
-	            url:'<%=basePath%>paging',
+	            url:'<%=basePath%>someonepublishmessage',
 	            nowrap: false,
 	            striped: true,
 	            collapsible:true,
 	            remoteSort: false,
 	            columns:[[
-	                    {title:'Item ID',field:'id',width:50},
-	                    {title:'Product ID',field:'userEmail',width:100},
-	                    {title:'List Price',field:'userPassword',width:100},
-	                    {title:'Unit Cost',field:'userNickName',width:100},
-	                    {title:'Attribute',field:'captcha',width:150}
+	                    {title:'时间',field:'dateTime',width:100},
+	                    {title:'描述',field:'description',width:150},
+	                    {title:'纬度',field:'latitude',width:50},
+	                    {title:'经度',field:'longitude',width:50},
+	                    {title:'联系电话',field:'telephone',width:100}
 	                ]],
 	            pagination:true,
 	            singleSelect:true,
@@ -87,13 +87,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </fieldset>
     <div id="inputMessage">
 	    <form id="publishedProducts" action="PublishedProducts" method="post">
+	    	<input type="hidden" id="lat" name="latitude">
+    		<input type="hidden" id="lng" name="longitude">
 		    <fieldset>
 		    	<legend>填写的信息</legend>
 		    	<table>
 		    		<tr>
 		    			<td>地址：</td>
 		    			<td>
-		    				<input type="text"  name="location"  id="location" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
+		    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
 		    			</td>
 		    		</tr>
 		    		<tr>
@@ -108,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    		</tr>
 		    		<tr>
 		    			<td>描述：</td>
-		    			<td><textarea name="description" rows="10" cols="20" placeholder="详述一下该信息的其他点呗"  class="easyui-validatebox textbox textBox" data-options="required:true"></textarea> </td>
+		    			<td><textarea name="description" rows="5" cols="10" placeholder="详述一下该信息的其他点呗"  class="easyui-validatebox textbox textBox" data-options="required:true"></textarea> </td>
 		    		</tr>
 		    		<tr>
 		    			<td colspan="2" align="right">
@@ -123,8 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="list-publish-message">
     	<fieldset>
     		<legend>展示所有发布的信息</legend>
-    		<!-- 利用分页进行展示 -->
-			     <table id="publishproductsgrid" class="easyui-datagrid" style="width:500px;height:240px"
+    		<!-- 利用分页进行展示 --><a href="#" class="easyui-linkbutton" onclick="mapMark()">地图标注</a>
+			     <table id="publishproductsgrid" class="easyui-datagrid" style="width:500px;height:200px"
 			           title="Load Data" iconCls="icon-save"
 			           rownumbers="true" pagination="true">
 			    </table>
@@ -174,7 +176,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        //alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
 	        document.getElementById("location").value= addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
 	    });
+	    document.getElementById("lat").value =e.point.lat;
+		document.getElementById("lng").value =e.point.lng;
 	}
+	
+	function mapMark(){
+			var row = $('#publishproductsgrid').datagrid('getSelected');
+			if (row){
+				 var point = new BMap.Point(row.longitude,row.latitude);//默认
+				 // 创建标注对象并添加到地图  
+				 var marker = new BMap.Marker(point);
+				 var label = new BMap.Label(row.description,{offset:new BMap.Size(20,-10)});
+		 		 marker.setLabel(label);
+				 map.addOverlay(marker); 
+			}
+		}
 		
  
 	/* function loadScript() {

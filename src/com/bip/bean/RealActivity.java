@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Table(name="t_realactivity")
 public class RealActivity implements Serializable {
 	private Integer id;
-	private Integer actionTypeId;
 	private Integer locationId;
 	private Integer userId;
 	private String name;
@@ -32,14 +31,6 @@ public class RealActivity implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
-	@Column
-	public Integer getActionTypeId() {
-		return actionTypeId;
-	}
-	public void setActionTypeId(Integer actionTypeId) {
-		this.actionTypeId = actionTypeId;
 	}
 	
 	@Column

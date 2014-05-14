@@ -36,7 +36,18 @@ public class PublishMessageService {
 		location.setDistrict(locations[2]);
 		location.setStreet(locations[3]);
 		location.setStreetNumber(locations[4]);
+		location.setLatitude(vo.getLatitude());
+		location.setLongitude(vo.getLongitude());
 		baseDAO.save(location);
+		RealActivity ra = new RealActivity();
+		ra.setDataMark(1);
+		ra.setDateTime(vo.getDateTime());
+		ra.setDiscription(vo.getDescription());
+		ra.setLocationId(location.getId());
+		ra.setName("");
+		ra.setTelephone(vo.getTelephone());
+		ra.setUserId(vo.getUserID());
+		baseDAO.save(ra);
 	}
 	
 	/* through User's id get the one all the published message
@@ -57,5 +68,28 @@ public class PublishMessageService {
 			publishVOs.add(publishvo);
 		}
 		return publishVOs;
+	}
+	
+	public List<PublishMessageVO> getPublishMessagePaging(int userid,int page,int rows){
+		List<PublishMessageVO> publishVOs = new ArrayList<PublishMessageVO>();
+		List<RealActivity> realActivitys = baseDAO.queryListPageAndRows(new RealActivity(), page, rows, "t_realactivity", " and userId = "+userid);
+		for(RealActivity r:realActivitys){
+			PublishMessageVO publishvo = new PublishMessageVO();
+			Location location = baseDAO.get(new Location(),r.getLocationId());
+			publishvo.setDateTime(r.getDateTime());
+			publishvo.setDescription(r.getDiscription());
+			publishvo.setLatitude(location.getLatitude());
+			publishvo.setLongitude(location.getLongitude());
+			publishvo.setTelephone(r.getTelephone());
+			publishVOs.add(publishvo);
+		}
+		return publishVOs;
+	}
+	
+	/* get someones all 
+	 * */
+	public int getPublishMessageTotalRows(int userid){
+		List<RealActivity> realActivitys = baseDAO.queryFactory(new RealActivity(), "t_realactivity", " and userId="+userid);
+		return realActivitys.size();
 	}
 }

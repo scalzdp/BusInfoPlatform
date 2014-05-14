@@ -71,9 +71,17 @@ public class BaseDAO implements IBaseDAO {
 		return temp;
 	}
 
-	public <T> List<T> queryListPageAndRows(int page, int rows) {
-		// TODO Auto-generated method stub
-		return null;
+	/* page:  witch page of this select
+	 * rows:  how many rows will display
+	 * */
+	public <T> List<T> queryListPageAndRows(T t,int page, int rows , String tablename , String whereClaluse) {
+		String hql = "select * from "+tablename;
+		if(!whereClaluse.equals("")&&whereClaluse!=null){
+			hql += " where 1=1 " +whereClaluse;
+		}
+		hql += " LIMIT "+(page-1)*rows+","+rows+" ;";
+		List<T> temp = (List<T>)this.sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(t.getClass()).list();
+		return temp;
 	}
 
 }

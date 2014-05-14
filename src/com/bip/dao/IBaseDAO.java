@@ -60,5 +60,5 @@ public interface IBaseDAO {
 	 * use incoming page and row select data in database then automatic assembly 
 	 * the results into one  List Object 
 	 * */
-	public <T> List<T> queryListPageAndRows(int page,int rows);
+	public <T> List<T> queryListPageAndRows(T t,int page,int rows, String tablename , String whereClaluse);
 }

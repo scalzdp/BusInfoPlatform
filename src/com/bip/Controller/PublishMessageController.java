@@ -1,5 +1,6 @@
 package com.bip.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bip.resource.ResourceFile;
 import com.bip.service.PublishMessageService;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
 import com.bip.vo.UserVO;
+
 
 @Controller
 public class PublishMessageController {
@@ -81,4 +85,24 @@ public class PublishMessageController {
 	private String getSearchProducts(){
 		return "publishmessage/searchproduct";
 	}
+	
+	@RequestMapping(value="someonepublishmessage")
+	public @ResponseBody
+     Map<String, Object> getJson( Map<String, Object> map,  
+            @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
+            @RequestParam(required = false, defaultValue = "10") Integer rows, //get the row number from the select value
+            HttpSession session) throws IOException{
+		//DataGrid server paging user input page and rows for paging this page
+        //get the user list object messages
+		UserVO uservo =  (UserVO)session.getAttribute(ResourceFile.USER_SESSION_KEY);
+        List<PublishMessageVO> publishMessageVO = publishService.getPublishMessagePaging(uservo.getId(),page,rows);
+
+        //get message row numbers
+        int totalRows = publishService.getPublishMessageTotalRows(uservo.getId());
+        map.put("total", totalRows);
+        map.put("rows", publishMessageVO);
+        //those message object will convert to json message then return map object
+        
+        return map;
+    }
 }
