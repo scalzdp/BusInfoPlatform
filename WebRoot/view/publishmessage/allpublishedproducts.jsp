@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	<h1>所有发布信息通过图表显示趋势</h1>
      <table id="dataallproductsgrid" class="easyui-datagrid" style="width:700px;height:250px"
            title="Load Data" iconCls="icon-save"
            rownumbers="true" pagination="true">

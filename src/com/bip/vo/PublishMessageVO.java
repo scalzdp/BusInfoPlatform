@@ -6,6 +6,7 @@ import java.util.Date;
  * in this object has input location place and message description and user message
  * */
 public class PublishMessageVO {
+	private Integer realactivityID;
 	private String location;
 	private String telephone;
 	private String description;
@@ -13,7 +14,14 @@ public class PublishMessageVO {
 	private Integer userID;
 	private Double latitude;
 	private Double longitude;
+	private Integer actiontypeid;
 	
+	public Integer getRealactivityID() {
+		return realactivityID;
+	}
+	public void setRealactivityID(Integer realactivityID) {
+		this.realactivityID = realactivityID;
+	}
 	public String getLocation() {
 		return location;
 	}
@@ -56,5 +64,11 @@ public class PublishMessageVO {
 	}
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+	public Integer getActiontypeid() {
+		return actiontypeid;
+	}
+	public void setActiontypeid(Integer actiontypeid) {
+		this.actiontypeid = actiontypeid;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bip.resource.ResourceFile;
+import com.bip.service.ActionTypeService;
 import com.bip.service.PublishMessageService;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
@@ -29,8 +31,12 @@ public class PublishMessageController {
 	@Autowired
 	private PublishMessageService publishService;
 	
+	@Autowired
+	private ActionTypeService actionTypeService;
+	
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.GET)
-	private String getPublishProduct(Model  model, HttpSession session,HttpServletRequest request){
+	private String getPublishProduct(Model model, HttpSession session,
+									 HttpServletRequest request){
 		/* 一、通过登录的IP判断所处的城市，查询该城市的相关信息
 		 * 二、将ActionType查询出来，并赋值给model
 		 * */
@@ -39,20 +45,20 @@ public class PublishMessageController {
 		String lng = "104.06";	
 		String lat = "30.67";
 		try{
-		Map<String,String> address = GetRequestClientUtil.getAddress("ip="+ip, "utf-8");
-		if(!address.equals("")){
-			Map<String,String> map = GetRequestClientUtil.getGeocoderLatitude(address.get("region")+" "+address.get("city")+" "+address.get("area")+" "+address.get("isp"));
-			if(map!=null){
-				if(map.size()>0){
-					lng = map.get("lng");	
-					lat =map.get("lat");
+			
+			Map<String,String> address = GetRequestClientUtil.getAddress("ip="+ip, "utf-8");
+			if(!address.equals("")){
+				Map<String,String> map = GetRequestClientUtil.getGeocoderLatitude(address.get("region")+" "+address.get("city")+" "+address.get("area")+" "+address.get("isp"));
+				if(map!=null){
+					if(map.size()>0){
+						lng = map.get("lng");	
+						lat =map.get("lat");
 				}
 			}
 			session.setAttribute("streetName", "");
 			session.setAttribute("townName", "");
 			session.setAttribute("cityName", address.get("city"));
 		}
-		
 		//将查询出来的经纬度返回到页面
 		model.addAttribute("lngcenter", lng) ;
 		model.addAttribute("latcenter", lat) ;
@@ -88,7 +94,7 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="someonepublishmessage")
 	public @ResponseBody
-     Map<String, Object> getJson( Map<String, Object> map,  
+     Map<String, Object> getSomeOnePublishMessage( Map<String, Object> map,  
             @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
             @RequestParam(required = false, defaultValue = "10") Integer rows, //get the row number from the select value
             HttpSession session) throws IOException{
@@ -105,4 +111,23 @@ public class PublishMessageController {
         
         return map;
     }
+	
+	@RequestMapping(value="allpublishmessage")
+	public @ResponseBody
+		Map<String, Object> getAllPublishMessage( Map<String, Object> map,  
+	            @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
+	            @RequestParam(required = false, defaultValue = "10") Integer rows //get the row number from the select value
+	            ){
+		List<PublishMessageVO> publishMessageVO = publishService.getPublishMessagePaging(0,page,rows);
+
+        //get message row numbers
+        int totalRows = publishService.getPublishMessageTotalRows(0);
+        map.put("total", totalRows);
+        map.put("rows", publishMessageVO);
+        //those message object will convert to json message then return map object
+        
+        return map;
+	}
+	
+	
 }

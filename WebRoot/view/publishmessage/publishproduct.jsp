@@ -93,6 +93,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	<legend>填写的信息</legend>
 		    	<table>
 		    		<tr>
+		    			<td>请选择活动类型：</td>
+		    			<td>
+			    			<select name="actiontypeid">
+			    					<option value="0">购物</option>
+			    					<option value="1">旅游</option>
+			    					<option value="2">聚餐</option>
+			    			</select>
+			    		</td>
+		    		</tr>
+		    		<tr>
 		    			<td>地址：</td>
 		    			<td>
 		    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
