@@ -23,6 +23,7 @@ public class RealActivity implements Serializable {
 	private Date dateTime;
 	private String discription;
 	private String telephone;
+	private Integer actiontypeid;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -86,5 +87,13 @@ public class RealActivity implements Serializable {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	
+	@Column
+	public Integer getActiontypeid() {
+		return actiontypeid;
+	}
+	public void setActiontypeid(Integer actiontypeid) {
+		this.actiontypeid = actiontypeid;
 	}
 }
