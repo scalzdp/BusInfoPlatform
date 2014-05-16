@@ -40,10 +40,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     url: '<%=basePath%>allpublishmessage',
                     columns: [[
                         { field: "realactivityID", title: "活动编号", hidden: true },
-                        { field: "dateTime", title: "时间", editor: "text" },
+                        { field: "dateTime", title: "时间"},
                         { field: "description", title: "描述", editor: "text" },
-                        { field: "latitude", title: "纬度", editor: {type:"numberbox",options:{precision:6}} },
-                        { field: "longitude", title: "经度", editor: {type:"numberbox",options:{precision:6}} },
+                        { field: "latitude", title: "纬度"},
+                        { field: "longitude", title: "经度"},
                         { field: "telephone", title: "电话", editor: "numberbox" },
                         {
                             field: "Op", title: "操作", formatter: function (value, row, index) {
@@ -74,24 +74,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $.messager.confirm("Confirm", "Are you sure you want to delete record?", function (r) {
                     if (r) {
                         var row = getRow(index);
-                        EUGrid.datagrid("reload", { id: row["Id"] });
+                        EUGrid.datagrid("reload", { id: row["realactivityID"] });
                         EUGrid.datagrid("options").queryParams = null;//清空参数
                     }
                 });
             };
             save = function (target, index) {
-                var datetime, description;
-                var editor = EUGrid.datagrid("getEditor", { index: index, field: "dateTime" });
-                datetime = $(editor.target).val();
+                var telephone, description;
+                var editor = EUGrid.datagrid("getEditor", { index: index, field: "telephone" });
+                telephone = $(editor.target).val();
                 editor = EUGrid.datagrid("getEditor", { index: index, field: "description" });
                 description = $(editor.target).val();
                 //description = $(editor.target).numberbox("getValue");
 
                 getRow(index).editing = false;//取消编辑状态
-                $.messager.confirm("Confirm", "Send data(" + datetime + "," + description + ") to server?", function (r) {
+                $.messager.confirm("Confirm", "Send data(" + telephone + "," + description + ") to server?", function (r) {
                     if (r) {
+                    	var rows = EUGrid.datagrid("getChanges");
+                		var rowstr = JSON.stringify(rows);
+		                $.post('<%=basePath%>published/saveedit', rowstr, function (data) {
+		                     
+		                });
                         EUGrid.datagrid("endEdit", index);
-                        EUGrid.datagrid("acceptChanges");
+                        //EUGrid.datagrid("acceptChanges");
                         //reload
                     }
                     else {
@@ -105,6 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 EUGrid.datagrid("cancelEdit", index);
             };
         });
+        
+        function postDataToDB(){
+        		var rows = $("#tab1").datagrid("getChanges");
+                var rowstr = JSON.stringify(rows);
+                $.post('<%=basePath%>published/saveedit', rowstr, function (data) {
+                     
+                });
+        }
     </script>
   </body>
 </html>
