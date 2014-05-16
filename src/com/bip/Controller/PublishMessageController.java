@@ -129,5 +129,10 @@ public class PublishMessageController {
         return map;
 	}
 	
+	@RequestMapping(value="published/saveedit")
+	public String acceptEditDg(Model model){
+		return "";
+	} 
+	
 	
 }
