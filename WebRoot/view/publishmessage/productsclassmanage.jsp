@@ -75,6 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     if (r) {
                         var row = getRow(index);
                         EUGrid.datagrid("reload", { id: row["realactivityID"] });
+                        //TODO:在这里发起ajax请求删除相应的数据
                         EUGrid.datagrid("options").queryParams = null;//清空参数
                     }
                 });
@@ -92,8 +93,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     if (r) {
                     	var rows = EUGrid.datagrid("getChanges");
                 		var rowstr = JSON.stringify(rows);
-		                $.post('<%=basePath%>published/saveedit', rowstr, function (data) {
-		                     
+		                jQuery.ajax({
+		                	url:'./published/saveedit',
+		                	type:'post',
+		                	contentType:'application/json',
+		                	processData : true,//contentType为xml时，些值为false
+		                	dataType:'json',
+		                	data:{postdata:rowstr}, //这里的数据无法post获取？？
+		                	success:function(data){
+		                	
+		                	},
+		                	error:function(data){
+		                	}
 		                });
                         EUGrid.datagrid("endEdit", index);
                         //EUGrid.datagrid("acceptChanges");
@@ -112,11 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
         
         function postDataToDB(){
-        		var rows = $("#tab1").datagrid("getChanges");
-                var rowstr = JSON.stringify(rows);
-                $.post('<%=basePath%>published/saveedit', rowstr, function (data) {
-                     
-                });
+        		
         }
     </script>
   </body>
