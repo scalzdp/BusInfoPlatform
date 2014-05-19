@@ -133,8 +133,9 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="published/saveedit")
-	public String acceptEditDg(Model model,HttpServletRequest request){
-		return "";
+	public @ResponseBody String acceptEditDg(Model model,HttpServletRequest request){
+		String result = request.getParameter("postdata");
+		return "json";
 	} 
 	
 	
