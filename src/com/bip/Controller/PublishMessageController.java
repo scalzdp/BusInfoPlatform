@@ -40,8 +40,8 @@ public class PublishMessageController {
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.GET)
 	private String getPublishProduct(Model model, HttpSession session,
 									 HttpServletRequest request){
-		/* Ò»¡¢Í¨¹ýµÇÂ¼µÄIPÅÐ¶ÏËù´¦µÄ³ÇÊÐ£¬²éÑ¯¸Ã³ÇÊÐµÄÏà¹ØÐÅÏ¢
-		 * ¶þ¡¢½«ActionType²éÑ¯³öÀ´£¬²¢¸³Öµ¸ømodel
+		/* Ò»ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Â¼ï¿½ï¿½IPï¿½Ð¶ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ñ¯ï¿½Ã³ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ActionTypeï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½model
 		 * */
 		String ip="61.139.66.76";
 		ip =GetRequestClientUtil.getIpAddr(request);
@@ -62,7 +62,7 @@ public class PublishMessageController {
 			session.setAttribute("townName", "");
 			session.setAttribute("cityName", address.get("city"));
 		}
-		//½«²éÑ¯³öÀ´µÄ¾­Î³¶È·µ»Øµ½Ò³Ãæ
+		//ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½Î³ï¿½È·ï¿½ï¿½Øµï¿½Ò³ï¿½ï¿½
 		model.addAttribute("lngcenter", lng) ;
 		model.addAttribute("latcenter", lat) ;
 		}catch(Exception ex){

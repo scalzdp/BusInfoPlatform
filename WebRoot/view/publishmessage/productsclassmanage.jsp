@@ -97,9 +97,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                	url:'./published/saveedit',
 		                	type:'post',
 		                	contentType:'application/json',
-		                	processData : true,//contentType为xml时，些值为false
+		                	processData : true,  //contentType为xml时，些值为false
 		                	dataType:'json',
-		                	data:{postdata:rowstr}, //这里的数据无法post获取？？
+		                	data:{postdata:"11ww"}, //这里的数据无法post获取？？
 		                	success:function(data){
 		                	
 		                	},
