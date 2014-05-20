@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -132,9 +133,10 @@ public class PublishMessageController {
         return map;
 	}
 	
-	@RequestMapping(value="published/saveedit")
-	public @ResponseBody String acceptEditDg(Model model,HttpServletRequest request){
-		String result = request.getParameter("postdata");
+	@RequestMapping(value="/published/saveedit")
+	public  String acceptEditDg(HttpServletRequest request) throws IOException{
+		ServletInputStream result = request.getInputStream();
+		
 		return "json";
 	} 
 	
