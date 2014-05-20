@@ -92,21 +92,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $.messager.confirm("Confirm", "Send data(" + telephone + "," + description + ") to server?", function (r) {
                     if (r) {
                     	var rows = EUGrid.datagrid("getChanges");
+                    	 EUGrid.datagrid("endEdit", index);
                 		var rowstr = JSON.stringify(rows);
 		                jQuery.ajax({
 		                	url:'./published/saveedit',
-		                	type:'post',
+		                	type:'get',
 		                	contentType:'application/json',
 		                	processData : true,  //contentType为xml时，些值为false
 		                	dataType:'json',
-		                	data:{postdata:"11ww"}, //这里的数据无法post获取？？
+		                	data:{postdata1:rowstr}, //这里的数据无法post获取？？
 		                	success:function(data){
 		                	
 		                	},
 		                	error:function(data){
 		                	}
 		                });
-                        EUGrid.datagrid("endEdit", index);
                         //EUGrid.datagrid("acceptChanges");
                         //reload
                     }

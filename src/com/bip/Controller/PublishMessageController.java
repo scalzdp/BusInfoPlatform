@@ -1,21 +1,18 @@
 package com.bip.Controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -134,9 +131,15 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="/published/saveedit")
-	public  String acceptEditDg(HttpServletRequest request) throws IOException{
+	public @ResponseBody  String acceptEditDg(HttpServletRequest request) throws IOException{
 		ServletInputStream result = request.getInputStream();
-		
+		System.out.println(request.getParameter("postdata1"));
+		System.out.println(request.getAttribute("postdata1"));
+		Enumeration enumeration = request.getParameterNames();
+		while(enumeration.hasMoreElements()){
+			System.out.println(enumeration.nextElement());
+		}
+		System.out.println(request.getParameterNames());
 		return "json";
 	} 
 	
