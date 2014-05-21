@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 getRow(index).editing = false;//取消编辑状态
                 $.messager.confirm("Confirm", "Send data(" + telephone + "," + description + ") to server?", function (r) {
                     if (r) {
-                    	var rows = EUGrid.datagrid("getChanges");
+                    	var rows = EUGrid.datagrid("getChanges","updated");
                     	 EUGrid.datagrid("endEdit", index);
                 		var rowstr = JSON.stringify(rows);
 		                jQuery.ajax({
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                	contentType:'application/json',
 		                	processData : true,  //contentType为xml时，些值为false
 		                	dataType:'json',
-		                	data:{postdata1:rowstr}, //这里的数据无法post获取？？
+		                	data:{postdata1:encodeURI(rowstr)}, //这里的数据无法post获取？？
 		                	success:function(data){
 		                	
 		                	},

@@ -1,6 +1,7 @@
 package com.bip.Controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -133,13 +134,13 @@ public class PublishMessageController {
 	@RequestMapping(value="/published/saveedit")
 	public @ResponseBody  String acceptEditDg(HttpServletRequest request) throws IOException{
 		ServletInputStream result = request.getInputStream();
-		System.out.println(request.getParameter("postdata1"));
-		System.out.println(request.getAttribute("postdata1"));
+		String postDatas = request.getParameter("postdata1");
+		System.out.println(URLDecoder.decode(postDatas,"UTF-8"));
+		//try convert this json to object that can modify the object
 		Enumeration enumeration = request.getParameterNames();
 		while(enumeration.hasMoreElements()){
 			System.out.println(enumeration.nextElement());
 		}
-		System.out.println(request.getParameterNames());
 		return "json";
 	} 
 	
