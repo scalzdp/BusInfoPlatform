@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                	error:function(data){
 		                	}
 		                });
-                        //EUGrid.datagrid("acceptChanges");
+                        EUGrid.datagrid("acceptChanges");
                         //reload
                     }
                     else {

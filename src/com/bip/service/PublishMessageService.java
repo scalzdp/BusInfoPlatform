@@ -97,7 +97,7 @@ public class PublishMessageService {
 		return publishVOs;
 	}
 	
-	/* get someones all 
+	/* get someone's all  publish messages
 	 * */
 	public int getPublishMessageTotalRows(int userid){
 		if(userid==0){
@@ -105,5 +105,16 @@ public class PublishMessageService {
 		}else{
 			return baseDAO.queryFactory(new RealActivity(), "t_realactivity", " and userId="+userid).size();
 		}
+	}
+	
+	/* modify the activity
+	 * this modify the connection telephone and
+	 * modify the activity description 
+	 * */
+	public void modifyRealActivity(PublishMessageVO vo){
+		RealActivity ra = baseDAO.get(new RealActivity(), vo.getRealactivityID());
+		ra.setTelephone(vo.getTelephone());
+		ra.setDiscription(vo.getDescription());
+		baseDAO.update(ra);
 	}
 }

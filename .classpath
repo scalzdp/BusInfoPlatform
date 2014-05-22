@@ -12,7 +12,6 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/asm-attrs-1.5.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/cglib-2.1_3.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-beanutils-1.7.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-collections-2.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-dbcp-1.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-digester-1.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-email-1.0.jar"/>
@@ -73,5 +72,6 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-mapper-asl-1.9.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-core-asl-1.9.10.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-mapper-asl-1.9.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-collections-3.2.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

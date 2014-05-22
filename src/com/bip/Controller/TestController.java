@@ -67,5 +67,10 @@ public class TestController {
         
         return map;
     }
+	
+	@RequestMapping(value="gettest",method=RequestMethod.GET)
+	public String getTestPage(Model model){
+		return "test/test";
+	}
 
 }

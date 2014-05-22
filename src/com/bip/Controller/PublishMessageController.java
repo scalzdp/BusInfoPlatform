@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bip.resource.ResourceFile;
 import com.bip.service.ActionTypeService;
 import com.bip.service.PublishMessageService;
+import com.bip.utils.CommonUtils;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
 import com.bip.vo.UserVO;
@@ -133,13 +134,15 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="/published/saveedit")
 	public @ResponseBody  String acceptEditDg(HttpServletRequest request) throws IOException{
-		ServletInputStream result = request.getInputStream();
 		String postDatas = request.getParameter("postdata1");
-		System.out.println(URLDecoder.decode(postDatas,"UTF-8"));
+		postDatas=URLDecoder.decode(postDatas,"UTF-8");
+		System.out.println(postDatas);
 		//try convert this json to object that can modify the object
-		Enumeration enumeration = request.getParameterNames();
-		while(enumeration.hasMoreElements()){
-			System.out.println(enumeration.nextElement());
+		PublishMessageVO vo = CommonUtils.convertJsonToObject(new PublishMessageVO(),postDatas);
+		if(vo!=null){
+			System.out.println(vo.getDescription());
+			System.out.println(vo.getTelephone());
+			publishService.modifyRealActivity(vo);
 		}
 		return "json";
 	} 

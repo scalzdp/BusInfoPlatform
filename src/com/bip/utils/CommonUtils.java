@@ -53,4 +53,15 @@ public class CommonUtils {
 		}
 		return "";
 	}
+	
+	public static <T> T convertJsonToObject(T t,String jsonStr){
+		JSONArray array = JSONArray.fromObject(jsonStr);//先读取串数组
+		Object[] o = array.toArray();                //转成对像数组
+		if(o.length==0){
+			return null;
+		}
+		JSONObject obj = JSONObject.fromObject(o[0]);//再使用JsonObject遍历一个个的对像
+		T oo = (T)obj.toBean(obj,t.getClass());//指定转换的类型，但仍需要强制转化-成功
+		return oo;
+	}
 }
