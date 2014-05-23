@@ -7,61 +7,121 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <title>所有发布的产品</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-	<link rel="stylesheet" href="css/easyui.css" type="text/css"></link>
-  	<link rel="stylesheet" href="css/icon.css" type="text/css"></link>
-  	<link rel="stylesheet" href="css/demo.css" type="text/css"></link>
-  	
+	
   	<script type="text/javascript" src="js/jquery.min.js"></script>
-  	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-
-  </head>
-  
-  <body>
-  	<h1>所有发布信息通过图表显示趋势</h1>
-     <table id="dataallproductsgrid" class="easyui-datagrid" style="width:700px;height:250px"
-           title="Load Data" iconCls="icon-save"
-           rownumbers="true" pagination="true">
-    </table>
-    <script type="text/javascript">
-   	$('#dataallproductsgrid').datagrid({
-            fit:true,
-            pageNumber:1,
-            pageList:[10,20,50],
-            url:'<%=basePath%>paging',
-            nowrap: false,
-            striped: true,
-            collapsible:true,
-            remoteSort: false,
-            columns:[[
-                    {title:'Item ID',field:'id',width:300},
-                    {title:'Product ID',field:'userEmail',width:150},
-                    {title:'List Price',field:'userPassword',width:150},
-                    {title:'Unit Cost',field:'userNickName',width:150},
-                    {title:'Attribute',field:'captcha',width:150}
-                ]],
-            pagination:true,
-            singleSelect:true,
-            rownumbers:true
+	<script type="text/javascript">
+	$(function () {
+    $(document).ready(function() {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
         });
-        
-        
-        var p = $('#dataallproductsgrid').datagrid('getPager');  
-	    p.pagination({  
-	        pageSize: 5,//每页显示的记录条数，默认为10  
-	        pageList: [5, 10, 15],//可以设置每页记录条数的列表  
-	        beforePageText: '第',//页数文本框前显示的汉字  
-	        afterPageText: '页    共 {pages} 页',  
-	        displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录'  
-	    }); 
+    
+        var chart;
+        $('#container').highcharts({
+            chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function() {
+                            var x = (new Date()).getTime(), // current time
+                                y = Math.random();
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                }
+            },
+            title: {
+                text: 'Live random data'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'Value'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Random data',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+    
+                    for (i = -19; i <= 0; i++) {
+                        dataPushLine(data,time,i);
+                    }
+                    return data;
+                })()
+            }]
+        });
+    });
+    
+});
+
+	function dataPushLine(data,time,i){
+		data.push({
+	              x: time + i * 1000,
+	              y: Math.random()
+	          });
+	}
+
+	//发起ajax请求,然后将返回的数据进行出来
+	function doAjaxBaiduMapHandler(url,dataMessage,typefunction){
+			$(function() {
+			jQuery.ajax({
+				url : url,  //需要加./url 这样表示从根目录进行访问(可以完成访问，不然找不到访问数据)
+				contentType : "application/json",//application/xml
+				processData : true,//contentType为xml时，些值为false
+				dataType : "json",//json--返回json数据类型；xml--返回xml
+				data :dataMessage,
+				success : function(data) {
+					doAjaxSuccessFunction(data,typefunction);
+				},
+				error : function(e) {
+				document.write('error'); //Js访问出错
+				}
+			});
+		});
+	}
     </script>
-  </body>
+    <script src="js/highcharts.js"></script>
+	<script src="js/exporting.js"></script>
+</head>
+<body>
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
 </html>

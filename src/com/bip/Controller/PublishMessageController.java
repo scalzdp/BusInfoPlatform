@@ -147,5 +147,11 @@ public class PublishMessageController {
 		return "json";
 	} 
 	
+	@RequestMapping(value="allpublishmessagecount")
+	public String getAllPublishMessageCount(HttpServletRequest  request){
+		request.setAttribute("jsonData", 1);
+		return "json";
+	}
+	
 	
 }
