@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -149,7 +150,9 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="allpublishmessagecount")
 	public String getAllPublishMessageCount(HttpServletRequest  request){
-		request.setAttribute("jsonData", 1);
+		Random random=new Random();
+		int result =(int)random.nextInt(100);
+		request.setAttribute("jsonData", result);
 		return "json";
 	}
 	

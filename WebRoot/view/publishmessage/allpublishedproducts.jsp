@@ -36,15 +36,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         // set up the updating of the chart each second
                         var series = this.series[0];
                         setInterval(function() {
-                            var x = (new Date()).getTime(), // current time
+                            addNewPoint(series,"allpublishmessagecount");
+                            /*var x = (new Date()).getTime(), // current time
                                 y = Math.random();
-                            series.addPoint([x, y], true, true);
+                            series.addPoint([x, y], true, true);  //TODO: this place add new point into line
+                            */
                         }, 1000);
                     }
                 }
             },
             title: {
-                text: 'Live random data'
+                text: '发布信息实时图'
             },
             xAxis: {
                 type: 'datetime',
@@ -52,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },
             yAxis: {
                 title: {
-                    text: 'Value'
+                    text: '发布条数'
                 },
                 plotLines: [{
                     value: 0,
@@ -74,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 enabled: false
             },
             series: [{
-                name: 'Random data',
+                name: '实时数据',
                 data: (function() {
                     // generate an array of random data
                     var data = [],
@@ -95,21 +97,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function dataPushLine(data,time,i){
 		data.push({
 	              x: time + i * 1000,
-	              y: Math.random()
+	              y: 0//Math.random()
 	          });
 	}
+	
+	function addNewPoint(series,url){
+	doAjaxStatisticsHandler(series,url);
+	
+	}
 
+	//doAjaxStatisticsHandler("allpublishmessagecount");
 	//发起ajax请求,然后将返回的数据进行出来
-	function doAjaxBaiduMapHandler(url,dataMessage,typefunction){
+	function doAjaxStatisticsHandler(series,url){
 			$(function() {
 			jQuery.ajax({
 				url : url,  //需要加./url 这样表示从根目录进行访问(可以完成访问，不然找不到访问数据)
 				contentType : "application/json",//application/xml
 				processData : true,//contentType为xml时，些值为false
 				dataType : "json",//json--返回json数据类型；xml--返回xml
-				data :dataMessage,
 				success : function(data) {
-					doAjaxSuccessFunction(data,typefunction);
+						var x = (new Date()).getTime(), // current time
+				         y = data;
+				        series.addPoint([x, y], true, true);  //TODO: this place add new point into line
 				},
 				error : function(e) {
 				document.write('error'); //Js访问出错
