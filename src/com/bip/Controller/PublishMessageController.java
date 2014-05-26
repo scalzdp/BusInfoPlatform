@@ -38,11 +38,13 @@ public class PublishMessageController {
 	@Autowired
 	private ActionTypeService actionTypeService;
 	
+	private static int countNum;
+	
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.GET)
 	private String getPublishProduct(Model model, HttpSession session,
 									 HttpServletRequest request){
-		/* һ��ͨ���¼��IP�ж���ĳ��У���ѯ�ó��е������Ϣ
-		 * ������ActionType��ѯ����������ֵ��model
+		/* default place is ChengDu ,Default Ip is 61.139.66.76.If system not get someones 
+		 * place or ip it will display ChengDu city.
 		 * */
 		String ip="61.139.66.76";
 		ip =GetRequestClientUtil.getIpAddr(request);
@@ -63,7 +65,7 @@ public class PublishMessageController {
 			session.setAttribute("townName", "");
 			session.setAttribute("cityName", address.get("city"));
 		}
-		//����ѯ�����ľ�γ�ȷ��ص�ҳ��
+		//add Longitude and Latitude to model,JSP page will get it by this type
 		model.addAttribute("lngcenter", lng) ;
 		model.addAttribute("latcenter", lat) ;
 		}catch(Exception ex){
@@ -78,6 +80,7 @@ public class PublishMessageController {
 		UserVO uservo =  (UserVO)session.getAttribute(ResourceFile.USER_SESSION_KEY);
 		publishVO.setUserID(uservo.getId());
 		publishService.saveMessage(publishVO);
+		countNum = publishService.CounterPublishNum(countNum);
 		return "publishmessage/publishproduct";
 	}
 	
@@ -149,12 +152,9 @@ public class PublishMessageController {
 	} 
 	
 	@RequestMapping(value="allpublishmessagecount")
-	public String getAllPublishMessageCount(HttpServletRequest  request){
-		Random random=new Random();
-		int result =(int)random.nextInt(100);
-		request.setAttribute("jsonData", result);
+	public String getAllPublishMessageCount(HttpServletRequest  request) throws InterruptedException{
+		request.setAttribute("jsonData", countNum);
+		countNum = publishService.ClearPublishNum();
 		return "json";
 	}
-	
-	
 }

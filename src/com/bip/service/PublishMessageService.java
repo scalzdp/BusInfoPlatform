@@ -117,4 +117,18 @@ public class PublishMessageService {
 		ra.setDiscription(vo.getDescription());
 		baseDAO.update(ra);
 	}
+	
+	/* calculate the number of publish messages
+	 * define a sentinel to count
+	 * */
+	public Integer CounterPublishNum(int count){
+		return ++count;
+	}
+	
+	/* clear the publish number
+	 * return zero
+	 * */
+	public Integer ClearPublishNum(){
+		return 0;
+	}
 }
