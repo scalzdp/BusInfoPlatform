@@ -17,6 +17,26 @@
   </head>
   
   <body>
-    <h1>查询发布商品</h1>
+	<form>
+	    <fieldset>
+	    	<legend>查询条件</legend>
+	    	<table>
+	    		<tr>
+	    			<td></td>
+	    			<td></td>
+	    			<td></td>
+	    			<td></td>
+	    			<td></td><td></td>
+	    			<td></td><td></td>
+	    			<td><input type="button" value="列表显示"/></td>
+	    		</tr>
+	    	</table>
+	    </fieldset>
+	    <fieldset>
+	    	<legend>查询结果</legend>
+	    	<div id="listDisplay"></div>
+	    	<div id="mapDisplay"></div>
+	    </fieldset>
+    </form>
   </body>
 </html>
