@@ -252,6 +252,7 @@ public class GetRequestClientUtil {
    }
     
 	/**
+	 * use address place to get location lng and lat
 	 * 获得测试所在的经度和维度
 	 * key lng(经度),lat(维度)
 	 */

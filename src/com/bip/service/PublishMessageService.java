@@ -2,6 +2,7 @@ package com.bip.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.bip.bean.Location;
 import com.bip.bean.RealActivity;
 import com.bip.dao.IBaseDAO;
+import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
+import com.bip.vo.SearchMessageVO;
 
 @Service
 public class PublishMessageService {
@@ -131,4 +134,21 @@ public class PublishMessageService {
 	public Integer ClearPublishNum(){
 		return 0;
 	}
+	
+	/* search the publish message by input message
+	 * input the SearchMessageVO then search the accord the conditions message 
+	 * then return the PublishMessageVO
+	 * */
+	public List<PublishMessageVO> SearchByInput(SearchMessageVO vo) {
+		
+		/* 1. use the location get the middle latitude and longitude
+		 * 2. get the get the range of the latitude and longitude
+		 * 3. use actionType to filter the does not meet the conditions
+		 * 4. return the list result 
+		 * */
+		List<PublishMessageVO> vos = new ArrayList<PublishMessageVO>();
+		Map<String,String> map = GetRequestClientUtil.getGeocoderLatitude(vo.getProvince()+vo.getCity()+vo.getCounty());
+		
+		return vos;
+	} 
 }

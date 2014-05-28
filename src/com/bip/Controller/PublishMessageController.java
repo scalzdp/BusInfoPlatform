@@ -26,6 +26,7 @@ import com.bip.service.PublishMessageService;
 import com.bip.utils.CommonUtils;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PublishMessageVO;
+import com.bip.vo.SearchMessageVO;
 import com.bip.vo.UserVO;
 
 
@@ -95,7 +96,11 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="SearchProducts",method=RequestMethod.GET)
-	private String getSearchProducts(){
+	private String getSearchProducts(Model model){
+		String lng = "104.06";	
+		String lat = "30.67";
+		model.addAttribute("lngcenter", lng) ;
+		model.addAttribute("latcenter", lat) ;
 		return "publishmessage/searchproduct";
 	}
 	
@@ -156,5 +161,22 @@ public class PublishMessageController {
 		request.setAttribute("jsonData", countNum);
 		countNum = publishService.ClearPublishNum();
 		return "json";
+	}
+	
+	@RequestMapping(value="SearchProducts",method=RequestMethod.POST)
+	private @ResponseBody Map<String, Object> postSearchProducts(Map<String, Object> map,
+																 Model model,
+																 @ModelAttribute("form") SearchMessageVO searchvo){
+		/* 1.get the input message from the page
+		 * 2.search the message by the input value object
+		 * 3.return the message back to the JSP page like JSON String
+		 * */
+		String lng = "104.06";	
+		String lat = "30.67";
+		model.addAttribute("lngcenter", lng) ;
+		model.addAttribute("latcenter", lat) ;
+		publishService.SearchByInput(searchvo);
+		
+		return map;
 	}
 }
