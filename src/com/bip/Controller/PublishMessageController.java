@@ -175,8 +175,13 @@ public class PublishMessageController {
 		String lat = "30.67";
 		model.addAttribute("lngcenter", lng) ;
 		model.addAttribute("latcenter", lat) ;
-		publishService.SearchByInput(searchvo);
-		
+		List<PublishMessageVO> publishVOs = publishService.SearchByInput(searchvo);
+		int totalRows = publishService.GetSearchByInputCount(searchvo);
+        map.put("total", totalRows);
+        map.put("rows", publishVOs);
+        //those message object will convert to json message then return map object
+        
+        return map;
 		return map;
 	}
 }

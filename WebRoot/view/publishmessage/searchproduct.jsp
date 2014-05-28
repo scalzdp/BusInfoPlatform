@@ -78,6 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td><input id="searchDisplay" type="button" value="列表显示" onclick="clickToDisplay(this)"/></td>
 	    		</tr>
 	    	</table>
+	    	<input type="hidden" id="lngSpan" />
+	    	<input type="hidden" id="latSpan" />
 	    </fieldset>
     </form>
     <div>
@@ -182,8 +184,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		// 向地图添加标注  
 		var bounds = map.getBounds();   //获取地图的经度和维度的跨度
-		//var lngSpan = bounds.ld - bounds.od;  
-		//var latSpan = bounds.md - bounds.qd; 
+		 $("#lngSpan").val(bounds.Ad - bounds.Dd);  
+		$("#latSpan").val(bounds.Cd - bounds.zd); 
 		//当地图拖动的时候获取拖动之后的地图中心点
 		map.addEventListener("dragend",function(){
 			//var center = map.getCenter(); //获得地图的中心

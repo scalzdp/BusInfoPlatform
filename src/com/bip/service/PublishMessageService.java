@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bip.bean.ActionType;
 import com.bip.bean.Location;
 import com.bip.bean.RealActivity;
 import com.bip.dao.IBaseDAO;
@@ -19,6 +20,10 @@ public class PublishMessageService {
 	
 	@Autowired
 	private IBaseDAO baseDAO;
+	
+	private int SearchPageNum=0;
+	
+	private int ALLPageNum=0;
 	
 	/* save published message
 	 * 1.save the incoming PublishMessageVO
@@ -85,6 +90,7 @@ public class PublishMessageService {
 		}else{
 			realActivitys= baseDAO.queryListPageAndRows(new RealActivity(), page, rows, "t_realactivity", " and userId = "+userid);
 		}
+		ALLPageNum=realActivitys.size();
 		for(RealActivity r:realActivitys){
 			PublishMessageVO publishvo = new PublishMessageVO();
 			Location location = baseDAO.get(new Location(),r.getLocationId());
@@ -103,11 +109,12 @@ public class PublishMessageService {
 	/* get someone's all  publish messages
 	 * */
 	public int getPublishMessageTotalRows(int userid){
-		if(userid==0){
+		/*if(userid==0){
 			return baseDAO.queryFactory(new RealActivity(), "t_realactivity", " ").size();
 		}else{
 			return baseDAO.queryFactory(new RealActivity(), "t_realactivity", " and userId="+userid).size();
-		}
+		}*/
+		return ALLPageNum;
 	}
 	
 	/* modify the activity
@@ -148,7 +155,35 @@ public class PublishMessageService {
 		 * */
 		List<PublishMessageVO> vos = new ArrayList<PublishMessageVO>();
 		Map<String,String> map = GetRequestClientUtil.getGeocoderLatitude(vo.getProvince()+vo.getCity()+vo.getCounty());
-		
+		if(map!=null){
+			if(map.size()<0){
+				return null;
+			}
+		}
+		Double lat=new Double(map.get("lat"));
+		Double lng=new Double(map.get("lng"));
+		List<Location> locations=baseDAO.queryFactory(new Location(), "t_location", " and latitude between "+(lat+0.05)+" and "+(lat-0.05)+" and longitude between "+(lng+0.05)+" and "+(lng-0.05));
+		SearchPageNum=locations.size();
+		for(Location l:locations){
+			PublishMessageVO publishVO = new PublishMessageVO();
+			publishVO.setLatitude(l.getLatitude());
+			publishVO.setLongitude(l.getLongitude());
+			List<RealActivity> realactivitys = baseDAO.queryFactory(new RealActivity(), "t_realactivity", " and locationId ="+l.getId());
+			//TODO:let location message into PublishMessageVO
+			if(realactivitys.size()>0){
+				//TODO: let realactivity message into list
+				ActionType atype = baseDAO.get(new ActionType() , realactivitys.get(0).getActiontypeid());
+				publishVO.setActiontypename(atype.getName());
+				publishVO.setDescription(realactivitys.get(0).getDiscription());
+				publishVO.setTelephone(realactivitys.get(0).getTelephone());
+				publishVO.setDateTime(realactivitys.get(0).getDateTime());
+			}
+			vos.add(publishVO);
+		}
 		return vos;
 	} 
+	
+	public int GetSearchByInputCount(SearchMessageVO vo){
+		return SearchPageNum;
+	}
 }

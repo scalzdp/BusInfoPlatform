@@ -15,6 +15,7 @@ public class PublishMessageVO {
 	private Double latitude;
 	private Double longitude;
 	private Integer actiontypeid;
+	private String actiontypename;
 	
 	public Integer getRealactivityID() {
 		return realactivityID;
@@ -70,5 +71,11 @@ public class PublishMessageVO {
 	}
 	public void setActiontypeid(Integer actiontypeid) {
 		this.actiontypeid = actiontypeid;
+	}
+	public String getActiontypename() {
+		return actiontypename;
+	}
+	public void setActiontypename(String actiontypename) {
+		this.actiontypename = actiontypename;
 	}
 }
