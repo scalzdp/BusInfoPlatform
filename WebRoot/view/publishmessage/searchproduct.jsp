@@ -38,8 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	$(document).ready(function(){ _init_area()});
     	
     	function clickToDisplay(button){
-    		//TODO:提交数据
-    		submitForm();
+    		
     	    if($("#listDisplay").css("display")=="block"){
     	    	button.value="列表查找";
 	    		$("#listDisplay").css("display","none");
@@ -51,8 +50,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		}
     	}
     	
-    	function submitForm(){
-    		$("#search").form("submit");
+    	function clickSubmitFrom(){
+    		//TODO:提交数据
+    		//alert (jQuery("#s_province  option:selected").text());
+    		//alert (jQuery("#actiontypeid  option:selected").val());
+    		
+    		//$("#search").form("submit");
+    		$.ajax({
+			   type: "POST",
+			   url:'<%=basePath%>SearchProducts',
+			   data: {
+				 provice:jQuery("#s_province  option:selected").text(),
+				 city:jQuery("#s_province  option:selected").text(),
+				 county:jQuery("#s_province  option:selected").text(),
+				 activetype:jQuery("#actiontypeid  option:selected").val(),
+				 begintime:$("input[name='beginDateTime']").val(),
+				 endtime:$("input[name='endDateTime']").val()
+				},
+			   success: function(msg){
+			     alert( "Data Saved: " + msg );
+			   }
+			});
     	}
     </script>
    
@@ -67,17 +85,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td><select id="s_province" name="province"></select></td>
 	    			<td><select id="s_city" name="city" ></select></td>
 	    			<td><select id="s_county" name="county"></td>
-	    			<td><select name="actiontypeid">
+	    			<td><select id="actiontypeid" name="actiontypeid">
 			    					<option value="0">购物</option>
 			    					<option value="1">旅游</option>
 			    					<option value="2">聚餐</option>
 			    			</select>
 			    	</td>
-	    			<td>起时间：</td><td><input name="beginDateTime" class="easyui-datetimebox" required class="textBox"></td>
-	    			<td>止时间：</td><td><input name="endDateTime" class="easyui-datetimebox" required class="textBox"></td>
+	    			<td>起时间：</td><td><input id="beginDateTime" name="beginDateTime" class="easyui-datetimebox" required class="textBox"></td>
+	    			<td>止时间：</td><td><input id="endDateTime" name="endDateTime" class="easyui-datetimebox" required class="textBox"></td>
 	    			<td>
-	    				<input id="searchDisplay" type="button" value="列表查找" onclick="clickToDisplay(this)"/>
-	    				<input id="submitFrom" type="submit" value="查找"/>
+	    				<input id="submitFrom" type="button" value="查找" onclick="clickSubmitFrom()"/>
+	    				<input id="searchDisplay" type="button" value="地图显示" onclick="clickToDisplay(this)"/>
 	    			</td>
 	    		</tr>
 	    	</table>
@@ -88,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div>
      <fieldset>
 	    	<legend>查询结果</legend>
-	    	<div id="listDisplay">列表显示
+	    	<div id="listDisplay" >列表显示
 				<table id="tt" style="width:700px;height:400px"
 				   title="DataGrid - CardView" singleSelect="true" fitColumns="true" remoteSort="false"
 				         pagination="true" sortOrder="desc">
@@ -127,6 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    $(function(){
 				        $('#tt').datagrid({
 				        	url: '<%=basePath%>someonepublishmessage',
+				        	//TODO:这里是ajax请求，在这个请求的时候存放数据提交到后台。
 				            view: cardview
 				        });
 				    });

@@ -164,14 +164,18 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="SearchProducts",method=RequestMethod.POST)
-	private String postSearchProducts(Model model,
-			 @ModelAttribute("form") SearchMessageVO searchvo){
+	private String postSearchProducts(Model model ,HttpServletRequest  request){
 		/* 1.get the input message from the page
 		 * 2.search the message by the input value object
 		 * 3.return the message back to the JSP page like JSON String
 		 * */
 		String lng = "104.06";	
 		String lat = "30.67";
+		SearchMessageVO searchvo = new SearchMessageVO();
+		searchvo.setProvince(request.getParameter("provice"));
+		searchvo.setCity(request.getParameter("city"));
+		searchvo.setCounty(request.getParameter("county"));
+		searchvo.setActiontypeid(new Integer(request.getParameter("activetype")));
 		Map<String,String> maplocation = GetRequestClientUtil.getGeocoderLatitude(searchvo.getProvince()+searchvo.getCity()+searchvo.getCounty());
 		if(maplocation == null){
 			return null;
@@ -186,6 +190,10 @@ public class PublishMessageController {
         //those message object will convert to json message then return map object
         
         return "publishmessage/searchproduct";
+	}
+	
+	public @ResponseBody  Map<String, Object> getLocationByCityName(Model model){
+		return null;
 	}
 	
 	@RequestMapping(value="xxx",method=RequestMethod.POST)
