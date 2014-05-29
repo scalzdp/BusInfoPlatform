@@ -1,11 +1,12 @@
 package com.bip.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /* middle of publish message value transport object 
  * in this object has input location place and message description and user message
  * */
-public class PublishMessageVO {
+public class PublishMessageVO implements Serializable{
 	private Integer realactivityID;
 	private String location;
 	private String telephone;

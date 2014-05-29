@@ -41,11 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		//TODO:提交数据
     		submitForm();
     	    if($("#listDisplay").css("display")=="block"){
-    	    	button.value="列表显示";
+    	    	button.value="列表查找";
 	    		$("#listDisplay").css("display","none");
 	    		$("#mapDisplay").css("display","block");
     		}else{
-    			button.value="地图显示";
+    			button.value="地图查找";
 	    		$("#listDisplay").css("display","block");
 	    		$("#mapDisplay").css("display","none");
     		}
@@ -75,7 +75,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	</td>
 	    			<td>起时间：</td><td><input name="beginDateTime" class="easyui-datetimebox" required class="textBox"></td>
 	    			<td>止时间：</td><td><input name="endDateTime" class="easyui-datetimebox" required class="textBox"></td>
-	    			<td><input id="searchDisplay" type="button" value="列表显示" onclick="clickToDisplay(this)"/></td>
+	    			<td>
+	    				<input id="searchDisplay" type="button" value="列表查找" onclick="clickToDisplay(this)"/>
+	    				<input id="submitFrom" type="submit" value="查找"/>
+	    			</td>
 	    		</tr>
 	    	</table>
 	    	<input type="hidden" id="lngSpan" />
@@ -88,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	<div id="listDisplay">列表显示
 				<table id="tt" style="width:700px;height:400px"
 				   title="DataGrid - CardView" singleSelect="true" fitColumns="true" remoteSort="false"
-				        url="<%=basePath%>someonepublishmessage" pagination="true" sortOrder="desc">
+				         pagination="true" sortOrder="desc">
 				    <thead>
 				        <tr>
 				            <th field="dateTime" width="80" sortable="true">时间</th>
@@ -123,6 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    });
 				    $(function(){
 				        $('#tt').datagrid({
+				        	url: '<%=basePath%>someonepublishmessage',
 				            view: cardview
 				        });
 				    });
@@ -136,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</style>  
 	    	</div>
 	    	
-	    	<div id="mapDisplay" style="display:none;width:70%;hight:70%">
+	    	<div id="mapDisplay">
 	    	地图显示
 	    		<div id="allmap"></div>
 	    	</div>

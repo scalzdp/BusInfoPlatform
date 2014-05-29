@@ -164,24 +164,61 @@ public class PublishMessageController {
 	}
 	
 	@RequestMapping(value="SearchProducts",method=RequestMethod.POST)
-	private @ResponseBody Map<String, Object> postSearchProducts(Map<String, Object> map,
-																 Model model,
-																 @ModelAttribute("form") SearchMessageVO searchvo){
+	private String postSearchProducts(Model model,
+			 @ModelAttribute("form") SearchMessageVO searchvo){
 		/* 1.get the input message from the page
 		 * 2.search the message by the input value object
 		 * 3.return the message back to the JSP page like JSON String
 		 * */
 		String lng = "104.06";	
 		String lat = "30.67";
+		Map<String,String> maplocation = GetRequestClientUtil.getGeocoderLatitude(searchvo.getProvince()+searchvo.getCity()+searchvo.getCounty());
+		if(maplocation == null){
+			return null;
+		}
+		if(maplocation.size()<0){
+			return null;
+		}
+		lat=maplocation.get("lat");
+		lng=maplocation.get("lng");
 		model.addAttribute("lngcenter", lng) ;
 		model.addAttribute("latcenter", lat) ;
-		List<PublishMessageVO> publishVOs = publishService.SearchByInput(searchvo);
+        //those message object will convert to json message then return map object
+        
+        return "publishmessage/searchproduct";
+	}
+	
+	@RequestMapping(value="xxx",method=RequestMethod.POST)
+	private @ResponseBody Map<String, Object> test(Map<String, Object> map,
+			 Model model,
+			 @ModelAttribute("form") SearchMessageVO searchvo){
+		/* 1.get the input message from the page
+		 * 2.search the message by the input value object
+		 * 3.return the message back to the JSP page like JSON String
+		 * */
+		double lng = 104.06;	
+		double lat = 30.67;
+		
+		Map<String,String> maplocation = GetRequestClientUtil.getGeocoderLatitude(searchvo.getProvince()+searchvo.getCity()+searchvo.getCounty());
+		if(maplocation == null){
+			return null;
+		}
+		if(maplocation.size()<0){
+			return null;
+		}
+		lat=new Double(maplocation.get("lat"));
+		lng=new Double(maplocation.get("lng"));
+		List<PublishMessageVO> publishVOs = publishService.SearchByInput(searchvo,lat,lng);
 		int totalRows = publishService.GetSearchByInputCount(searchvo);
+		
+		model.addAttribute("lngcenter", lng) ;
+		model.addAttribute("latcenter", lat) ;
         map.put("total", totalRows);
         map.put("rows", publishVOs);
         //those message object will convert to json message then return map object
         
         return map;
-		return map;
 	}
+	
+
 }
