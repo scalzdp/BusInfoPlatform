@@ -109,12 +109,12 @@ public class PublishMessageService {
 	/* get someone's all  publish messages
 	 * */
 	public int getPublishMessageTotalRows(int userid){
-		/*if(userid==0){
+		if(userid==0){
 			return baseDAO.queryFactory(new RealActivity(), "t_realactivity", " ").size();
 		}else{
 			return baseDAO.queryFactory(new RealActivity(), "t_realactivity", " and userId="+userid).size();
-		}*/
-		return ALLPageNum;
+		}
+		/*return ALLPageNum;*/
 	}
 	
 	/* modify the activity
@@ -146,7 +146,7 @@ public class PublishMessageService {
 	 * input the SearchMessageVO then search the accord the conditions message 
 	 * then return the PublishMessageVO
 	 * */
-	public List<PublishMessageVO> SearchByInput(SearchMessageVO vo,Double lat,Double lng) {
+	public List<PublishMessageVO> SearchByInput(SearchMessageVO vo) {
 		
 		/* 1. use the location get the middle latitude and longitude
 		 * 2. get the get the range of the latitude and longitude
@@ -154,7 +154,15 @@ public class PublishMessageService {
 		 * 4. return the list result 
 		 * */
 		List<PublishMessageVO> vos = new ArrayList<PublishMessageVO>();
-
+		Map<String,String> maplocation = GetRequestClientUtil.getGeocoderLatitude(vo.getProvince()+vo.getCity()+vo.getCounty());
+		if(maplocation == null){
+			return null;
+		}
+		if(maplocation.size()<0){
+			return null;
+		}
+		Double lat=new Double(maplocation.get("lat"));
+		Double lng=new Double(maplocation.get("lng"));
 		List<Location> locations=baseDAO.queryFactory(new Location(), "t_location", " and latitude <= "+(lat+0.1)+" and latitude >="+(lat-0.1)+" and longitude <= "+(lng+0.1)+" and longitude >="+(lng-0.1));
 		SearchPageNum=locations.size();
 		for(Location l:locations){

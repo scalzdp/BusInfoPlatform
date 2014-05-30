@@ -38,39 +38,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	$(document).ready(function(){ _init_area()});
     	
     	function clickToDisplay(button){
-    		
-    	    if($("#listDisplay").css("display")=="block"){
-    	    	button.value="列表查找";
-	    		$("#listDisplay").css("display","none");
-	    		$("#mapDisplay").css("display","block");
-    		}else{
-    			button.value="地图查找";
-	    		$("#listDisplay").css("display","block");
-	    		$("#mapDisplay").css("display","none");
+    		if(jQuery("#s_province  option:selected").text()=="省份"){
+    			alert("省份还没选择！");
+    			return false;
     		}
-    	}
-    	
-    	function clickSubmitFrom(){
-    		//TODO:提交数据
-    		//alert (jQuery("#s_province  option:selected").text());
-    		//alert (jQuery("#actiontypeid  option:selected").val());
-    		
-    		//$("#search").form("submit");
-    		$.ajax({
-			   type: "POST",
-			   url:'<%=basePath%>SearchProducts',
-			   data: {
-				 provice:jQuery("#s_province  option:selected").text(),
-				 city:jQuery("#s_province  option:selected").text(),
-				 county:jQuery("#s_province  option:selected").text(),
-				 activetype:jQuery("#actiontypeid  option:selected").val(),
-				 begintime:$("input[name='beginDateTime']").val(),
-				 endtime:$("input[name='endDateTime']").val()
-				},
-			   success: function(msg){
-			     alert( "Data Saved: " + msg );
-			   }
-			});
+    		if(jQuery("#s_city  option:selected").text()=="地级市"){
+    			alert("地级市还没选择！");
+    			return false;
+    		}
+    		if(jQuery("#s_county  option:selected").text()=="市、县级市"){
+    			alert("市、县级市还没选择！");
+    			return false;
+    		} 
+    		$("#search").form("submit");
     	}
     </script>
    
@@ -94,8 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td>起时间：</td><td><input id="beginDateTime" name="beginDateTime" class="easyui-datetimebox" required class="textBox"></td>
 	    			<td>止时间：</td><td><input id="endDateTime" name="endDateTime" class="easyui-datetimebox" required class="textBox"></td>
 	    			<td>
-	    				<input id="submitFrom" type="button" value="查找" onclick="clickSubmitFrom()"/>
-	    				<input id="searchDisplay" type="button" value="地图显示" onclick="clickToDisplay(this)"/>
+	    				<input id="searchDisplay" type="button" value="查一查" onclick="clickToDisplay(this)"/>
 	    			</td>
 	    		</tr>
 	    	</table>
@@ -107,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <fieldset>
 	    	<legend>查询结果</legend>
 	    	<div id="listDisplay" >列表显示
-				<table id="tt" style="width:700px;height:400px"
+				<table id="tt" style="width:700px;height:450px"
 				   title="DataGrid - CardView" singleSelect="true" fitColumns="true" remoteSort="false"
 				         pagination="true" sortOrder="desc">
 				    <thead>
@@ -159,74 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</style>  
 	    	</div>
 	    	
-	    	<div id="mapDisplay">
-	    	地图显示
-	    		<div id="allmap"></div>
-	    	</div>
-	    	
 	 </fieldset>
 	</div>
   </body>
-  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=x2MhgDZIHVXhQwWLGhc98Qar"></script>
-  <script>
-	// 百度地图API功能
-	var ZoomLevel =15;
-	var lat = '${latcenter}';
-	var lng = '${lngcenter}';
-	var map = new BMap.Map("allmap");            // 创建Map实例
-	var point = new BMap.Point(lng, lat);    // 创建点坐标
-	map.centerAndZoom(point,ZoomLevel);                     // 初始化地图,设置中心点坐标和地图级别。
-	//添加地图平移缩放控件
-	map.addControl(new BMap.NavigationControl());
-
-        //显示信息窗口
-        function showinfomessage(marker,point,data){
-        var infoWindow ;
-		     var opts = {  
-		          width : 100,     // 信息窗口宽度  
-		          height: 60,     // 信息窗口高度    
-		      }  ;
-		      /*if(data.specificactivity.length>0){
-		     	infoWindow = new BMap.InfoWindow(data.specificactivity[0].actiondetails, opts);  // 创建信息窗口对象
-		     }else{
-		     	infoWindow = new BMap.InfoWindow("此处尚未发现，任何活动迹象", opts);  // 创建信息窗口对象
-		     }*/
-		     marker.addEventListener("click", function(){ 
-		     map.openInfoWindow(infoWindow, point);      // 打开信息窗口 
-		    });  
-		}   
-	
-	//向地图上面添加覆盖物
-	  function addMarker(point,data){  // 创建图标对象 
-		// 创建标注对象并添加到地图 
-		 var marker = new BMap.Marker(point, {title:data.location.locationName});  
-		 map.addOverlay(marker);  
-		 showinfomessage(marker,point,data);
-		}
-		
-		
-		// 向地图添加标注  
-		var bounds = map.getBounds();   //获取地图的经度和维度的跨度
-		 $("#lngSpan").val(bounds.Ad - bounds.Dd);  
-		$("#latSpan").val(bounds.Cd - bounds.zd); 
-		//当地图拖动的时候获取拖动之后的地图中心点
-		map.addEventListener("dragend",function(){
-			//var center = map.getCenter(); //获得地图的中心
-			var bounds = map.getBounds();   //获取地图的经度和维度的跨度
-		});
-		
-	map.enableScrollWheelZoom();    		 //启用滚轮放大缩小
-	var isWheelZoom =true;
-	map.addEventListener("zoomend",function(){
-		if(isWheelZoom){
-			var center = map.getCenter(); //获得地图的中心  
-			//根据这个获取范围，然后发起请求查询符合条件的数据然后进行显示。
-			bounds = map.getBounds();   //获取地图的经度和维度的跨度
-			isWheelZoom=false;
-			map.centerAndZoom(center,ZoomLevel);			
-		}else{
-			isWheelZoom = true;
-		}
-	});
-  </script>
 </html>
