@@ -164,7 +164,6 @@ public class PublishMessageService {
 		Double lat=new Double(maplocation.get("lat"));
 		Double lng=new Double(maplocation.get("lng"));
 		List<Location> locations=baseDAO.queryFactory(new Location(), "t_location", " and latitude <= "+(lat+0.1)+" and latitude >="+(lat-0.1)+" and longitude <= "+(lng+0.1)+" and longitude >="+(lng-0.1));
-		SearchPageNum=locations.size();
 		for(Location l:locations){
 			PublishMessageVO publishVO = new PublishMessageVO();
 			publishVO.setLatitude(l.getLatitude());

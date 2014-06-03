@@ -2,6 +2,8 @@ package com.bip.Controller;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -97,10 +99,6 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="SearchProducts",method=RequestMethod.GET)
 	private String getSearchProducts(Model model){
-		String lng = "104.06";	
-		String lat = "30.67";
-		model.addAttribute("lngcenter", lng) ;
-		model.addAttribute("latcenter", lat) ;
 		return "publishmessage/searchproduct";
 	}
 	
@@ -165,21 +163,47 @@ public class PublishMessageController {
 	
 
 	
-	@RequestMapping(value="SearchProducts",method=RequestMethod.POST)
-	private @ResponseBody Map<String, Object> postSearchProducts(
+	@RequestMapping(value="SearchPublishProducts")
+	public @ResponseBody Map<String, Object> postSearchProducts(
 			 Map<String, Object> map,
-			 Model model,
-			 @ModelAttribute("form") SearchMessageVO searchvo){
+
+			 @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
+	         @RequestParam(required = false, defaultValue = "10") Integer rows, //get the row number from the select value
+	         HttpServletRequest request
+	            ){
 		/* 1.get the input message from the page
 		 * 2.search the message by the input value object
 		 * 3.return the message back to the JSP page like JSON String
 		 * */
+		SearchMessageVO searchvo = new SearchMessageVO();
+		searchvo.setProvince(request.getParameter("province"));
+		searchvo.setCity(request.getParameter("city"));
+		searchvo.setCounty(request.getParameter("county"));
+		searchvo.setActiontypeid(new Integer(request.getParameter("actiontypeid")));
+		searchvo.setBeginDateTime(new Date(request.getParameter("beginDateTime")));
+		searchvo.setEndDateTime(new Date(request.getParameter("endDateTime")));
+		
 		List<PublishMessageVO> publishVOs = publishService.SearchByInput(searchvo);
+		if(publishVOs==null){
+			publishVOs = new ArrayList<PublishMessageVO>();
+		}
 		int totalRows = publishService.GetSearchByInputCount(searchvo);
         //those message object will convert to json message then return map object
 		map.put("total", totalRows);
         map.put("rows", publishVOs);
         return map;
+        /*
+		System.out.println(request.getParameter("province"));
+		List<PublishMessageVO> publishMessageVO = publishService.getPublishMessagePaging(2,page,rows);
+
+        //get message row numbers
+        int totalRows = publishService.getPublishMessageTotalRows(2);
+        map.put("total", totalRows);
+        map.put("rows", publishMessageVO);
+        //those message object will convert to json message then return map object
+        
+        return map;
+        */
 	}
 	
 

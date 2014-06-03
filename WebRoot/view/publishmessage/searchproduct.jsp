@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	<form id="search" action="SearchProducts" method="post">
+	<form id="search" action="SearchPublishProducts" method="post">
 	    <fieldset>
 	    	<legend>查询条件</legend>
 	    	<table>
@@ -123,10 +123,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    });
 				    $(function(){
 				        $('#tt').datagrid({
-				        	url: '<%=basePath%>someonepublishmessage',
+				        	url: '<%=basePath%>SearchPublishProducts',
 				        	//TODO:这里是ajax请求，在这个请求的时候存放数据提交到后台。
 				            view: cardview
 				        });
+				        
+				        //$('#tt').datagrid('loadData',{ total: total, rows: json });
 				    });
 				</script> 
 				<style type="text/css">
