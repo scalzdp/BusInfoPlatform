@@ -163,7 +163,7 @@ public class PublishMessageController {
 	
 
 	
-	@RequestMapping(value="SearchPublishProducts")
+	@RequestMapping(value="SearchPublishProducts",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> postSearchProducts(
 			 Map<String, Object> map,
 
@@ -176,6 +176,12 @@ public class PublishMessageController {
 		 * 3.return the message back to the JSP page like JSON String
 		 * */
 		SearchMessageVO searchvo = new SearchMessageVO();
+		List<PublishMessageVO> publishVOs = new ArrayList<PublishMessageVO>();
+		if(request.getParameter("province")==null){
+			map.put("total", 0);
+	        map.put("rows", publishVOs);
+	        return map;
+		}
 		searchvo.setProvince(request.getParameter("province"));
 		searchvo.setCity(request.getParameter("city"));
 		searchvo.setCounty(request.getParameter("county"));
@@ -183,10 +189,7 @@ public class PublishMessageController {
 		searchvo.setBeginDateTime(new Date(request.getParameter("beginDateTime")));
 		searchvo.setEndDateTime(new Date(request.getParameter("endDateTime")));
 		
-		List<PublishMessageVO> publishVOs = publishService.SearchByInput(searchvo);
-		if(publishVOs==null){
-			publishVOs = new ArrayList<PublishMessageVO>();
-		}
+		publishVOs = publishService.SearchByInput(searchvo);
 		int totalRows = publishService.GetSearchByInputCount(searchvo);
         //those message object will convert to json message then return map object
 		map.put("total", totalRows);

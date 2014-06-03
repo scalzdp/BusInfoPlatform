@@ -50,14 +50,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			alert("市、县级市还没选择！");
     			return false;
     		} 
-    		$("#search").form("submit");
+    		//$("#search").form("submit");
+    		bindMessage();
     	}
     </script>
    
   </head>
   
   <body>
-	<form id="search" action="SearchPublishProducts" method="post">
+	<form name="search" id="search" action="SearchPublishProducts" method="post">
 	    <fieldset>
 	    	<legend>查询条件</legend>
 	    	<table>
@@ -122,14 +123,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        }
 				    });
 				    $(function(){
+				      
+				        //$('#tt').datagrid('loadData',{ total: total, rows: json });
+				    });
+				    
+				    function bindMessage(){
 				        $('#tt').datagrid({
 				        	url: '<%=basePath%>SearchPublishProducts',
+				        	queryParams: form2Json("search"),//关键之处,表名处于提交表单数据的form表单
 				        	//TODO:这里是ajax请求，在这个请求的时候存放数据提交到后台。
 				            view: cardview
 				        });
+				        }
 				        
-				        //$('#tt').datagrid('loadData',{ total: total, rows: json });
-				    });
+				             //将表单数据转为json
+				        function form2Json(id) {
+				
+				            var arr = $("#" + id).serializeArray()
+				            var jsonStr = "";
+				
+				            jsonStr += '{';
+				            for (var i = 0; i < arr.length; i++) {
+				                jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+				            }
+				            jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+				            jsonStr += '}'
+				
+				            var json = JSON.parse(jsonStr)
+				            return json
+				        }
 				</script> 
 				<style type="text/css">
 				   .c-label{
