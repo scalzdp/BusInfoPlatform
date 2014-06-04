@@ -96,9 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    			<td>请选择活动类型：</td>
 		    			<td>
 			    			<select name="actiontypeid">
-			    					<option value="0">购物</option>
-			    					<option value="1">旅游</option>
-			    					<option value="2">聚餐</option>
+			    					<option value="1">购物</option>
+			    					<option value="2">旅游</option>
+			    					<option value="3">聚餐</option>
 			    			</select>
 			    		</td>
 		    		</tr>

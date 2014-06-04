@@ -74,9 +74,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $.messager.confirm("Confirm", "Are you sure you want to delete record?", function (r) {
                     if (r) {
                         var row = getRow(index);
-                        EUGrid.datagrid("reload", { id: row["realactivityID"] });
                         //TODO:在这里发起ajax请求删除相应的数据
-                        EUGrid.datagrid("options").queryParams = null;//清空参数
+                      	DeleteData(row["realactivityID"],EUGrid,row);
+                       // EUGrid.datagrid("reload", { id: row["realactivityID"] });
+                       // EUGrid.datagrid("options").queryParams = null;//清空参数
                     }
                 });
             };
@@ -122,8 +123,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             };
         });
         
-        function postDataToDB(){
-        		
+        function DeleteData(id,EUGrid,row){
+   		  jQuery.ajax({
+           	url:'./published/del',
+           	type:'get',
+           	contentType:'application/json',
+           	processData : true,  //contentType为xml时，些值为false
+           	dataType:'json',
+           	data:{activityid:id}, //这里的数据无法post获取？？
+           	success:function(data){
+	           	EUGrid.datagrid("reload", { id: row["realactivityID"] });
+	            EUGrid.datagrid("options").queryParams = null;//清空参数
+           	},
+           	error:function(data){}
+           	});
         }
     </script>
   </body>

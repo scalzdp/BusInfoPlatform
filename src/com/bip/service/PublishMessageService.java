@@ -184,7 +184,18 @@ public class PublishMessageService {
 		return vos;
 	} 
 	
+	/* return the number of Search by input message
+	 * 
+	 * */
 	public int GetSearchByInputCount(SearchMessageVO vo){
 		return SearchPageNum;
 	}
+	
+	public void deleteActivity(Integer activityid){
+		RealActivity ra = baseDAO.get(new RealActivity(), activityid);
+		baseDAO.delete(new Location(), ra.getLocationId());
+		baseDAO.delete(new RealActivity(), ra.getId());
+	}
+	
+	
 }

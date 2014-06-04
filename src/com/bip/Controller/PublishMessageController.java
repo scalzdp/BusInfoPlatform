@@ -154,6 +154,14 @@ public class PublishMessageController {
 		return "json";
 	} 
 	
+	@RequestMapping(value="/published/del")
+	public @ResponseBody String acceptDelDg(HttpServletRequest request){
+		String activityid = request.getParameter("activityid");
+		System.out.println(activityid);
+		publishService.deleteActivity(new Integer(activityid));
+		return "json";
+	}
+	
 	@RequestMapping(value="allpublishmessagecount")
 	public String getAllPublishMessageCount(HttpServletRequest  request) throws InterruptedException{
 		request.setAttribute("jsonData", countNum);
@@ -208,6 +216,8 @@ public class PublishMessageController {
         return map;
         */
 	}
+	
+	
 	
 
 }
