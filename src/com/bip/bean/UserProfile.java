@@ -17,6 +17,7 @@ public class UserProfile implements Serializable {
 	private String headImg;
 	private String frequenedLocation;
 	private String hobby;
+	private Integer isEnable;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -57,5 +58,13 @@ public class UserProfile implements Serializable {
 	}
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
+	}
+	
+	@Column
+	public Integer getIsEnable() {
+		return isEnable;
+	}
+	public void setIsEnable(Integer isEnable) {
+		this.isEnable = isEnable;
 	}
 }

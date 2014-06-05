@@ -34,15 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     	</table>
     </form>
-   <table id="tbList" class="easyui-datagrid" title="Merge Cells for DataGrid" style="width:700px;height:250px">
+   <table id="tbList" class="easyui-datagrid" title="统计用户" style="width:800px;height:500px">
        <thead>
            <tr>
-               <th data-options="field:'productid',width:100">Product</th>
-               <th data-options="field:'itemid',width:80">Item ID</th>
-               <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-               <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-               <th data-options="field:'attr1',width:240">Attribute</th>
-               <th data-options="field:'status',width:60,align:'center'">Status</th>
+               <th data-options="field:'userEmail',width:80">电邮</th>
+               <th data-options="field:'userAge',width:80,align:'right'">芳龄</th>
+               <th data-options="field:'userNickName',width:80,align:'right'">绰号</th>
+               <th data-options="field:'userBrithday',width:60">生日</th>
+               <th data-options="field:'frequenedLocation',width:120,align:'center'">经常出没</th>
+               <th data-options="field:'hobby',width:120,align:'center'">喜好</th>
            </tr>
        </thead>
 <script type="text/javascript">
@@ -58,7 +58,7 @@ $('#tbList').datagrid({
             onLoadSuccess: function (data) {
                 if (data.rows.length > 0) {
                     //调用mergeCellsByField()合并单元格
-                    mergeCellsByField("tbList", "No");  //
+                    mergeCellsByField("tbList", "userEmail");  //只将userEmail数据进行合并
                 }
             }
         });
@@ -97,7 +97,7 @@ function mergeCellsByField(tableID, colList) {
                 
                 tTable.datagrid("mergeCells", {
                     index: i - tmpA,
-                    field: ColArray[j],　　//合并字段
+                    field: ColArray[j],//合并字段
                     rowspan: tmpA,
                     colspan: null
                 });

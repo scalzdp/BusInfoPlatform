@@ -1,5 +1,7 @@
 package com.bip.vo;
 
+import java.util.List;
+
 public class UserAndProfileVO {
 	private Integer userId;
 	private String userAge;
@@ -7,10 +9,12 @@ public class UserAndProfileVO {
 	private String userEmail;
 	private String userNickName;
 	private String userPassword;
+	
 	private Integer userProfileId;
-	private  String userFrequenedLocation;
-	private String userHeadImg;
-	private String userHobby;
+	private String frequenedLocation;
+	private String headImg;
+	private String hobby;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -47,28 +51,32 @@ public class UserAndProfileVO {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	
+	
 	public Integer getUserProfileId() {
 		return userProfileId;
 	}
 	public void setUserProfileId(Integer userProfileId) {
 		this.userProfileId = userProfileId;
 	}
-	public String getUserFrequenedLocation() {
-		return userFrequenedLocation;
+	public String getFrequenedLocation() {
+		return frequenedLocation;
 	}
-	public void setUserFrequenedLocation(String userFrequenedLocation) {
-		this.userFrequenedLocation = userFrequenedLocation;
+	public void setFrequenedLocation(String frequenedLocation) {
+		this.frequenedLocation = frequenedLocation;
 	}
-	public String getUserHeadImg() {
-		return userHeadImg;
+	public String getHeadImg() {
+		return headImg;
 	}
-	public void setUserHeadImg(String userHeadImg) {
-		this.userHeadImg = userHeadImg;
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
-	public String getUserHobby() {
-		return userHobby;
+	public String getHobby() {
+		return hobby;
 	}
-	public void setUserHobby(String userHobby) {
-		this.userHobby = userHobby;
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
 	}
+	
+	
 }
