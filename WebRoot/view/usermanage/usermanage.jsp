@@ -22,15 +22,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
   	<script type="text/javascript" src="js/jquery.min.js"></script>
   	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+  	<script>
+  	function submitForm(){
+  		$("#tbList").datagrid({
+  			url: '<%=basePath%>SearchUser',
+        	queryParams: form2Json("search")//关键之处,表名处于提交表单数据的form表单
+  		});
+  	}
+  	
+  	//将表单数据转为json
+    function form2Json(id) {
+
+        var arr = $("#" + id).serializeArray()
+        var jsonStr = "";
+
+        jsonStr += '{';
+        for (var i = 0; i < arr.length; i++) {
+            jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+        }
+        jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+        jsonStr += '}'
+
+        var json = JSON.parse(jsonStr)
+        return json
+    }
+  	</script>
   </head>
   
   <body>
     <h1>用户管理</h1>
-    <form action="" method="">
+    <form id="search" action="" method="post">
     	<table>
     		<tr>
-    			<td></td>
-    			<td></td>
+    			<td>电邮：</td>
+    			<td><input type="text" id="searchEmail" name="searchEmail" placeholder="邮箱" maxlength="20"></td>
+    			<td>芳龄：</td>
+    			<td><input type="text" id="searchAge" name="searchAge" placeholder="芳龄" maxlength="5"> </td>
+    			<td>绰号：</td>
+    			<td><input type="text" id="searchNickName" name="searchNickName" placeholder="绰号" maxlength="20"> </td>
+    			<td>
+    				 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">查询</a> 
+    			</td>
     		</tr>
     	</table>
     </form>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bip.bean.User;
 import com.bip.bean.UserProfile;
 import com.bip.dao.IBaseDAO;
-import com.bip.vo.ProfileVO;
+import com.bip.vo.SearchUserVO;
 import com.bip.vo.UserAndProfileVO;
 import com.bip.vo.UserVO;
 
@@ -81,5 +81,15 @@ public class UserService {
 	 * */
 	public int getAllUserCount(){
 		return baseDAO.getAllSelf(new User(), "t_user").size();
+	}
+	
+	public List<UserAndProfileVO> SearchByInputUser(SearchUserVO searchUserVo){
+		List<UserAndProfileVO> userAndProfileVos = new ArrayList<UserAndProfileVO>();
+		String whereClause="";
+		if(!searchUserVo.getSearchEmail().equals(null)){
+			//whereClause+=" and "
+		}
+		//List<User> users = baseDAO.queryFactory(new User(), "t_user", "and ");
+		return userAndProfileVos;
 	}
 }
