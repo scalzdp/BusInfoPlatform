@@ -22,31 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
   	<script type="text/javascript" src="js/jquery.min.js"></script>
   	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-  	<script>
-  	function submitForm(){
-  		$("#tbList").datagrid({
-  			url: '<%=basePath%>SearchUser',
-        	queryParams: form2Json("search")//关键之处,表名处于提交表单数据的form表单
-  		});
-  	}
-  	
-  	//将表单数据转为json
-    function form2Json(id) {
-
-        var arr = $("#" + id).serializeArray()
-        var jsonStr = "";
-
-        jsonStr += '{';
-        for (var i = 0; i < arr.length; i++) {
-            jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
-        }
-        jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
-        jsonStr += '}'
-
-        var json = JSON.parse(jsonStr)
-        return json
-    }
-  	</script>
   </head>
   
   <body>
@@ -78,22 +53,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </tr>
        </thead>
 <script type="text/javascript">
-$('#tbList').datagrid({ 
+	function submitForm(){
+  		$("#tbList").datagrid({
 			pagination: true,
 			pageNumber:1,
             pageList:[10,20,50],
-            url:'<%=basePath%>alluser',
-            nowrap: false,
-            striped: true,
-            collapsible:true,
-            remoteSort: false,
-            onLoadSuccess: function (data) {
-                if (data.rows.length > 0) {
+  			url: '<%=basePath%>SearchUser',
+  			nowrap:false,
+  			remoteSort:false,
+  			collapsible:true,
+        	queryParams: form2Json("search"),//关键之处,表名处于提交表单数据的form表单
+        	onLoadSuccess:function(data){
+        		if (data.rows.length > 0) {
                     //调用mergeCellsByField()合并单元格
                     mergeCellsByField("tbList", "userEmail");  //只将userEmail数据进行合并
                 }
-            }
-        });
+        	}
+  		});
+  	}
+  	
+
+
+
+     //将表单数据转为json
+    function form2Json(id) {
+
+        var arr = $("#" + id).serializeArray()
+        var jsonStr = "";
+
+        jsonStr += '{';
+        for (var i = 0; i < arr.length; i++) {
+            jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+        }
+        jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+        jsonStr += '}'
+
+        var json = JSON.parse(jsonStr)
+        return json
+    }
 
 /**
 * EasyUI DataGrid根据字段动态合并单元格

@@ -1,4 +1,4 @@
-package com.bip.resource;
+package com.bip.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -55,7 +55,22 @@ public class MailUtil {
     {
 
         //sendEmail("??????@sina.com","邮件测试","hello");//收件人
-    	sendEmail("275735763@qq.com","邮件测试","10.80.28.130:8080/BusInfoPlatForm/loginSuccess");//收件人
+    	//sendEmail("275735763@qq.com","邮件测试","hellos");//收件人
+    	 StringBuffer sf=new StringBuffer();  
+         /*sf.append("<a href=\"http://192.168.0.84:8088/ompxm/activateEmail.action?email=");  
+         sf.append("275735763@qq.com");  
+         sf.append("&validateCode=");  
+         sf.append("xxxxx");  
+         sf.append("\">");  
+         sf.append(" <FONT   face=\"MS   UI   Gothic\"   size=\"3\"><b>点击这里</b></FONT>");  
+         sf.append("</a>");  
+         sf.append("激活账号，24小时生效，否则重新验证，请尽快激活！<br>"); 
+         */
+    	 /*sf.append("<a>");//含有超链接和ip都会被屏蔽
+    	 sf.append(" <FONT   face=\"MS   UI   Gothic\"   size=\"3\"><b>点击这里</b></FONT>");
+    	 sf.append("激活账号，24小时生效，否则重新验证，请尽快激活！<br>");*/
+    	sf.append("王老师！呵呵");
+    	sendEmail("34600699@qq.com","邮件测试",sf.toString());//收件人
     	//sendEmail("xjbean@qq.com","邮件测试","hello jun");//收件人
         System.out.println("ok");
     }

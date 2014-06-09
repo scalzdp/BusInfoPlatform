@@ -83,13 +83,63 @@ public class UserService {
 		return baseDAO.getAllSelf(new User(), "t_user").size();
 	}
 	
-	public List<UserAndProfileVO> SearchByInputUser(SearchUserVO searchUserVo){
-		List<UserAndProfileVO> userAndProfileVos = new ArrayList<UserAndProfileVO>();
+	/* 1.searchByInputUser this will get the request form searchUserVo from Controller
+	 * 2.construct the query SQL 
+	 * 3.query the database
+	 * */
+	public List<UserAndProfileVO> SearchByInputUser(SearchUserVO searchUserVo,int page,int rows){
+		List<UserAndProfileVO> userProfileVOs = new ArrayList<UserAndProfileVO>();
+		String whereClause="";
+		if(!searchUserVo.getSearchEmail().equals("")){
+			whereClause+=" and email='"+searchUserVo.getSearchEmail()+"'";
+		}
+		if(!searchUserVo.getSearchNickName().equals("")){
+			whereClause+= " and nickName='"+searchUserVo.getSearchNickName()+"'";
+		}
+		List<User> users = baseDAO.queryListPageAndRows(new User(),page,rows,"t_user", whereClause);
+		for(User u:users){
+			List<UserProfile> ups = baseDAO.queryListPageAndRows(new UserProfile(),page,rows, "t_userprofile", "and userID="+u.getId());
+			if(ups.size()>0){
+				for(UserProfile up:ups){
+					UserAndProfileVO userProfileVO = new UserAndProfileVO();
+					userProfileVO.setUserAge(u.getAge());
+					userProfileVO.setUserBrithday(u.getBrithday());
+					userProfileVO.setUserEmail(u.getEmail());
+					userProfileVO.setUserId(u.getId());
+					userProfileVO.setUserNickName(u.getNickName());
+					userProfileVO.setUserPassword(u.getPassword());
+					userProfileVO.setFrequenedLocation(up.getFrequenedLocation());
+					userProfileVO.setHeadImg(up.getHeadImg());
+					userProfileVO.setHobby(up.getHobby());
+					userProfileVO.setUserProfileId(up.getId());
+					userProfileVOs.add(userProfileVO);
+				}
+			}else{
+				UserAndProfileVO userProfileVO = new UserAndProfileVO();
+				userProfileVO.setUserAge(u.getAge());
+				userProfileVO.setUserBrithday(u.getBrithday());
+				userProfileVO.setUserEmail(u.getEmail());
+				userProfileVO.setUserId(u.getId());
+				userProfileVO.setUserNickName(u.getNickName());
+				userProfileVO.setUserPassword(u.getPassword());
+				userProfileVOs.add(userProfileVO);
+			}
+		}
+		return userProfileVOs;
+	}
+	
+	/* get the request form search user value object ,
+	 * query the database get the number of the search result
+	 * */
+	public int SearchByInputUserCount(SearchUserVO searchUserVo){
 		String whereClause="";
 		if(!searchUserVo.getSearchEmail().equals(null)){
-			//whereClause+=" and "
+			whereClause+=" and email='"+searchUserVo.getSearchEmail()+"'";
 		}
-		//List<User> users = baseDAO.queryFactory(new User(), "t_user", "and ");
-		return userAndProfileVos;
+		if(!searchUserVo.getSearchNickName().equals(null)){
+			whereClause+= " and nickName='"+searchUserVo.getSearchNickName()+"'";
+		}
+		List<User> users = baseDAO.queryFactory(new User(),"t_user", whereClause);
+		return users.size();
 	}
 }

@@ -1,5 +1,6 @@
 package com.bip.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class UserController {
 		return map;
 	}
 	
-	
+	@RequestMapping(value="SearchUser")
 	public @ResponseBody
 	Map<String,Object> SearchUser(Map<String, Object> map,
 			 @RequestParam(required = false, defaultValue = "1") Integer page, //get the select page number 
@@ -56,6 +57,10 @@ public class UserController {
 		searchUserVo.setSearchAge(request.getParameter("searchAge"));
 		searchUserVo.setSearchNickName(request.getParameter("searchNickName"));
 		
+		List<UserAndProfileVO> searchResults = userService.SearchByInputUser(searchUserVo,page,rows);
+		int totalRows = userService.SearchByInputUserCount(searchUserVo);
+		map.put("total", totalRows);
+		map.put("rows", searchResults);
 		
 		return map;
 	}
