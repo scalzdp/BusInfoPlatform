@@ -30,8 +30,11 @@ public class MailUtil {
             props.put("mail.smtp.host", server);
             props.put("mail.smtp.port", String.valueOf(port));
             props.put("mail.smtp.auth", "true");
+            //props.put("mail.smtp.auth", "false");
             Transport transport = null;
             Session session = Session.getDefaultInstance(props, null);
+            //
+            session.setDebug(true);//设置调试标志,要查看经过邮件服务器邮件命令，可以用该方法
             transport = session.getTransport("smtp");
             transport.connect(server, user, password);
             MimeMessage msg = new MimeMessage(session);
@@ -69,8 +72,9 @@ public class MailUtil {
     	 /*sf.append("<a>");//含有超链接和ip都会被屏蔽
     	 sf.append(" <FONT   face=\"MS   UI   Gothic\"   size=\"3\"><b>点击这里</b></FONT>");
     	 sf.append("激活账号，24小时生效，否则重新验证，请尽快激活！<br>");*/
-    	sf.append("王老师！呵呵");
-    	sendEmail("34600699@qq.com","邮件测试",sf.toString());//收件人
+    	sf.append("http://jingyan.baidu.com/article/f54ae2fccd998d1e93b8497f.html");
+    	 sf.append("hello,this is message");
+    	sendEmail("275735763@qq.com","邮件",sf.toString());//收件人
     	//sendEmail("xjbean@qq.com","邮件测试","hello jun");//收件人
         System.out.println("ok");
     }

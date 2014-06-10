@@ -51,4 +51,16 @@ public class RegisteController {
 		}
 	}
 	
+	@RequestMapping(value="/verification",method=RequestMethod.GET)
+	public String getEmailVerification(Model model){
+		model.addAttribute("pagename", "registerandlogin/emailVerification.jsp");
+		return "vertical";
+	}
+	
+	@RequestMapping(value="/verification",method=RequestMethod.POST)
+	public ModelAndView postEmailVerification(Model model){
+		ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
+		return mv;
+	}
+	
 }

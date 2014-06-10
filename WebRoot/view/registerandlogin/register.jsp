@@ -70,6 +70,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		</tr>
 	    	</table>
 	    </form>
+	    <table>
+	    	<tr>
+	    		<td>注册时请将：</td>
+	    		<td>scalzdp@sina.com</td>
+	    		<td>添加到您的邮箱注册列表里面！</td>
+	    	</tr>
+	    	<tr style="display:none">
+	    		<td>如果没有收到邮箱!</td>
+	    		<td>请点击我进行重发</td>
+	    		<td>
+	    			<input type="button"   value="重新发送">
+	    		</td>
+	    	</tr>
+	    </table>
 	  </div>
   	</div>
   </body>
