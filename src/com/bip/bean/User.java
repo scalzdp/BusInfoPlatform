@@ -18,6 +18,8 @@ public class User implements Serializable {
 	private String email;
 	private String age;
 	private String brithday;
+	private String isActive;
+	private String emailvfcode;//E-mail verification code
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -67,5 +69,23 @@ public class User implements Serializable {
 	}
 	public void setBrithday(String brithday) {
 		this.brithday = brithday;
+	}
+	
+	@Column
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+	@Column
+	public String getEmailvfcode() {
+		return emailvfcode;
+	}
+
+	public void setEmailvfcode(String emailvfcode) {
+		this.emailvfcode = emailvfcode;
 	}
 }

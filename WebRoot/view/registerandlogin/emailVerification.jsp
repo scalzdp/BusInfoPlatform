@@ -16,24 +16,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<script type="text/javascript">
+		function submitVerficationForm(){
+			$('#verficationForm').form('submit');
+			var result = $("#userEmail").validatebox('isValid')&&$("#emailVerificationCode").validatebox('isValid')&&$("#captcha").validatebox('isValid');
+			if(result){
+				$('#submit').click(); //因为上面已经提交了表单这里的的type=submit表单，就不用再次提交表单了。
+			}
+		}
+	</script>
   </head>
   
   <body>
     <fieldset>
     <legend>完成以下步骤验证你的邮箱</legend>
-	    <form>
+	    <form id="verficationForm"  action="verification" method="post">
 	    	<table>
 	    		<tr>
 	    			<td>注册邮箱：</td>
 	    			<td>
-	    				<input type="text" id="userEmail" name="userEmail" placeholder="邮箱" maxlength="20" class="easyui-validatebox textbox" data-options="validType:'email'">
+	    				<input type="text" id="userEmail" name="userEmail" placeholder="邮箱" maxlength="20" value="${userEmail} ">
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>邮箱验证码：</td>
 	    			<td>
-	    				<input type="text" id="emailVerificationCode" name=""emailVerificationCode" placeholder="验证码"  maxlength="5" class="easyui-validatebox textbox" data-options="required:true">
+	    				<input type="text" id="emailVerificationCode" name="emailVerificationCode" placeholder="验证码"  maxlength="20" class="easyui-validatebox textbox" data-options="required:true">
 	    			</td>
 	    		</tr>
 	    		<tr>
@@ -42,7 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2">
-	    				<input id="submit" type="submit" value="完成验证">
+	    				 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitVerficationForm()">完成验证</a>
+	    				<input id="submit" type="submit" value="完成验证" style="display:none;">
 	    			</td>
 	    		</tr>
 	    	</table>

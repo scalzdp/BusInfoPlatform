@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bip.resource.ResourceFile;
 import com.bip.service.RegisterService;
+import com.bip.utils.CommonUtils;
+import com.bip.utils.MailUtil;
 import com.bip.vo.UserVO;
 import com.google.code.kaptcha.Constants;
 
@@ -41,10 +43,14 @@ public class RegisteController {
 				ModelAndView mv = new ModelAndView("redirect:/emailRepeat");//redirectAnother action
 				return mv;
 			}
+			uservo.setEmailvfcode(CommonUtils.getRandomString(uservo.getUserEmail().length()));
 			registerService.save(uservo);
 			UserVO userVO = registerService.getUser(uservo);
+			String sendMessage ="请将发送过来的验证码"+userVO.getEmailvfcode()+"填写邮箱验证，账号只有在验证之后才能正常的使用！！\n  ";
+			MailUtil.sendEmail(userVO.getUserEmail(), "邮箱验证码", sendMessage);
 			session.setAttribute(ResourceFile.USER_SESSION_KEY, userVO);
-			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
+			//ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
+			ModelAndView mv = new ModelAndView("redirect:/verification");//redirectAnother action
 			return mv;
 		}catch(Exception ex){
 			throw ex;
@@ -52,7 +58,9 @@ public class RegisteController {
 	}
 	
 	@RequestMapping(value="/verification",method=RequestMethod.GET)
-	public String getEmailVerification(Model model){
+	public String getEmailVerification(Model model,HttpSession session){
+		UserVO userVO = (UserVO) session.getAttribute(ResourceFile.USER_SESSION_KEY);
+		model.addAttribute("userEmail", userVO.getUserEmail());
 		model.addAttribute("pagename", "registerandlogin/emailVerification.jsp");
 		return "vertical";
 	}

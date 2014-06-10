@@ -27,6 +27,7 @@ public class RegisterService {
 		}
 		user.setEmail(registervo.getUserEmail());
 		user.setPassword(registervo.getUserPassword());
+		user.setEmailvfcode(registervo.getEmailvfcode());
 		baseDAO.save(user);
 	}
 	
@@ -54,6 +55,7 @@ public class RegisterService {
 			userVO.setUserNickName(userlist.get(0).getNickName());
 			userVO.setUserEmail(userlist.get(0).getEmail());
 			userVO.setId(userlist.get(0).getId());
+			userVO.setEmailvfcode(userlist.get(0).getEmailvfcode());
 			return userVO;
 		}
 	}

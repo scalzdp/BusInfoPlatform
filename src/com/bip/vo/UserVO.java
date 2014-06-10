@@ -9,6 +9,7 @@ public class UserVO implements java.io.Serializable {
 	private String userPassword;
 	private String userNickName;
 	private String captcha;
+	private String emailvfcode; 
 	
 	public Integer getId() {
 		return id;
@@ -39,5 +40,11 @@ public class UserVO implements java.io.Serializable {
 	}
 	public void setCaptcha(String captcha) {
 		this.captcha = captcha;
+	}
+	public String getEmailvfcode() {
+		return emailvfcode;
+	}
+	public void setEmailvfcode(String emailvfcode) {
+		this.emailvfcode = emailvfcode;
 	}
 }
