@@ -44,6 +44,23 @@ public class RegisterService {
 		}
 	}
 	
+	/* query user by email
+	 * */
+	public UserVO findUserByEmail(UserVO uservo){
+		UserVO vo = new UserVO();
+		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+uservo.getUserEmail()+"'");
+		if(userlist.size()<=0){
+			vo=null;
+		}else{
+			vo.setEmailvfcode(userlist.get(0).getEmailvfcode());
+			vo.setUserEmail(userlist.get(0).getEmail());
+			vo.setUserNickName(userlist.get(0).getNickName());
+			vo.setId(userlist.get(0).getId());
+		}
+		return vo;
+		
+	}
+	
 	/*if register successful then query the database ,query this uservo
 	 * then return this uservo to controller
 	 * */
@@ -59,4 +76,14 @@ public class RegisterService {
 			return userVO;
 		}
 	}
+	
+	/* modify user message
+	 * this modify user IsActive status
+	 * */
+	public void updateUser(UserVO userVO){
+		String whereClause="update t_user set isActive= '"+userVO.getIsActive()+"' where id="+userVO.getId();
+		baseDAO.updateUserStatus(whereClause);
+	}
+	
+	
 }

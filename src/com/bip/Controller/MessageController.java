@@ -53,4 +53,16 @@ public class MessageController {
 		model.addAttribute("pagename", "template/404error.jsp");
 		return "vertical";
 	}
+	
+	@RequestMapping(value="/evc")
+	public String getEmailVerificationCode(Model model){
+		model.addAttribute("pagename", "message/emailVerificationErrorCode.jsp");
+		return "vertical";
+	}
+	
+	@RequestMapping(value="/sendEmailWrong")
+	public String getSendEmailWrong(Model model){
+		model.addAttribute("pagename", "message/inputSendEmailWrong.jsp");
+		return "vertical";
+	}
 }

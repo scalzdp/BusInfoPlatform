@@ -10,6 +10,7 @@ public class UserVO implements java.io.Serializable {
 	private String userNickName;
 	private String captcha;
 	private String emailvfcode; 
+	private String isActive;
 	
 	public Integer getId() {
 		return id;
@@ -46,5 +47,11 @@ public class UserVO implements java.io.Serializable {
 	}
 	public void setEmailvfcode(String emailvfcode) {
 		this.emailvfcode = emailvfcode;
+	}
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 }

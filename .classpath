@@ -47,7 +47,7 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/quartz-1.5.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/slf4j-api-1.5.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-aop-3.0.1.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-aop-3.0.1.RELEASE.jar" sourcepath="G:/java/Maven/Repository/org/springframework/spring-aop/3.0.1.RELEASE/spring-aop-3.0.1.RELEASE-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-asm-3.0.1.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-beans-3.0.1.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-context-3.0.1.RELEASE.jar"/>

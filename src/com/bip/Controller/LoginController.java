@@ -43,6 +43,10 @@ public class LoginController {
 				ModelAndView mv = new ModelAndView("redirect:/loginError");//redirectģʽ  
 				return mv;
 			}
+			if(user.getIsActive()==null){
+				ModelAndView mv = new ModelAndView("redirect:/sendEmail");//redirectģʽ  
+				return mv;
+			}
 			//this user is right and select form to it and save this user
 			session.setAttribute(ResourceFile.USER_SESSION_KEY, user);
 			ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectģʽ  

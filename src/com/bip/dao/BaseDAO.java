@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,13 @@ public class BaseDAO implements IBaseDAO {
 		List<T> temp = (List<T>)this.sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(t.getClass()).list();
 		return temp;
 	}
+
+	public void updateUserStatus(String whereClause) {
+		String hql = whereClause;//"update t_user set isActive= '1' where id="+id;
+		Query query =sessionFactory.getCurrentSession().createSQLQuery(whereClause);
+		query.executeUpdate();
+	}
+	
+	
 
 }

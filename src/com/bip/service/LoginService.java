@@ -28,6 +28,7 @@ public class LoginService {
 			userVO.setUserNickName(userlist.get(0).getNickName());
 			userVO.setUserEmail(userlist.get(0).getEmail());
 			userVO.setId(userlist.get(0).getId());
+			userVO.setIsActive(userlist.get(0).getIsActive());
 			return userVO;
 		}
 	}

@@ -17,7 +17,7 @@ public class MailUtil {
 
     static String server = "smtp.sina.com";//邮件服务器mail.cpip.net.cn
 
-    static String from = "张三";//发送者,显示的发件人名字
+    static String from = "欢迎";//发送者,显示的发件人名字
 
     static String user = "scalzdp@sina.com";//发送者邮箱地址
 

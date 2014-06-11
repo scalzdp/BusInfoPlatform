@@ -61,4 +61,8 @@ public interface IBaseDAO {
 	 * the results into one  List Object 
 	 * */
 	public <T> List<T> queryListPageAndRows(T t,int page,int rows, String tablename , String whereClaluse);
+	
+	/* 执行更改某些字段
+	 * */
+	public void updateUserStatus(String whereClause); 
 }
