@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%
+    String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -16,7 +19,33 @@
   	
   	<script type="text/javascript" src="js/jquery.min.js"></script>
   	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-
+	
+	<script type="text/javascript">
+		function submitForm(){
+			if($("#email").val().trim()==""){
+				alert("您还没有填写邮箱！！");
+			}
+			$.ajax({
+				type:"POST",
+				url:"./getEmailVerifyCode",
+				dataType:"json",
+				data:{email:$("#email").val(),captcha:$("#captcha").val()},
+				success:function(data){
+					toVerifyEmail();
+				}
+			});
+			
+			$("#getVerifyCode").css("display","none");
+			$("#getUserPassword").css("display","block");
+			$("#useremail").val($("#email").val());
+		}
+		
+		function toVerifyEmail(){
+			$("#getVerifyCode").css("display","none");
+			$("#getUserPassword").css("display","block");
+			$("#useremail").val($("#email").val());
+		}
+	</script>
   </head>
   
   <body>
@@ -27,56 +56,51 @@
   		<li>填写注册邮箱并且填写邮箱验证码，密码将通过邮件发到注册邮箱里面</li>
   	</ul>
   </div>
-  <fieldset>
-  	<legend>获取邮箱验证码</legend>
-	    <form>
-	    	<table>
-	    		<tr>
-	    			<td>注册邮箱：</td>
-	    			<td>
-	    				<input class="easyui-validatebox textbox" type="text" name="email" data-options="required:true,validType:'email'"></input>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td></td>
-	    			<td></td>
-	    		</tr>
-	    		<tr>
-	    			<td colspan="2">
-	    				<input type="submit" id="submit" value="邮箱验证码！"/>
-	    			</td>
-	    		</tr>
-	    	</table>
-	    </form>
-     </fieldset>
-     <hr>
-     <fieldset>
-     	<legend>填写获取密码</legend>
-     	<form>
-     	<table>
-     		<tr>
-	    			<td>注册邮箱：</td>
-	    			<td>
-	    				<input class="easyui-validatebox textbox" type="text" name="email" data-options="required:true,validType:'email'"></input>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td>邮箱验证码：</td>
-	    			<td>
-	    				<input class="easyui-validatebox textbox" type="text" name="name" data-options="required:true"></input>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td></td>
-	    			<td></td>
-	    		</tr>
-	    		<tr>
-	    			<td colspan="2">
-	    				<input type="submit" id="submit" value="获取密码！"/>
-	    			</td>
-	    		</tr>
-	    		</table>
-     	</form>
-     </fieldset>
+  <div id="getVerifyCode">
+	  <fieldset>
+	  	<legend>获取邮箱验证码</legend>
+		    <form id="postEmailForm">
+		    	<table>
+		    		<tr>
+		    			<td>注册邮箱：</td>
+		    			<td>
+		    				<input class="easyui-validatebox textbox" type="text" name="email" id="email" data-options="required:true,validType:'email'"></input>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="2">
+		    				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">邮箱验证码！</a>
+		    			</td>
+		    		</tr>
+		    	</table>
+		    </form>
+	     </fieldset>
+     </div>
+     <div id="getUserPassword" style="display:none">
+	     <fieldset>
+	     	<legend>填写获取密码</legend>
+	     	<form id="postVerifyCode" action="getPassword" method="post">
+	     	<table>
+	     		<tr>
+		    			<td>注册邮箱：</td>
+		    			<td>
+		    				<input class="easyui-validatebox textbox" type="text" name="useremail" id="useremail"  readonly="readonly" data-options="required:true,validType:'email'"></input>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td>邮箱验证码：</td>
+		    			<td>
+		    				<input class="easyui-validatebox textbox" type="text" name="emailverifycode" data-options="required:true"></input>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td colspan="2">
+		    				<input type="submit" id="submit" value="获取密码！"/>
+		    			</td>
+		    		</tr>
+		    		</table>
+	     	</form>
+	     </fieldset>
+     </div>
   </body>
 </html>

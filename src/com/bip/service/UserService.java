@@ -142,4 +142,22 @@ public class UserService {
 		List<User> users = baseDAO.queryFactory(new User(),"t_user", whereClause);
 		return users.size();
 	}
+	
+	/* query user by email
+	 * */
+	public UserVO findUserByEmail(UserVO uservo){
+		UserVO vo = new UserVO();
+		List<User> userlist = baseDAO.queryFactory(new User(), "t_user", " and email='"+uservo.getUserEmail()+"'");
+		if(userlist.size()<=0){
+			vo=null;
+		}else{
+			vo.setEmailvfcode(userlist.get(0).getEmailvfcode());
+			vo.setUserEmail(userlist.get(0).getEmail());
+			vo.setUserNickName(userlist.get(0).getNickName());
+			vo.setId(userlist.get(0).getId());
+			vo.setUserPassword(userlist.get(0).getPassword());
+		}
+		return vo;
+		
+	}
 }
