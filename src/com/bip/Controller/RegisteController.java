@@ -49,7 +49,7 @@ public class RegisteController {
 			registerService.save(uservo);
 			UserVO userVO = registerService.getUser(uservo);
 			String sendMessage ="请将发送过来的验证码: "+userVO.getEmailvfcode()+" :填写邮箱验证，账号只有在验证之后才能正常的使用！！\n  ";
-			sendMessage+="你的邮箱： "+userVO.getUserEmail()+"\n";
+			//sendMessage+="你的邮箱： "+userVO.getUserEmail()+"\n";
 			MailUtil.sendEmail(userVO.getUserEmail(), "邮箱验证码", sendMessage);
 			session.setAttribute(ResourceFile.USER_SESSION_KEY, userVO);
 			//ModelAndView mv = new ModelAndView("redirect:/loginSuccess");//redirectAnother action
@@ -99,7 +99,7 @@ public class RegisteController {
 	
 	@RequestMapping(value="/sendEmail",method=RequestMethod.POST)
 	private ModelAndView postSendEmail(Model model,HttpServletRequest request,HttpSession session) throws UnsupportedEncodingException{
-		String email = request.getParameter("userEmail");
+		String email = request.getParameter("userEmail").trim();
 		UserVO userVO= new UserVO();
 		userVO.setUserEmail(email);
 		UserVO userVOResult = registerService.findUserByEmail(userVO);

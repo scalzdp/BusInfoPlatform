@@ -102,6 +102,7 @@ public class PublishMessageController {
 		return "publishmessage/searchproduct";
 	}
 	
+	
 	@RequestMapping(value="someonepublishmessage")
 	public @ResponseBody
      Map<String, Object> getSomeOnePublishMessage( Map<String, Object> map,  
@@ -141,7 +142,7 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="/published/saveedit")
 	public @ResponseBody  String acceptEditDg(HttpServletRequest request) throws IOException{
-		String postDatas = request.getParameter("postdata1");
+		String postDatas = request.getParameter("postdata1").trim();
 		postDatas=URLDecoder.decode(postDatas,"UTF-8");
 		System.out.println(postDatas);
 		//try convert this json to object that can modify the object
@@ -194,8 +195,8 @@ public class PublishMessageController {
 		searchvo.setCity(request.getParameter("city"));
 		searchvo.setCounty(request.getParameter("county"));
 		searchvo.setActiontypeid(new Integer(request.getParameter("actiontypeid")));
-		searchvo.setBeginDateTime(new Date(request.getParameter("beginDateTime")));
-		searchvo.setEndDateTime(new Date(request.getParameter("endDateTime")));
+		searchvo.setBeginDateTime(new Date(request.getParameter("beginDateTime").trim()));
+		searchvo.setEndDateTime(new Date(request.getParameter("endDateTime").trim()));
 		
 		publishVOs = publishService.SearchByInput(searchvo);
 		int totalRows = publishService.GetSearchByInputCount(searchvo);

@@ -11,7 +11,7 @@ public class PublishMessageVO implements Serializable{
 	private String location;
 	private String telephone;
 	private String description;
-	private Date dateTime;
+	private String dateTime;
 	private Integer userID;
 	private Double latitude;
 	private Double longitude;
@@ -42,10 +42,10 @@ public class PublishMessageVO implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(Date dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 	public Integer getUserID() {

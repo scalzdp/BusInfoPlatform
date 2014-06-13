@@ -1,6 +1,8 @@
 package com.bip.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ public class PublishMessageService {
 	 * return the one all the published message
 	 * addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
 	 * */
+	@SuppressWarnings("deprecation")
 	public void saveMessage(PublishMessageVO vo){
 		Location location = new Location();
 		String[] locations = vo.getLocation().split(",");
@@ -49,7 +52,7 @@ public class PublishMessageService {
 		baseDAO.save(location);
 		RealActivity ra = new RealActivity();
 		ra.setDataMark(1);
-		ra.setDateTime(vo.getDateTime());
+		ra.setDateTime(new Date(vo.getDateTime()));
 		ra.setDiscription(vo.getDescription());
 		ra.setLocationId(location.getId());
 		ra.setName("");
@@ -69,7 +72,8 @@ public class PublishMessageService {
 		for(RealActivity r:realActivitys){
 			PublishMessageVO publishvo = new PublishMessageVO();
 			Location location = baseDAO.get(new Location(),r.getLocationId());
-			publishvo.setDateTime(r.getDateTime());
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			publishvo.setDateTime(formatter.format(r.getDateTime()));
 			publishvo.setDescription(r.getDiscription());
 			publishvo.setLatitude(location.getLatitude());
 			publishvo.setLongitude(location.getLongitude());
@@ -94,8 +98,10 @@ public class PublishMessageService {
 		for(RealActivity r:realActivitys){
 			PublishMessageVO publishvo = new PublishMessageVO();
 			Location location = baseDAO.get(new Location(),r.getLocationId());
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
 			publishvo.setRealactivityID(r.getId());
-			publishvo.setDateTime(r.getDateTime());
+			publishvo.setDateTime(formatter.format(r.getDateTime()));
 			publishvo.setDescription(r.getDiscription());
 			publishvo.setLatitude(location.getLatitude());
 			publishvo.setLongitude(location.getLongitude());
@@ -173,11 +179,12 @@ public class PublishMessageService {
 			//TODO:let location message into PublishMessageVO
 			if(realactivitys.size()>0){
 				//TODO: let realactivity message into list
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				ActionType atype = baseDAO.get(new ActionType() , realactivitys.get(0).getActiontypeid());
 				publishVO.setActiontypename(atype.getName());
 				publishVO.setDescription(realactivitys.get(0).getDiscription());
 				publishVO.setTelephone(realactivitys.get(0).getTelephone());
-				publishVO.setDateTime(realactivitys.get(0).getDateTime());
+				publishVO.setDateTime(formatter.format(realactivitys.get(0).getDateTime()));
 			}
 			vos.add(publishVO);
 		}

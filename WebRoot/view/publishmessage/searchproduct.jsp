@@ -50,8 +50,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			alert("市、县级市还没选择！");
     			return false;
     		} 
+    		if(jQuery("input[name^='beginDateTime']").val().trim()==""||jQuery("input[name^='endDateTime']").val().trim()==""){
+    			alert("开始/结束时间还没选择！");
+    			return false;
+    		}
+
     		//$("#search").form("submit");
     		bindMessage();
+    	
     	}
     </script>
    

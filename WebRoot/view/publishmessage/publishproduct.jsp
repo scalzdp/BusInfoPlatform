@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            collapsible:true,
 	            remoteSort: false,
 	            columns:[[
-	                    {title:'时间',field:'dateTime',width:100},
+	                    {title:'时间',field:'dateTime',width:160},
 	                    {title:'描述',field:'description',width:150},
 	                    {title:'纬度',field:'latitude',width:50},
 	                    {title:'经度',field:'longitude',width:50},
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<fieldset>
     		<legend>展示所有发布的信息</legend>
     		<!-- 利用分页进行展示 --><a href="#" class="easyui-linkbutton" onclick="mapMark()">地图标注</a>
-			     <table id="publishproductsgrid" class="easyui-datagrid" style="width:500px;height:200px"
+			     <table id="publishproductsgrid" class="easyui-datagrid" style="width:550px;height:200px"
 			           title="Load Data" iconCls="icon-save"
 			           rownumbers="true" pagination="true">
 			    </table>
