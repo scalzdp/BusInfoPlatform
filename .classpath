@@ -57,7 +57,7 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-orm-3.0.1.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-tx-3.0.1.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-web-3.0.1.RELEASE.jar" sourcepath="G:/java/Maven/Repository/org/springframework/spring-web/3.0.1.RELEASE/spring-web-3.0.1.RELEASE-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-webmvc-3.0.1.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/spring-webmvc-3.0.1.RELEASE.jar" sourcepath="G:/java/Maven/Repository/org/springframework/spring-webmvc/3.0.1.RELEASE/spring-webmvc-3.0.1.RELEASE-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/stax-api-1.0-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/xalan-2.6.0.jar"/>
