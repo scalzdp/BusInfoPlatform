@@ -69,7 +69,6 @@
 				<value>com.bip.bean.ActionType</value>
 				<value>com.bip.bean.RealActivity</value>
 				<value>com.bip.bean.User</value>
-				<value>com.bip.bean.UserProfile</value>
 			</list>
 		</property>
 		
