@@ -25,6 +25,9 @@ public class RealActivity implements Serializable {
 	private String telephone;
 	private Integer actiontypeid;
 	
+	private String originalPicture;
+	private String shrinkPictures;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer getId() {
@@ -95,5 +98,21 @@ public class RealActivity implements Serializable {
 	}
 	public void setActiontypeid(Integer actiontypeid) {
 		this.actiontypeid = actiontypeid;
+	}
+	
+	@Column
+	public String getOriginalPicture() {
+		return originalPicture;
+	}
+	public void setOriginalPicture(String originalPicture) {
+		this.originalPicture = originalPicture;
+	}
+	
+	@Column
+	public String getShrinkPictures() {
+		return shrinkPictures;
+	}
+	public void setShrinkPictures(String shrinkPictures) {
+		this.shrinkPictures = shrinkPictures;
 	}
 }
