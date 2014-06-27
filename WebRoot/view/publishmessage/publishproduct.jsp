@@ -103,17 +103,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    		</td>
 		    		</tr>
 		    		<tr>
-		    			<td>地址：</td>
-		    			<td>
-		    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
-		    			</td>
-		    		</tr>
-		    		<tr>
 		    			<td>开始时间：</td>
 		    			<td>
 		    				<input name="dateTime" class="easyui-datetimebox" required class="textBox">
 		    			</td>
 		    		</tr>
+		    		<tr>
+		    			<td>地址：</td>
+		    			<td>
+		    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
+		    			</td>
+		    		</tr>
+		    		
 		    		<tr>
 		    			<td>联系电话：</td>
 		    			<td><input name="telephone" type="text" placeholder="联系电话" class="easyui-validatebox textbox textBox" data-options="required:true"> </td>
@@ -164,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 var point = new BMap.Point(e.point.lng ,e.point.lat);//默认
 		 // 创建标注对象并添加到地图  
 		 var marker = new BMap.Marker(point);  
-		 var label = new BMap.Label("我是可以拖动的,点击我制动填充",{offset:new BMap.Size(20,-10)});
+		 var label = new BMap.Label("我是可以拖动的,点击我自动填充",{offset:new BMap.Size(20,-10)});
 		 marker.setLabel(label);
 		 map.addOverlay(marker);  
 		 setValue(e);
