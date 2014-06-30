@@ -17,6 +17,9 @@
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <form action="fileUpload" enctype="multipart/form-data" method="post">
+    	<input type="file" name="file" />
+   		<input type="submit" />
+    </form>
   </body>
 </html>
