@@ -13,10 +13,12 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,8 @@ import com.bip.service.ActionTypeService;
 import com.bip.service.PublishMessageService;
 import com.bip.utils.CommonUtils;
 import com.bip.utils.GetRequestClientUtil;
+import com.bip.utils.PicUploadUtil;
+import com.bip.vo.PictureVO;
 import com.bip.vo.PublishMessageVO;
 import com.bip.vo.SearchMessageVO;
 import com.bip.vo.UserVO;
@@ -218,7 +222,31 @@ public class PublishMessageController {
         */
 	}
 	
+	@RequestMapping(value="/fileUpload/{id}",method=RequestMethod.GET)
+	public String getUploadPage(Model model,@PathVariable Integer id){
+		model.addAttribute("realactivityID", id);
+		System.out.println(id);
+		List<PictureVO> vos = publishService.getRealActivityPic(id);
+		model.addAttribute("pictureVO", vos);
+		return "publishmessage/fileUpload";
+	}
 	
+	@RequestMapping(value="/fileUpload",method=RequestMethod.POST)
+	public String postUploadPage(Model model,HttpServletRequest request){
+		int realActivityId = 1;//Integer.parseInt(request.getParameter("realactivityID"));
+		Date now = new Date();
+		String fileName = PicUploadUtil.SavePicToDisk(request,now);
+		if(!fileName.equals("")){
+			PictureVO vo = new PictureVO();
+			vo.setIsMain(1);
+			vo.setPicMaxPath(fileName);
+			vo.setRealActivityId(realActivityId);
+			publishService.savePic(vo);
+		}else{
+			//TODO:Save pic has wrong
+		}
+		return "publishmessage/fileUpload";
+	}
 	
 
 }

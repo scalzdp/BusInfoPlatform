@@ -27,12 +27,13 @@
   </head>
   
   <body>
-    <form action="fileUpload" enctype="multipart/form-data" method="post">
-    	<input type="file" name="file" />
-   		<input type="submit" />
-    </form>
+   		
+    
+    <form action="fileUpload1" enctype="multipart/form-data" method="post">
     <div id="preview"></div>
-    <input type="file" onchange="preview(this)" />
+	    <input type="file" onchange="preview(this)" />
+	    <input type="submit" />
+    </form>
     <script type="text/javascript">
     function preview(file)  
 	 {  

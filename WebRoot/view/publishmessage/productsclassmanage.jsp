@@ -22,6 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
   	<script type="text/javascript" src="js/jquery.min.js"></script>
   	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+  	<style type="text/css"> 
+  	iframe{
+  	width:460px;
+  	height:350px;
+  	}
+  	</style>
 
   </head>
   
@@ -54,6 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     return "<input type=\"button\" onclick=\"edit(this," + index + ")\" value=\"Edit\"/><input type=\"button\" onclick=\"del(" + index + ")\" value=\"Delete\"/>"
                                 }
                             }
+                        },
+                        {
+                        	field:"picUpload",title:"上传图片",formatter:function(value,row,index){
+                        		return "<input type=\"button\" onclick=\"picUpload(this,"+index+")\" value=\"上传图片\"/>";
+                        	}
                         }
                     ]],
                     pagination: true,
@@ -138,6 +149,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            	error:function(data){}
            	});
         }
+        
+        function picUpload(eve,index){
+        	var row = getRow(index);
+        	var realactivityID = row["realactivityID"];
+        	//跳转到相应的页面进行图片上传
+        	//将realactivityID通过iframe传递到fileUpload.jsp页面上面
+        	document.getElementById("fileUploadIframe").src="./fileUpload/"+realactivityID;
+        	//打开弹出页面
+        	$('#pic_upload').window('open');
+        }
     </script>
+    <div id="pic_upload" class="easyui-window" title="上传图片" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:400px;padding:10px;">
+		<iframe id="fileUploadIframe"></iframe> 
   </body>
 </html>

@@ -1,6 +1,7 @@
 package com.bip.utils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class CommonUtils {
 		return oo;
 	}
 	
-	/*
+	/**
 	 * generate the random string message
 	 * */
 	public static String getRandomString(int length) { //length表示生成字符串的长度
@@ -79,4 +80,13 @@ public class CommonUtils {
 	    }   
 	    return sb.toString();   
 	 } 
+	
+	public static String GenerateMaxPicName(String oldname , Date now){
+		return now.getTime()+"_max_"+oldname;
+		
+	}
+	
+	public static String GenerateMinPicName(String oldname , Date now){
+		return now.getTime()+"_max_"+oldname;
+	}
 }

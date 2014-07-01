@@ -32,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.textBox{
 			width:200px;
 		}
+		
 	</style>
 	<script type="text/javascript">
 		function submitForm(){
@@ -91,45 +92,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<input type="hidden" id="lng" name="longitude">
 		    <fieldset>
 		    	<legend>填写的信息</legend>
-		    	<table>
-		    		<tr>
-		    			<td>请选择活动类型：</td>
-		    			<td>
-			    			<select name="actiontypeid">
-			    					<option value="1">购物</option>
-			    					<option value="2">旅游</option>
-			    					<option value="3">聚餐</option>
-			    			</select>
-			    		</td>
-		    		</tr>
-		    		<tr>
-		    			<td>开始时间：</td>
-		    			<td>
-		    				<input name="dateTime" class="easyui-datetimebox" required class="textBox">
-		    			</td>
-		    		</tr>
-		    		<tr>
-		    			<td>地址：</td>
-		    			<td>
-		    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
-		    			</td>
-		    		</tr>
-		    		
-		    		<tr>
-		    			<td>联系电话：</td>
-		    			<td><input name="telephone" type="text" placeholder="联系电话" class="easyui-validatebox textbox textBox" data-options="required:true"> </td>
-		    		</tr>
-		    		<tr>
-		    			<td>描述：</td>
-		    			<td><textarea name="description" rows="5" cols="10" placeholder="详述一下该信息的其他点呗"  class="easyui-validatebox textbox textBox" data-options="required:true"></textarea> </td>
-		    		</tr>
-		    		<tr>
-		    			<td colspan="2" align="right">
-		    				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">确认发布</a>
-			    		 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancelForm()">取消从来</a>
-		    			</td>
-		    		</tr>
-		    	</table>
+			    	<table>
+			    		<tr>
+			    			<td>请选择活动类型：</td>
+			    			<td>
+				    			<select name="actiontypeid">
+				    					<option value="1">购物</option>
+				    					<option value="2">旅游</option>
+				    					<option value="3">聚餐</option>
+				    			</select>
+				    		</td>
+			    		</tr>
+			    		<tr>
+			    			<td>开始时间：</td>
+			    			<td>
+			    				<input name="dateTime" class="easyui-datetimebox" required class="textBox">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td>地址：</td>
+			    			<td>
+			    				<input type="text"  name="location"  id="location" readonly="readonly" placeholder="在地图点击并拖动到想要的位置" class="easyui-validatebox textbox textBox" data-options="required:true"/>
+			    			</td>
+			    		</tr>
+			    		
+			    		<tr>
+			    			<td>联系电话：</td>
+			    			<td><input name="telephone" type="text" placeholder="联系电话" class="easyui-validatebox textbox textBox" data-options="required:true"> </td>
+			    		</tr>
+			    		<tr>
+			    			<td>描述：</td>
+			    			<td><textarea name="description" rows="5" cols="10" placeholder="详述一下该信息的其他点呗"  class="easyui-validatebox textbox textBox" data-options="required:true"></textarea> </td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="2" align="right">
+			    				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">确认发布</a>
+				    		 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancelForm()">取消从来</a>
+			    			</td>
+			    		</tr>
+			    	</table>
 	    	</fieldset>
 	    </form>
     </div>

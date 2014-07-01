@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.bip.bean.ActionType;
 import com.bip.bean.Location;
+import com.bip.bean.Picture;
 import com.bip.bean.RealActivity;
 import com.bip.dao.IBaseDAO;
 import com.bip.utils.GetRequestClientUtil;
+import com.bip.vo.PictureVO;
 import com.bip.vo.PublishMessageVO;
 import com.bip.vo.SearchMessageVO;
 
@@ -202,6 +204,36 @@ public class PublishMessageService {
 		RealActivity ra = baseDAO.get(new RealActivity(), activityid);
 		baseDAO.delete(new Location(), ra.getLocationId());
 		baseDAO.delete(new RealActivity(), ra.getId());
+	}
+	
+	/**
+	 * 保存图片信息，然后再读取的时候根据情况读取主要的哪一张图片
+	 * */
+	public void savePic(PictureVO vo){
+		Picture picture = new Picture();
+		picture.setIsMain(vo.getIsMain());
+		picture.setPicMaxPath(vo.getPicMaxPath());
+		picture.setRealActivityId(vo.getRealActivityId());
+		baseDAO.save(picture);
+	}
+	
+	/**
+	 * 通过realActivityID
+	 * 找到某一个活动上传的所有图片信息
+	 * */
+	public List<PictureVO> getRealActivityPic(int realActivityID){
+		List<PictureVO> vos = new ArrayList<PictureVO>();
+		List<Picture> pictures = baseDAO.queryFactory(new Picture(), "t_picture", " and realActivityId="+realActivityID);
+		for(Picture p :pictures){
+			PictureVO vo = new PictureVO();
+			vo.setId(p.getId());
+			vo.setIsMain(p.getIsMain());
+			vo.setPicMaxPath(p.getPicMaxPath());
+			vo.setPicMinPath(p.getPicMinPath());
+			vo.setRealActivityId(p.getRealActivityId());
+			vos.add(vo);
+		}
+		return vos;
 	}
 	
 	
