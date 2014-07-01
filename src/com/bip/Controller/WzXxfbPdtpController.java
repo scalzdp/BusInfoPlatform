@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WzXxfbPdtpController {
 
-	@RequestMapping(value="/fileUpload1",method=RequestMethod.GET)
+	@RequestMapping(value="/fileUploadDemo",method=RequestMethod.GET)
 	public String getUploadPage(Model model){
 		return "test/testUploadFile";
 	}
 	
-	@RequestMapping(value="/fileUpload1",method=RequestMethod.POST)
+	@RequestMapping(value="/fileUploadDemo",method=RequestMethod.POST)
 	public String postUploadPage(Model model,HttpServletRequest request){
 		try{
 			//文件初始化
