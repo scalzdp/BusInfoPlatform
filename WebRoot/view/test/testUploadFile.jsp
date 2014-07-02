@@ -29,9 +29,9 @@
   <body>
    		
     
-    <form action="fileUploadDemo" enctype="multipart/form-data" method="post">
+    <form action="fileUploadTest" enctype="multipart/form-data" method="post">
     <div id="preview"></div>
-	    <input type="file" onchange="preview(this)" />
+	    <input type="file" name="imgFile" id="imgFile" onchange="preview(this)" />
 	    <input type="submit" />
     </form>
     <script type="text/javascript">
