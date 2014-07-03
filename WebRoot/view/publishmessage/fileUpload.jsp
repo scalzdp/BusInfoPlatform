@@ -86,8 +86,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="pic_uploaded">
 			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
 			<% for(PictureVO p:pictureVOs) {%>
-				<img class="imgHis" alt="" src="<%=basePath %><%=p.getPicMaxPath() %>">
+				<img class="imgHis" alt="" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
 			<%} %>
 		</div>
+		<script>
+			function tomoddle(file){
+				var prevDiv = document.getElementById('preview');
+			 	prevDiv.innerHTML = '<img class="img" src="' + file.src  + '" />';
+			}
+		</script>
   </body>
 </html>

@@ -91,8 +91,8 @@ public class UserController {
 		}else{
 			session.setAttribute(ResourceFile.USERVO_SESSION_KEY, uservo);
 			//Send Email
-			String sendMessage ="请将发送过来的验证码: "+uservo.getEmailvfcode()+" :与注册邮箱一并填入并提交既可以获得密码\n  ";
-			sendMessage+="你的邮箱： "+uservo.getUserEmail()+"\n";
+			String sendMessage ="请将发送过来的验证码: "+uservo.getEmailvfcode()+" :与注册邮箱一并填入并提交既可以获得密码.  ";
+			sendMessage+="你的邮箱： "+uservo.getUserEmail()+"";
 			MailUtil.sendEmail(uservo.getUserEmail(), "邮箱验证码", sendMessage);
 			jsonData="EmailSend";
 		}
