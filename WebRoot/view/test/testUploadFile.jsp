@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -51,6 +54,8 @@
 		 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
 		 }  
 	 } 
-    </script>  
+    </script> 
+    <img src="./UploadImg/1404352311424/Img/1404352311424_max_aa1.png" />
+    <img src="G:/JavaWork/Img/_DSC0275.jpg" />
   </body>
 </html>

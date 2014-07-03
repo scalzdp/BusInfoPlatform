@@ -148,7 +148,7 @@
 	<!--配置错误页面-->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WebRoot/view/errorpage/404.jsp</location>
+		<location>/WebRoot/view/template/404error.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>

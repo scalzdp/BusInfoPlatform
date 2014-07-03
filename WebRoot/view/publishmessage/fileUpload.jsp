@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.bip.vo.PictureVO" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -52,8 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form action="<%=basePath %>fileUpload"  enctype="multipart/form-data" method="post">
 				<input type="hidden" name="realactivityID" id="realactivityID" value="${realactivityID}"/>
 				<div id="preview">预览</div>
-			    <input type="file" onchange="preview(this)" />
-			    <input type="submit" value="保存" />
+			    <input type="file" name="imgFile" id="imgFile" onchange="preview(this)" />
+			    <input type="submit" value="保存" /><br>
+			   仅提供jpg、jpeg、bmp、gif和png图片
 			    <script type="text/javascript">
 			    function preview(file)  
 				 {  
@@ -62,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 {  
 						var reader = new FileReader();  
 						reader.onload = function(evt){  
-							 prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+							 prevDiv.innerHTML = '<img class="img" src="' + evt.target.result + '" />';
 						}    
 					 	reader.readAsDataURL(file.files[0]);  
 					}  
@@ -73,9 +75,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 } 
 			    </script> 
 			</form>
+			
 		</div>
+		<style>
+			.imgHis{
+			width:50px;  
+			 height:50px;
+			}
+		</style>
 		<div class="pic_uploaded">
-			已上传的图片
+			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
+			<% for(PictureVO p:pictureVOs) {%>
+				<img class="imgHis" alt="" src="<%=basePath %><%=p.getPicMaxPath() %>">
+			<%} %>
 		</div>
   </body>
 </html>

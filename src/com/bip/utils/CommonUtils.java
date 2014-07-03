@@ -81,8 +81,8 @@ public class CommonUtils {
 	    return sb.toString();   
 	 } 
 	
-	public static String GenerateMaxPicName(String oldname , Date now){
-		return now.getTime()+"_max_"+oldname;
+	public static String GenerateMaxPicName(String oldname , String timespan){
+		return timespan+"_max_"+oldname;
 		
 	}
 	

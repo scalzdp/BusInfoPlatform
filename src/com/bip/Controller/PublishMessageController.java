@@ -1,5 +1,6 @@
 package com.bip.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bip.resource.ResourceFile;
 import com.bip.service.ActionTypeService;
@@ -233,19 +236,42 @@ public class PublishMessageController {
 	
 	@RequestMapping(value="/fileUpload",method=RequestMethod.POST)
 	public String postUploadPage(Model model,HttpServletRequest request){
-		int realActivityId = 1;//Integer.parseInt(request.getParameter("realactivityID"));
-		Date now = new Date();
-		String fileName = PicUploadUtil.SavePicToDisk(request,now);
-		if(!fileName.equals("")){
-			PictureVO vo = new PictureVO();
-			vo.setIsMain(1);
-			vo.setPicMaxPath(fileName);
-			vo.setRealActivityId(realActivityId);
-			publishService.savePic(vo);
-		}else{
-			//TODO:Save pic has wrong
-		}
-		return "publishmessage/fileUpload";
+		PictureVO vo = new PictureVO();
+		int realActivityId = Integer.parseInt(request.getParameter("realactivityID"));
+		String basePath = new File(System.getProperty("catalina.home")).toString()+"\\webapps\\BusInfoPlatForm\\UploadImg\\";
+		//转型为MultipartHttpRequest(重点的所在)  
+        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;  
+        //  获得第1张图片（根据前台的name名称得到上传的文件）   
+        MultipartFile imgFile1  =  multipartRequest.getFile("imgFile");  
+         
+        //定义一个数组，用于保存可上传的文件类型  
+        List fileTypes = new ArrayList();  
+        fileTypes.add("jpg");  
+        fileTypes.add("jpeg");  
+        fileTypes.add("bmp");  
+        fileTypes.add("gif");  
+        fileTypes.add("png"); 
+        //保存第一张图片  
+        if(!(imgFile1.getOriginalFilename() ==null || "".equals(imgFile1.getOriginalFilename()))) {  
+		/*下面调用的方法，主要是用来检测上传的文件是否属于允许上传的类型范围内，及根据传入的路径名 
+		*自动创建文件夹和文件名，返回的File文件我们可以用来做其它的使用，如得到保存后的文件名路径等 
+		*这里我就先不做多的介绍。 
+		*/  
+		 Date now = new Date();
+		 String timespan = now.getTime()+"";
+       	 String path1= timespan;
+       	 String path2= "Img";
+       	 String fileName	 = imgFile1.getOriginalFilename();
+       	
+       	 fileName=CommonUtils.GenerateMaxPicName(fileName, timespan);
+         File file1 = PicUploadUtil.getFile(imgFile1,path1,path2,fileTypes,fileName,basePath);
+         vo.setIsMain(1);
+         vo.setPicMaxPath("UploadImg/"+timespan+"/"+path2+"/"+fileName);
+         vo.setRealActivityId(realActivityId);
+         vo.setPicMinPath(fileName);
+         publishService.savePic(vo);
+        }     
+		return "redirect:/fileUpload/"+realActivityId;
 	}
 	
 
