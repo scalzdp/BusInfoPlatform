@@ -251,7 +251,7 @@ public class PublishMessageController {
         fileTypes.add("bmp");  
         fileTypes.add("gif");  
         fileTypes.add("png"); 
-        //保存第一张图片  
+        //保存第一张图片
         if(!(imgFile1.getOriginalFilename() ==null || "".equals(imgFile1.getOriginalFilename()))) {  
 		/*下面调用的方法，主要是用来检测上传的文件是否属于允许上传的类型范围内，及根据传入的路径名 
 		*自动创建文件夹和文件名，返回的File文件我们可以用来做其它的使用，如得到保存后的文件名路径等 
