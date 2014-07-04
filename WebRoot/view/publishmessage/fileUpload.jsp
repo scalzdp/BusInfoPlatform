@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-  	
+  	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<style type="text/css"> 
 	body, html {width: 500px;height: 500px;overflow:hidden; margin:0;} 
 		 #preview, .img, img  
@@ -79,20 +79,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<style>
 			.imgHis{
-			width:50px;  
+			 width:50px;  
 			 height:50px;
 			}
 		</style>
 		<div class="pic_uploaded">
 			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
-			<% for(PictureVO p:pictureVOs) {%>
-				<img class="imgHis" alt="" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
-			<%} %>
+			<% for(PictureVO p:pictureVOs) {
+					if(p.getIsMain()==1){ %>
+					<img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+				<%} else{%>
+					<img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+			<%}
+			} %>
 		</div>
 		<script>
 			function tomoddle(file){
 				var prevDiv = document.getElementById('preview');
 			 	prevDiv.innerHTML = '<img class="img" src="' + file.src  + '" />';
+			 	setMainPic(file.name,$('#realactivityID').val());
+			}
+			function setMainPic(id,realactivityID){
+				$.ajax({
+					 type: "POST",
+		             url: "<%=basePath %>setMainPic",
+		             data: {ID:id,RID:realactivityID},
+		             dataType: "json",
+		             success: function(data){
+		             }
+				});
 			}
 		</script>
   </body>

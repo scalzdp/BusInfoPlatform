@@ -236,5 +236,24 @@ public class PublishMessageService {
 		return vos;
 	}
 	
+	/**设置为主显示图片
+	 * 1.查询出一个活动的所有图片信息。
+	 * 2.将其他主要显示的设置为0。
+	 * 3.将点击传入的图片设置为1。
+	 * */
+	public void SetMainPicture(int ID,int realactivityID){
+		List<Picture> pictures = baseDAO.queryFactory(new Picture(), "t_picture", " and realActivityId="+realactivityID);
+		for(Picture p :pictures){
+			if(p.getIsMain()==1){
+				p.setIsMain(0);
+				baseDAO.update(p);
+			}
+			if(p.getId()==ID){
+				p.setIsMain(1);
+				baseDAO.update(p);
+			}
+		}
+	}
+	
 	
 }

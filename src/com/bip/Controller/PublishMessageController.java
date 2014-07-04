@@ -265,13 +265,20 @@ public class PublishMessageController {
        	
        	 fileName=CommonUtils.GenerateMaxPicName(fileName, timespan);
          File file1 = PicUploadUtil.getFile(imgFile1,path1,path2,fileTypes,fileName,basePath);
-         vo.setIsMain(1);
+         vo.setIsMain(0);
          vo.setPicMaxPath("UploadImg/"+timespan+"/"+path2+"/"+fileName);
          vo.setRealActivityId(realActivityId);
          vo.setPicMinPath(fileName);
          publishService.savePic(vo);
         }     
 		return "redirect:/fileUpload/"+realActivityId;
+	}
+	
+	@RequestMapping(value="/setMainPic",method=RequestMethod.POST)
+	public void setTheMainPic(HttpServletRequest request){
+		int pictureID = Integer.parseInt(request.getParameter("ID"));
+		int realactivityID = Integer.parseInt(request.getParameter("RID"));
+		publishService.SetMainPicture(pictureID, realactivityID);
 	}
 	
 
