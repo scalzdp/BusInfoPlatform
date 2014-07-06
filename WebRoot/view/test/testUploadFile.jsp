@@ -56,6 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 } 
     </script> 
     <img src="./UploadImg/1404352311424/Img/1404352311424_max_aa1.png" />
-    <img src="G:/JavaWork/Img/_DSC0275.jpg" />
+    <img src="/Img/test.jpg" />
+    <img src="http://cms.csdnimg.cn/article/201407/03/53b4be2d4a180.jpg" />
+    <%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/"%>
   </body>
 </html>

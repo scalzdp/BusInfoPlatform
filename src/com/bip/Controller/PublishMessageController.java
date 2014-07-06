@@ -238,7 +238,7 @@ public class PublishMessageController {
 	public String postUploadPage(Model model,HttpServletRequest request){
 		PictureVO vo = new PictureVO();
 		int realActivityId = Integer.parseInt(request.getParameter("realactivityID"));
-		String basePath = new File(System.getProperty("catalina.home")).toString()+"\\webapps\\BusInfoPlatForm\\UploadImg\\";
+		String basePath = new File(ResourceFile.UPLOAD_PICTURE_PATH).toString()+"\\";
 		//转型为MultipartHttpRequest(重点的所在)  
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;  
         //  获得第1张图片（根据前台的name名称得到上传的文件）   
@@ -266,7 +266,7 @@ public class PublishMessageController {
        	 fileName=CommonUtils.GenerateMaxPicName(fileName, timespan);
          File file1 = PicUploadUtil.getFile(imgFile1,path1,path2,fileTypes,fileName,basePath);
          vo.setIsMain(0);
-         vo.setPicMaxPath("UploadImg/"+timespan+"/"+path2+"/"+fileName);
+         vo.setPicMaxPath("/"+timespan+"/"+path2+"/"+fileName);
          vo.setRealActivityId(realActivityId);
          vo.setPicMinPath(fileName);
          publishService.savePic(vo);

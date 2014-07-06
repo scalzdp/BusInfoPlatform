@@ -87,9 +87,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
 			<% for(PictureVO p:pictureVOs) {
 					if(p.getIsMain()==1){ %>
-					<img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+					<img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
 				<%} else{%>
-					<img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="<%=basePath %><%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+					<img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
 			<%}
 			} %>
 		</div>
