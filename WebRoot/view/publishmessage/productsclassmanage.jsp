@@ -159,6 +159,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	//打开弹出页面
         	$('#pic_upload').window('open');
         }
+        
+       
     </script>
     <div id="pic_upload" class="easyui-window" title="上传图片" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:400px;padding:10px;">
 		<iframe id="fileUploadIframe"></iframe> 

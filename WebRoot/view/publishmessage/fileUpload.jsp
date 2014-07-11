@@ -45,6 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			float:right;
 			border:1px solid #000;
 		}
+		#message_alert{
+			color:red;
+		}
 	 </style>
   </head>
   
@@ -55,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="preview">预览</div>
 			    <input type="file" name="imgFile" id="imgFile" onchange="preview(this)" />
 			    <input type="submit" value="保存" /><br>
-			   仅提供jpg、jpeg、bmp、gif和png图片
+			   	<font id="message_alert"></font>
 			    <script type="text/javascript">
 			    function preview(file)  
 				 {  
@@ -73,6 +76,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
 					 } 
 				 } 
+				 
+				 
+				 function getElementsByClassName (className) {
+				    var all = document.all ? document.all : document.getElementsByTagName('*');
+				    var elements = new Array();
+				    for ( var e = 0; e < all.length; e ++ ) {
+				      if (all[e].className == className) {
+				        elements[elements.length] = all[e];
+				        break ;
+				      }
+				    }
+				    return elements; 
+				}
+				
+				window.onload = function(){
+					setAlertMessage();
+				 }
+				 function setAlertMessage(){
+				 	var f = document.getElementById("message_alert");
+					f.innerHTML="还未设置主显示图片！";
+				 	var his = getElementsByClassName("imgHis");
+				 	for(var i=0;i<his.length;i++){
+				 		if(his[i].title=='主显示图片'){
+				 			f.innerHTML="OK,Profect";
+				 		}
+				 	}
+				 }
 			    </script> 
 			</form>
 			
@@ -106,6 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		             data: {ID:id,RID:realactivityID},
 		             dataType: "json",
 		             success: function(data){
+		             	setAlertMessage();
 		             }
 				});
 			}
