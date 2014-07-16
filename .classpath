@@ -74,5 +74,6 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jackson-mapper-asl-1.9.10.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-collections-3.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/javax.mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jaxrpc.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
