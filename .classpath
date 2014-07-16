@@ -75,5 +75,6 @@
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/commons-collections-3.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/javax.mail.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/jaxrpc.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/com/bip/lib/java_memcached-release_2.6.6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
