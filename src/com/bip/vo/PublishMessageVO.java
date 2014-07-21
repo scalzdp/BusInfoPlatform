@@ -7,6 +7,7 @@ import java.util.Date;
  * in this object has input location place and message description and user message
  * */
 public class PublishMessageVO implements Serializable{
+	private Integer id;
 	private Integer realactivityID;
 	private String location;
 	private String telephone;
@@ -18,6 +19,12 @@ public class PublishMessageVO implements Serializable{
 	private Integer actiontypeid;
 	private String actiontypename;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public Integer getRealactivityID() {
 		return realactivityID;
 	}

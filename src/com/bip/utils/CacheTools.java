@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bip.bean.CacheKey;
 import com.bip.dao.IBaseDAO;
+import com.bip.vo.CacheKeyVO;
 
 
 /**memcached manage ,manage the cache
  * */
+@Service
 public class CacheTools {
 	
 	@Autowired
@@ -22,10 +25,11 @@ public class CacheTools {
 	
 	/**Store the CacheKey message 
 	 * */
-	public  void StoreCacheKeyToCached(CacheKey key){
+	public  void StoreCacheKeyToCached(CacheKeyVO vo){
+		CacheKey key = saveCacheToDB(vo);
 		Object obj = memcached.get(getCachedKeyKeys());
 		List<CacheKey> cacheKeys = new ArrayList<CacheKey>();
-		if(obj.toString().equals("[]")|| obj==null){
+		if(obj==null){
 			cacheKeys = getAllCacheKeyJson();
 		}else{
 			cacheKeys = JsonHandler.convertJsonToCacheKeyObjects((String)obj);
@@ -39,5 +43,14 @@ public class CacheTools {
 	
 	private String getCachedKeyKeys(){
 		return "realactivity_cachedkeys";
+	}
+	
+	private CacheKey saveCacheToDB(CacheKeyVO vo){
+		CacheKey key = new CacheKey();
+		key.setDataMark(vo.getDataMark());
+		key.setProperty1(vo.getProperty1());
+		key.setTypeID(vo.getF1());
+		baseDAO.save(key);
+		return key;
 	}
 }

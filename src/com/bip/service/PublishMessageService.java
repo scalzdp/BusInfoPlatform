@@ -36,7 +36,8 @@ public class PublishMessageService {
 	 * addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
 	 * */
 	@SuppressWarnings("deprecation")
-	public void saveMessage(PublishMessageVO vo){
+	public PublishMessageVO saveMessage(PublishMessageVO vo){
+		PublishMessageVO tmpvo = new PublishMessageVO();
 		Location location = new Location();
 		String[] locations = vo.getLocation().split(",");
 		if(locations.length<4){
@@ -62,6 +63,9 @@ public class PublishMessageService {
 		ra.setUserId(vo.getUserID());
 		ra.setActiontypeid(vo.getActiontypeid());
 		baseDAO.save(ra);
+		tmpvo.setId(ra.getId());
+		tmpvo.setLocation(locations[1]);
+		return tmpvo;
 	}
 	
 	/* through User's id get the one all the published message

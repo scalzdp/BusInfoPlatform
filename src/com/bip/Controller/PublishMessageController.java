@@ -30,9 +30,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.bip.resource.ResourceFile;
 import com.bip.service.ActionTypeService;
 import com.bip.service.PublishMessageService;
+import com.bip.utils.CacheTools;
 import com.bip.utils.CommonUtils;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.utils.PicUploadUtil;
+import com.bip.vo.CacheKeyVO;
 import com.bip.vo.PictureVO;
 import com.bip.vo.PublishMessageVO;
 import com.bip.vo.SearchMessageVO;
@@ -47,6 +49,9 @@ public class PublishMessageController {
 	
 	@Autowired
 	private ActionTypeService actionTypeService;
+	
+	@Autowired
+	private CacheTools cachetools;
 	
 	private static int countNum;
 	
@@ -87,10 +92,16 @@ public class PublishMessageController {
 	@RequestMapping(value="PublishedProducts",method=RequestMethod.POST)
 	private String postPublishProduct(Model model,@ModelAttribute("form") PublishMessageVO publishVO,HttpSession session){
 		//
+		CacheKeyVO cacheKeyVO = new CacheKeyVO();
 		UserVO uservo =  (UserVO)session.getAttribute(ResourceFile.USER_SESSION_KEY);
 		publishVO.setUserID(uservo.getId());
-		publishService.saveMessage(publishVO);
+		PublishMessageVO tmppublishvo =publishService.saveMessage(publishVO);
 		countNum = publishService.CounterPublishNum(countNum);
+		
+		cacheKeyVO.setDataMark(1);
+		cacheKeyVO.setF1(tmppublishvo.getId());
+		cacheKeyVO.setProperty1(tmppublishvo.getLocation());
+		cachetools.StoreCacheKeyToCached(cacheKeyVO);
 		return "publishmessage/publishproduct";
 	}
 	
