@@ -166,9 +166,15 @@ public class PublishMessageController {
 		//try convert this json to object that can modify the object
 		PublishMessageVO vo = CommonUtils.convertJsonToObject(new PublishMessageVO(),postDatas);
 		if(vo!=null){
+			CacheKeyVO cachevo = new CacheKeyVO();
 			System.out.println(vo.getDescription());
 			System.out.println(vo.getTelephone());
 			publishService.modifyRealActivity(vo);
+			//modify the cache data
+			cachevo.setDataMark(1);
+			cachevo.setF1(vo.getId());
+			cachevo.setProperty1(vo.getLocation());
+			cachetools.StoreCacheKeyToCached(cachevo);
 		}
 		return "json";
 	} 
