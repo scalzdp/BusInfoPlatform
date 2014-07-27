@@ -47,7 +47,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		#message_alert{
 			color:red;
+			font-size: 3pt;
+			width:inherit;
+			height:inherit;
 		}
+
 	 </style>
   </head>
   
@@ -56,9 +60,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form action="<%=basePath %>fileUpload"  enctype="multipart/form-data" method="post">
 				<input type="hidden" name="realactivityID" id="realactivityID" value="${realactivityID}"/>
 				<div id="preview">预览</div>
-			    <input type="file" name="imgFile" id="imgFile" onchange="preview(this)" />
-			    <input type="submit" value="保存" /><br>
-			   	<font id="message_alert"></font>
+				<div>
+					<table>
+						<tr>
+							<td>
+						    	<input type="file" name="imgFile" id="imgFile" onchange="preview(this)" />
+						    </td>
+						    <td>
+						    	<input type="submit" value="保存" />
+						    </td>
+						    <td>
+						   		<font id="message_alert"></font>
+				   			</td>
+				   		</tr>
+				   	</table>
+			   	</div>
 			    <script type="text/javascript">
 			    function preview(file)  
 				 {  
@@ -95,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 }
 				 function setAlertMessage(){
 				 	var f = document.getElementById("message_alert");
-					f.innerHTML="还未设置主显示图片！";
+					f.innerHTML="请点击图片列表";
 				 	var his = getElementsByClassName("imgHis");
 				 	for(var i=0;i<his.length;i++){
 				 		if(his[i].title=='主显示图片'){
