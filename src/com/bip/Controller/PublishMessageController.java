@@ -101,6 +101,7 @@ public class PublishMessageController {
 		cacheKeyVO.setDataMark(1);
 		cacheKeyVO.setF1(tmppublishvo.getId());
 		cacheKeyVO.setProperty1(tmppublishvo.getLocation());
+		cacheKeyVO.setTypeID(publishVO.getActiontypeid());
 		cachetools.StoreCacheKeyToCached(cacheKeyVO);
 		return "publishmessage/publishproduct";
 	}

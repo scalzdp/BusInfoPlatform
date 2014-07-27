@@ -18,6 +18,8 @@ public class CacheKey {
 	private String property4;
 	private Integer dataMark;
 	
+	private Integer f1;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer getId() {
@@ -73,6 +75,14 @@ public class CacheKey {
 	}
 	public void setDataMark(Integer dataMark) {
 		this.dataMark = dataMark;
+	}
+	
+	@Column
+	public Integer getF1() {
+		return f1;
+	}
+	public void setF1(Integer f1) {
+		this.f1 = f1;
 	}
 
 }

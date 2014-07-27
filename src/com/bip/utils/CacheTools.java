@@ -49,7 +49,8 @@ public class CacheTools {
 		CacheKey key = new CacheKey();
 		key.setDataMark(vo.getDataMark());
 		key.setProperty1(vo.getProperty1());
-		key.setTypeID(vo.getF1());
+		key.setTypeID(vo.getTypeID());
+		key.setF1(vo.getF1());
 		baseDAO.save(key);
 		return key;
 	}
