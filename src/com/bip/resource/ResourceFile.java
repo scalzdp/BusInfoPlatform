@@ -11,4 +11,8 @@ public class ResourceFile {
 	 * 		存放这里的路径配置和Tomcat的虚拟路径配置相同
 	 * */
 	public static String UPLOAD_PICTURE_PATH="G:\\javabackup\\Img";
+	
+	/** validation the path is the right windows system path		
+	 * */
+	public static String matches = "[A-Za-z]:\\\\[^:?\"><*]*";
 }

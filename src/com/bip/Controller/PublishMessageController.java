@@ -299,5 +299,12 @@ public class PublishMessageController {
 		publishService.SetMainPicture(pictureID, realactivityID);
 	}
 	
+	
+	@RequestMapping(value="/deletePic",method=RequestMethod.POST)
+	public void deletePic(Model model,HttpServletRequest request){
+		int pictureID = Integer.parseInt(request.getParameter("picid"));
+		publishService.deletePic(pictureID);
+	}
+	
 
 }

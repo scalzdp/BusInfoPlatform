@@ -128,14 +128,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 width:50px;  
 			 height:50px;
 			}
+			
+			.box{ width:50px; height:50px; position:relative;}
+			.right{display:block;top:0;width:10px; height:10px;position:absolute;
+			}
+			.right span{position:relative;}
+			.right{right:0;}
+			.right{ 
+				float:right;
+				background:url(../css/icons/delete.jpg)
+				}
+			.left{ z-index:99999;}
 		</style>
 		<div class="pic_uploaded">
 			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
 			<% for(PictureVO p:pictureVOs) {
 					if(p.getIsMain()==1){ %>
-					<img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+					<div class="box">
+						<div><img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)"></div>
+						<a class="right"  href="#" title="删除我" ></a>
+					</div>
+					</span>
 				<%} else{%>
-					<img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)">
+					<div class="box">
+						<div><img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)"></div>
+						<a class="right"  href="#" title="删除我" ></a>
+					</div>
 			<%}
 			} %>
 		</div>

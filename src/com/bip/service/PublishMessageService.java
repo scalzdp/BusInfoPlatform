@@ -1,5 +1,6 @@
 package com.bip.service;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import com.bip.bean.Location;
 import com.bip.bean.Picture;
 import com.bip.bean.RealActivity;
 import com.bip.dao.IBaseDAO;
+import com.bip.resource.ResourceFile;
 import com.bip.utils.GetRequestClientUtil;
 import com.bip.vo.PictureVO;
 import com.bip.vo.PublishMessageVO;
@@ -259,5 +261,62 @@ public class PublishMessageService {
 		}
 	}
 	
+	/**delete picture path,if the path is file then delete ,
+	 * if the path is folder fist delete file then delete folder 
+	 * */
+	public boolean deletePic(int picId){
+		Picture pic= baseDAO.get(new Picture(), picId);
+		return DeleteFolder(ResourceFile.UPLOAD_PICTURE_PATH+pic.getPicMaxPath());
+	}
+	
+	private boolean DeleteFolder(String path){
+		boolean flag = false;
+		File file = new File(path);
+		if(!file.exists()){
+			return flag;
+		}else{
+			if(file.isFile()){
+				return deleteFile(path);
+			}else{
+				return deleteDirectory(path);
+			}
+		}
+	}
+	
+	private boolean deleteFile(String path){
+		boolean flag = false;
+		File file = new File(path);
+		if(file.isFile()&&file.exists()){
+			file.delete();
+			flag = true;
+		}
+		return flag;
+	}
+	private boolean deleteDirectory(String path){
+		if(!path.endsWith(File.separator)){
+			path = path +File.separator;
+		}
+		File dirFile = new File(path);
+		if(!dirFile.exists() || !dirFile.isDirectory()){
+			return false;
+		}
+		boolean flag = false;
+		File[] files = dirFile.listFiles();
+		for(int i=0;i<files.length;i++){
+			if(files[i].isFile()){
+				flag = deleteFile(files[i].getAbsolutePath());
+				if(!flag) break;
+			}else{
+				flag = deleteDirectory(files[i].getAbsolutePath());
+				if(!flag)break;
+			}
+		}
+		if(!flag) return false;
+		if(dirFile.delete()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }
