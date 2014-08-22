@@ -266,7 +266,9 @@ public class PublishMessageService {
 	 * */
 	public boolean deletePic(int picId){
 		Picture pic= baseDAO.get(new Picture(), picId);
-		return DeleteFolder(ResourceFile.UPLOAD_PICTURE_PATH+pic.getPicMaxPath());
+		baseDAO.delete(new Picture(), picId);
+		String folder = pic.getPicMaxPath().split("/")[1];
+		return DeleteFolder(ResourceFile.UPLOAD_PICTURE_PATH+"\\"+folder);
 	}
 	
 	private boolean DeleteFolder(String path){

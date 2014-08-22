@@ -144,20 +144,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<% List<PictureVO> pictureVOs = (List<PictureVO>)request.getAttribute("pictureVO");%>
 			<% for(PictureVO p:pictureVOs) {
 					if(p.getIsMain()==1){ %>
-					<div class="box">
+					<div class="box" id="div_<%=p.getId() %>">
 						<div><img class="imgHis" title="主显示图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)"></div>
-						<a class="right"  href="#" title="删除我" ></a>
+						<a class="right"  href="#" title="删除我"  onclick="deleteme(<%=p.getId() %>);"  ></a>
 					</div>
 					</span>
 				<%} else{%>
-					<div class="box">
+					<div class="box" id="div_<%=p.getId() %>">
 						<div><img class="imgHis" title="点击我成为主显图片" alt="我已尽力了~!~" onmouseover="this.style.cursor='hand'" name="<%=p.getId() %>" src="/Img/<%=p.getPicMaxPath() %>" onclick="tomoddle(this)"></div>
-						<a class="right"  href="#" title="删除我" ></a>
+						<a class="right"  href="#" title="删除我" onclick="deleteme(<%=p.getId() %>);" ></a>
 					</div>
 			<%}
 			} %>
 		</div>
 		<script>
+			function deleteme(picid){
+				$.ajax({
+					type:"POST",
+					url:"<%=basePath%>deletePic",
+					data:{pid:picid},
+					dataType:"json",
+					success:function(data){
+						if(data=="success"){
+							deleteDomNode(picid);
+						}	
+					}
+				});
+			}
+			
+			function deleteDomNode(picid){
+				var tmpid = "#div_"+picid;
+				var _element =$(tmpid);
+				var _parentElement = $(tmpid).parent();
+		        if(_parentElement){
+		        	_element.remove();
+		               //_parentElement.removeChild(_element);
+		        }
+			}
+			
+		
 			function tomoddle(file){
 				var prevDiv = document.getElementById('preview');
 			 	prevDiv.innerHTML = '<img class="img" src="' + file.src  + '" />';

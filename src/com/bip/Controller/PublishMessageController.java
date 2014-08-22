@@ -301,9 +301,11 @@ public class PublishMessageController {
 	
 	
 	@RequestMapping(value="/deletePic",method=RequestMethod.POST)
-	public void deletePic(Model model,HttpServletRequest request){
-		int pictureID = Integer.parseInt(request.getParameter("picid"));
+	public @ResponseBody String deletePic(Model model,HttpServletRequest request){
+		int pictureID = Integer.parseInt(request.getParameter("pid"));
+		System.out.println(pictureID);
 		publishService.deletePic(pictureID);
+		return "success";
 	}
 	
 
