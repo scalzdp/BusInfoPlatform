@@ -154,5 +154,4 @@
 		<error-code>500</error-code>
 		<location>/WebRoot/view/errorpage/500.jsp</location>
 	</error-page>
-  
 </web-app>

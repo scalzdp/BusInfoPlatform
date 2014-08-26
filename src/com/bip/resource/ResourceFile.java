@@ -15,4 +15,15 @@ public class ResourceFile {
 	/** validation the path is the right windows system path		
 	 * */
 	public static String matches = "[A-Za-z]:\\\\[^:?\"><*]*";
+	
+	/** the base path
+	 * */
+	public static String BASE_PATH = "http://localhost:8080/BusInfoPlatForm";
+	
+	/** set the url filter characters,
+	 *  if the request url has this character it a forbidden url
+	 * */
+	public static String URL_FILTER_CHARACTERS=("\",',<,>,%,&,(,),;,+,-,[,],{,},%,#,"+
+		"select,insert,delete,drop,update,truncate,from,exec").trim();
+	
 }
